@@ -8,7 +8,7 @@
     A lot of the foundation for this game came from Assignment 7 - 50mon by Colton Ogden.
 ]]
 
-require 'src/Dependencies'
+require 'src/dependencies'
 
 function love.load()
     love.window.setTitle('Final Project')
