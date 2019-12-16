@@ -18,10 +18,10 @@ function TileMap:init(width, height)
     self.height = height
 end
 
-function TileMap:render()
+function TileMap:render(camera)
     for y = 1, self.height do
         for x = 1, self.width do
-            self.tiles[y][x]:render()
+            self.tiles[y][x]:render(camera)
         end
     end
 end

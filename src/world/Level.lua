@@ -11,12 +11,27 @@
 Level = Class{}
 
 function Level:init()
-    self.tileMapWidth = 50
+    self.tileMapWidth = 24
     self.tileMapHeight = 50
 
     self.base = TileMap(self.tileMapWidth, self.tileMapHeight)
 
     self:createMap()
+
+    self.player = Entity {
+        mapX = (VIRTUAL_WIDTH / TILE_SIZE) / 2 + 1,
+        mapY = (VIRTUAL_HEIGHT / TILE_SIZE) / 2 + 1,
+        width = 16,
+        height = 16,
+        animations = ENTITY_DEFS['player'].animations
+    }
+
+    self.player.stateMachine = StateMachine {
+        ['walk'] = function() return PlayerWalkState(self.player, self) end,
+        ['idle'] = function() return PlayerIdleState(self.player) end
+    }
+    self.player.stateMachine:change('idle')
+
 end
 
 function Level:createMap()
@@ -31,8 +46,11 @@ function Level:createMap()
     end
 end
 
-function Level:update(dt) end
+function Level:update(dt) 
+    self.player:update(dt)
+end
 
-function Level:render()
-    self.base:render()
+function Level:render(camera)
+    self.base:render(camera)
+    self.player:render(camera)
 end

@@ -18,7 +18,7 @@ function Tile:init(x, y, id)
     self.id = id
 end
 
-function Tile:render()
+function Tile:render(camera)
     love.graphics.draw(gTextures['tiles'], gFrames['tiles'][self.id],
-        (self.x -1) * TILE_SIZE, (self.y - 1) * TILE_SIZE)
+        math.floor((self.x - 1) * TILE_SIZE - camera.offsetX), math.floor((self.y - 1) * TILE_SIZE - camera.offsetY))
 end
