@@ -19,8 +19,8 @@ function Level:init(camera)
     self.dungeon = generateDungeon(self.mapWidth, self.mapHeight)
 
     self.player = Entity {
-        mapX = self.mapWidth / 2 + 2,--(VIRTUAL_WIDTH / TILE_SIZE) / 2,
-        mapY = self.mapHeight / 2 + 2,--(VIRTUAL_HEIGHT / TILE_SIZE + 0.5) / 2 ,
+        mapX = self.mapWidth / 2 + 4,--(VIRTUAL_WIDTH / TILE_SIZE) / 2,
+        mapY = self.mapHeight / 2 + 4,--(VIRTUAL_HEIGHT / TILE_SIZE + 0.5) / 2 ,
         width = 16,
         height = 16,
         animations = ENTITY_DEFS['player'].animations

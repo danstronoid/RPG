@@ -11,14 +11,14 @@
 Room = Class{}
 
 -- create a table of booleans to reprsent where on the map to spawn a room
-function Room:init(mapWidth, mapHeight, x, y, corridor)
+function Room:init(mapWidth, mapHeight, corridor)
     self.tiles = {}
     self.width = 8 --math.random(5, 10)
     self.height = 8 --math.random(5, 10)
 
     -- use an offset to ensure one empty tile of padding around the map
-    self.x = x
-    self.y = y
+    self.x = mapWidth / 2 --+ math.random(4)
+    self.y = mapHeight / 2 --+ math.random(4)
     
     self.corridor = corridor or false
 

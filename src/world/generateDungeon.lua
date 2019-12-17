@@ -28,12 +28,10 @@ function generateDungeon(mapWidth, mapHeight)
     for i = 1, maxRooms do
         if i == 1 then
             -- spawn the first room somewhere in the middle of the map
-            local startX = mapWidth / 2 --+ math.random(4)
-            local startY = mapHeight / 2 --+ math.random(4)
-            rooms[i] = Room(mapWidth, mapHeight, startX, startY)
+            rooms[i] = Room(mapWidth, mapHeight)
             corridors[i] = Corridor(mapWidth, mapHeight, rooms[i])
         elseif i == maxRooms then            
-            rooms[i] = Room(mapWidth, mapHeight, corridors[i - 1].x, corridors[i - 1].y, corridors[i - 1])
+            rooms[i] = Room(mapWidth, mapHeight, corridors[i - 1])
             corridors[i] = Corridor(mapWidth, mapHeight, rooms[i])
 
             -- since this is the last room, set all the corridor flags to false
@@ -44,7 +42,7 @@ function generateDungeon(mapWidth, mapHeight)
                 end
             end
         else
-            rooms[i] = Room(mapWidth, mapHeight, corridors[i - 1].x, corridors[i - 1].y, corridors[i - 1])
+            rooms[i] = Room(mapWidth, mapHeight, corridors[i - 1])
             corridors[i] = Corridor(mapWidth, mapHeight, rooms[i])
         end
 
