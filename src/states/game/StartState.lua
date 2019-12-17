@@ -1,0 +1,35 @@
+--[[
+    GD50 
+    Final Project
+
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- StartState --
+]]
+
+StartState = Class{__includes = BaseState}
+
+function StartState:init() end
+
+function StartState:update(dt) 
+
+    if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
+        gStateStack:pop()
+        gStateStack:push(PlayState())
+    end
+
+end
+
+function StartState:render()
+    love.graphics.clear(0, 0, 0, 255)
+
+    love.graphics.setColor(255, 255, 255, 255)
+    love.graphics.setFont(gFonts['large'])
+    love.graphics.printf('FINAL PROJECT', 0, VIRTUAL_HEIGHT / 2 - 64, VIRTUAL_WIDTH, 'center')
+    love.graphics.setFont(gFonts['medium'])
+    love.graphics.printf('Press Enter', 0, VIRTUAL_HEIGHT / 2 + 32, VIRTUAL_WIDTH, 'center')
+
+    --love.graphics.setFont(gFonts['small'])
+    
+end
