@@ -40,7 +40,7 @@ function EntityWalkState:move()
     end
 
     -- if the tile is solid then don't move and return
-    local tile = self.level.walls.tiles[toY][toX]
+    local tile = self.level.dungeon.tiles[toY][toX]
 
     if tile.solid then
         --print(tile.y .. ', ' .. tile.x)
