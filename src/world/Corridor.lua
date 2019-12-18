@@ -46,13 +46,13 @@ function Corridor:init(mapWidth, mapHeight, room)
     -- guard to make sure a corridor isn't created outside of the map boundries
     -- use one tile of padding around the map
     if (self.x + self.width) >= mapWidth then
-        self.x = mapWidth - self.width - 1
-    elseif self.x <= 1 then
-        self.x = 2
+        self.x = mapWidth - self.width - 2
+    elseif self.x <= 2 then
+        self.x = 3
     elseif (self.y + self.height) >= mapHeight then
-        self.y = mapHeight - self.height - 1
-    elseif self.y <= 1 then
-        self.y = 2
+        self.y = mapHeight - self.height - 2
+    elseif self.y <= 2 then
+        self.y = 3
     end
 
     for y = 1, mapHeight do
