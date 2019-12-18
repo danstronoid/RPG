@@ -13,12 +13,12 @@ Room = Class{}
 -- create a table of booleans to reprsent where on the map to spawn a room
 function Room:init(mapWidth, mapHeight, corridor)
     self.tiles = {}
-    self.width = 8 --math.random(5, 10)
-    self.height = 8 --math.random(5, 10)
+    self.width = math.random(8, 12)
+    self.height = math.random(8, 12)
 
-    -- use an offset to ensure one empty tile of padding around the map
-    self.x = mapWidth / 2 --+ math.random(4)
-    self.y = mapHeight / 2 --+ math.random(4)
+    -- if this is the first room, create it in the middle of the map
+    self.x = mapWidth / 2 
+    self.y = mapHeight / 2 
     
     self.corridor = corridor or false
 
@@ -26,18 +26,31 @@ function Room:init(mapWidth, mapHeight, corridor)
     if self.corridor then
         if corridor.type == 'left' then
             self.x = corridor.x - self.width
-            self.y = corridor.y
+            self.y = corridor.y - math.random(0, self.height - corridor.height)
         elseif corridor.type == 'right' then
             self.x = corridor.x + corridor.width
-            self.y = corridor.y
+            self.y = corridor.y - math.random(0, self.height - corridor.height)
         elseif corridor.type == 'top' then
-            self.x = corridor.x
+            self.x = corridor.x - math.random(0, self.width - corridor.width)
             self.y = corridor.y - self.height
         else
-            self.x = corridor.x
-            self.y = corridor.y + corridor.width
+            self.x = corridor.x - math.random(0, self.width - corridor.width)
+            self.y = corridor.y + corridor.height
         end
     end
+
+    -- guard to make sure a room isn't created outside of the map boundries
+    -- use one tile of padding around the map
+    if (self.x + self.width) >= mapWidth then
+        self.x = mapWidth - self.width - 1
+    elseif self.x <= 1 then
+        self.x = 2
+    elseif (self.y + self.height) >= mapHeight then
+        self.y = mapHeight - self.height - 1
+    elseif self.y <= 1 then
+        self.y = 2
+    end
+
 
     for y = 1, mapHeight do
         table.insert(self.tiles, {})

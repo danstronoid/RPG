@@ -45,7 +45,7 @@ require 'src/world/Tile'
 require 'src/world/tileIDs'
 require 'src/world/TileMap'
 require 'src/world/Level'
-require 'src/world/generateDungeon'
+require 'src/world/Dungeon'
 require 'src/world/Room'
 require 'src/world/Corridor'
 

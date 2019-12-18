@@ -14,7 +14,7 @@ EntityWalkState = Class{__includes = EntityBaseState}
 function EntityWalkState:init(entity, level)
     self.entity = entity
     self.level = level
-    self.camera = self.level.camera
+    self.camera = self.level.camera 
 end
 
 function EntityWalkState:enter(params)
@@ -40,7 +40,7 @@ function EntityWalkState:move()
     end
 
     -- if the tile is solid then don't move and return
-    local tile = self.level.dungeon.tiles[toY][toX]
+    local tile = self.level.dungeon.walls.tiles[toY][toX]
 
     if tile.solid then
         --print(tile.y .. ', ' .. tile.x)

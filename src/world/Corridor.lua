@@ -14,31 +14,45 @@ CORRIDOR_TYPES = {'top', 'bottom', 'left', 'right'}
 
 function Corridor:init(mapWidth, mapHeight, room)
     self.tiles = {}
-    self.last = last or false
 
     self.type = CORRIDOR_TYPES[math.random(4)]
-    print(self.type)    
+    --print(self.type)    
+
+    local smDim = math.random(2)
+    local lgDim = math.random(6, 10)
 
     if self.type == 'top' then
-        self.width = 2
-        self.height = 10 --math.random(8, 10)
-        self.x = room.x + math.random(room.width - self.width)
+        self.width = smDim
+        self.height = lgDim 
+        self.x = room.x + math.random(0, room.width - self.width)
         self.y = room.y - self.height
     elseif self.type == 'bottom' then
-        self.width = 2
-        self.height = 10 --math.random(8, 10)
-        self.x = room.x + math.random(room.width - self.width)
+        self.width = smDim
+        self.height = lgDim 
+        self.x = room.x + math.random(0, room.width - self.width)
         self.y = room.y + room.height
     elseif self.type == 'left' then
-        self.width = 10
-        self.height = 2 --math.random(8, 10)
+        self.width = lgDim
+        self.height = smDim 
         self.x = room.x - self.width
-        self.y = room.y + math.random(room.height - self.height)
+        self.y = room.y + math.random(0, room.height - self.height)
     else
-        self.width = 10
-        self.height = 2 --math.random(8, 10)
+        self.width = lgDim
+        self.height = smDim 
         self.x = room.x + room.width
-        self.y = room.y + math.random(room.height - self.height)
+        self.y = room.y + math.random(0, room.height - self.height)
+    end
+
+    -- guard to make sure a corridor isn't created outside of the map boundries
+    -- use one tile of padding around the map
+    if (self.x + self.width) >= mapWidth then
+        self.x = mapWidth - self.width - 1
+    elseif self.x <= 1 then
+        self.x = 2
+    elseif (self.y + self.height) >= mapHeight then
+        self.y = mapHeight - self.height - 1
+    elseif self.y <= 1 then
+        self.y = 2
     end
 
     for y = 1, mapHeight do
