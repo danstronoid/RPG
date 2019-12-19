@@ -43,7 +43,6 @@ function EntityWalkState:move()
     local tile = self.level.dungeon.water.tiles[toY][toX]
 
     if tile.solid then
-        --print(tile.y .. ', ' .. tile.x)
         self.entity:changeState('idle')
         return
     end

@@ -49,6 +49,10 @@ require 'src/world/Dungeon'
 require 'src/world/Room'
 require 'src/world/Corridor'
 
+-- GUI
+require 'src/GUI/Panel'
+require 'src/GUI/Textbox'
+
 -- textures
 gTextures = {
     --['tiles'] = love.graphics.newImage('graphics/temp/sheet.png'),
