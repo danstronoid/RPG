@@ -25,12 +25,12 @@ function Textbox:init(x, y, width, height, text, font)
 
     self:next()
 
-    print(#self.textChunks)
-    print(self.maxChunks)
+    --print(#self.textChunks)
+    --print(self.maxChunks)
 end
 
 function Textbox:update(dt)
-    if love.keyboard.wasPressed('space') then
+    if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
         self:next()
     end
 end
@@ -60,7 +60,7 @@ function Textbox:nextChunks()
 
     -- if maxChunks is 0 (only one line is displayed per page) then still increment by 1
     self.chunkCounter = self.chunkCounter + math.max(1, self.maxChunks)
-    print(self.chunkCounter)
+    --print(self.chunkCounter)
 
     return chunks
 end

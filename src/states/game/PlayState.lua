@@ -26,7 +26,6 @@ end
 
 function PlayState:render()
     self.level:render()
-    self.text:render()
 
     -- print the FPS
     love.graphics.setColor(255, 255, 255, 255)

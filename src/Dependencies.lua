@@ -28,6 +28,9 @@ require 'src/states/StateMachine'
 -- game states
 require 'src/states/game/StartState'
 require 'src/states/game/PlayState'
+require 'src/states/game/FadeInState'
+require 'src/states/game/FadeOutState'
+require 'src/states/game/DialogueState'
 
 -- entity states
 require 'src/states/entity/EntityBaseState'
@@ -52,6 +55,8 @@ require 'src/world/Corridor'
 -- GUI
 require 'src/GUI/Panel'
 require 'src/GUI/Textbox'
+require 'src/GUI/Selection'
+require 'src/GUI/Menu'
 
 -- textures
 gTextures = {

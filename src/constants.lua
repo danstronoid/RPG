@@ -21,4 +21,6 @@ PADDING_TILE = 4
 
 -- GUI constants
 LINE_WIDTH = 2
+BLACK = {r = 0, b = 0, g = 0, a = 255}
+WHITE = {r = 255, b = 255, g = 255, a = 255}
 GREY = {r = 56, g = 56, b = 56, a = 255}

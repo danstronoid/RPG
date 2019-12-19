@@ -15,10 +15,17 @@ function StartState:init() end
 function StartState:update(dt) 
 
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
-        gStateStack:pop()
-        gStateStack:push(PlayState())
+        gStateStack:push(FadeInState(BLACK, 1, 
+        function ()
+            gStateStack:pop()
+            gStateStack:push(PlayState())
+            gStateStack:push(FadeOutState(BLACK, 1,
+            function ()
+                gStateStack:push(DialogueState(""..
+                "Help!  I'm trapped inside of a game.  Get me out of here!"))
+            end))
+        end))  
     end
-
 end
 
 function StartState:render()
