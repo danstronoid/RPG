@@ -40,7 +40,7 @@ function EntityWalkState:move()
     end
 
     -- if the tile is solid then don't move and return
-    local tile = self.level.dungeon.walls.tiles[toY][toX]
+    local tile = self.level.dungeon.water.tiles[toY][toX]
 
     if tile.solid then
         --print(tile.y .. ', ' .. tile.x)
@@ -54,7 +54,7 @@ function EntityWalkState:move()
     self.entity:changeAnimation('walk-' .. tostring(self.entity.direction))
 
     Timer.tween(0.5, {
-        [self.entity] = {x = (toX -1) * TILE_SIZE, y = (toY -1) * TILE_SIZE - self.entity.height / 2},
+        [self.entity] = {x = (toX -1) * TILE_SIZE, y = (toY -1) * TILE_SIZE}, -- self.entity.height / 2},
         [self.camera] = {offsetX = toCamX, offsetY = toCamY}
     }):finish(function ()
         if love.keyboard.isDown('up') then

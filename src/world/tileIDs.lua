@@ -1,20 +1,51 @@
 TILE_IDS = {
-    ['grass'] = {46, 47},
-    ['empty'] = 101,
-    ['posts'] = 57,
+    ['ground'] = {145, 146, 161, 162},
+    ['empty'] = 67,
+    ['water'] = 51,
     --edges
-    ['top-edge'] = 38,
-    ['bot-edge'] = 30,
-    ['left-edge'] = 44,
-    ['right-edge'] = 43,
+    ['water-top-edge'] = 2,
+    ['water-bot-edge'] = 34,
+    ['water-left-edge'] = 17,
+    ['water-right-edge'] = 19,
     -- inner corners
-    ['top-left'] = 28,
-    ['top-right'] = 27,
-    ['bot-left'] = 20,
-    ['bot-right'] = 19,
+    ['water-top-left'] = 49,
+    ['water-top-right'] = 50,
+    ['water-bot-left'] = 65,
+    ['water-bot-right'] = 66,
     -- corners
-    ['top-left-corner'] = 1,
-    ['top-right-corner'] = 2,
-    ['bot-left-corner'] = 9,
-    ['bot-right-corner'] = 10
+    ['water-top-left-corner'] = 1,
+    ['water-top-right-corner'] = 3,
+    ['water-bot-left-corner'] = 33,
+    ['water-bot-right-corner'] = 35,
+
+    -- details
+    ['rocks'] = {113, 116, 130, 148, 148, 148, 149, 149, 149},
+    ['cracks'] = 132,
+    ['hole'] = 147
 }
+
+
+
+--[[
+
+-- these IDs are for a more complicated set of tiles that I may implement later
+    ['ground'] = {145, 146, 161, 162},
+    ['empty'] = 67,
+    --edges
+    ['top-edge'] = 46,
+    ['bot-edge'] = 62,
+    ['left-edge'] = 23,
+    ['right-edge'] = 24,
+    -- inner corners
+    ['top-left'] = 48,
+    ['top-right'] = 45,
+    ['bot-left'] = 64,
+    ['bot-right'] = 61,
+    -- corners
+    ['top-left-corner'] = 7,
+    ['top-right-corner'] = 8,
+    ['bot-left-corner'] = 60,
+    ['bot-right-corner'] = 76
+
+
+]]

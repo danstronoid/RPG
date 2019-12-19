@@ -13,7 +13,7 @@ Level = Class{}
 function Level:init(camera, dungeon)
     self.camera = camera
 
-    self.dungeon = Dungeon(100, 100, 8)
+    self.dungeon = Dungeon(80, 80, 8)
 
     self.player = Entity {
         -- spawn the player in the middle of the first room
@@ -41,7 +41,6 @@ function Level:update(dt)
 end
 
 function Level:render()
-    self.dungeon.floor:render(self.camera)
-    self.dungeon.walls:render(self.camera)
+    self.dungeon:render(self.camera)
     self.player:render(self.camera)
 end

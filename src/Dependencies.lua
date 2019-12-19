@@ -51,7 +51,8 @@ require 'src/world/Corridor'
 
 -- textures
 gTextures = {
-    ['tiles'] = love.graphics.newImage('graphics/temp/sheet.png'),
+    --['tiles'] = love.graphics.newImage('graphics/temp/sheet.png'),
+    ['tiles'] = love.graphics.newImage('graphics/cave.png'),
     ['entities'] = love.graphics.newImage('graphics/temp/entities.png')
 }
 
