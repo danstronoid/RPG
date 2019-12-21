@@ -78,3 +78,11 @@ function gradientMesh(dir, ...)
     -- Resulting Mesh has 1x1 image size
     return love.graphics.newMesh(meshData, "strip", "static")
 end
+
+function formatTime(t)
+    local hours = string.sub('0' .. math.floor(t / 3600), -2)
+    local minutes = string.sub('0' .. math.floor(t / 60 % 60), -2)
+    local seconds = string.sub('0' .. t % 60, -2)
+
+    return hours .. ':' .. minutes .. ':' .. seconds
+end

@@ -17,7 +17,7 @@ function Entity:init(def)
     self.width = def.width
     self.height = def.height
     self.x = (self.mapX - 1) * TILE_SIZE
-    self.y = (self.mapY - 1) * TILE_SIZE -- self.height / 2
+    self.y = (self.mapY - 1) * TILE_SIZE - 4
 
     self.direction = 'down'
     self.animations = self:getAnimations(def.animations)

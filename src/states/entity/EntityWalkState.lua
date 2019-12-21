@@ -53,7 +53,7 @@ function EntityWalkState:move()
     self.entity:changeAnimation('walk-' .. tostring(self.entity.direction))
 
     Timer.tween(0.5, {
-        [self.entity] = {x = (toX -1) * TILE_SIZE, y = (toY -1) * TILE_SIZE}, -- self.entity.height / 2},
+        [self.entity] = {x = (toX -1) * TILE_SIZE, y = (toY -1) * TILE_SIZE - 4},
         [self.camera] = {offsetX = toCamX, offsetY = toCamY}
     }):finish(function ()
         if love.keyboard.isDown('up') then

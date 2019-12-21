@@ -13,40 +13,40 @@ ENTITY_DEFS = {
     ['player'] = {
         animations = {
             ['walk-left'] = {
-                texture = 'entities',
-                frames = {16, 17, 18, 17},
+                texture = 'man',
+                frames = {10, 11, 12, 11},
                 interval = 0.15
             },
             ['walk-right'] = {
-                texture = 'entities',
-                frames = {28, 29, 30, 29},
-                interval = 0.15
-            },
-            ['walk-down'] = {
-                texture = 'entities',
+                texture = 'man',
                 frames = {4, 5, 6, 5},
                 interval = 0.15
             },
+            ['walk-down'] = {
+                texture = 'man',
+                frames = {7, 8, 9, 8},
+                interval = 0.15
+            },
             ['walk-up'] = {
-                texture = 'entities',
-                frames = {40, 41, 42, 41},
+                texture = 'man',
+                frames = {1, 2, 3, 2},
                 interval = 0.15
             },
             ['idle-left'] = {
-                texture = 'entities',
-                frames = {17}
+                texture = 'man',
+                frames = {10}
             },
             ['idle-right'] = {
-                texture = 'entities',
-                frames = {29}
+                texture = 'man',
+                frames = {4}
             },
             ['idle-down'] = {
-                texture = 'entities',
-                frames = {5}
+                texture = 'man',
+                frames = {7}
             },
             ['idle-up'] = {
-                texture = 'entities',
-                frames = {41}
+                texture = 'man',
+                frames = {1}
             },
         }
     }

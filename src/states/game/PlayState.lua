@@ -13,11 +13,16 @@ PlayState = Class{__includes = BaseState}
 function PlayState:init()
     self.camera = Camera()
     self.level = Level(self.camera)
+    self.startTime = love.timer.getTime()
 
     self.fps = 0
 end
 
 function PlayState:update(dt)
+    if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
+        gStateStack:push(FieldMenuState(self.startTime))
+    end
+
     self.level:update(dt)
     self.camera:update(dt)
 

@@ -31,6 +31,7 @@ require 'src/states/game/PlayState'
 require 'src/states/game/FadeInState'
 require 'src/states/game/FadeOutState'
 require 'src/states/game/DialogueState'
+require 'src/states/game/FieldMenuState'
 
 -- entity states
 require 'src/states/entity/EntityBaseState'
@@ -60,15 +61,19 @@ require 'src/GUI/Menu'
 
 -- textures
 gTextures = {
-    --['tiles'] = love.graphics.newImage('graphics/temp/sheet.png'),
     ['tiles'] = love.graphics.newImage('graphics/cave.png'),
-    ['entities'] = love.graphics.newImage('graphics/temp/entities.png')
+    ['cursor'] = love.graphics.newImage('graphics/cursor.png'),
+    ['entities'] = love.graphics.newImage('graphics/temp/entities.png'),
+    ['man'] = love.graphics.newImage('graphics/healer_m_16.png'),
+    ['woman'] = love.graphics.newImage('graphics/townfolk1_f_16.png')
 }
 
 -- frames
 gFrames = {
     ['tiles'] = GenerateQuads(gTextures['tiles'], TILE_SIZE, TILE_SIZE),
-    ['entities'] = GenerateQuads(gTextures['entities'], TILE_SIZE, TILE_SIZE)
+    ['entities'] = GenerateQuads(gTextures['entities'], TILE_SIZE, TILE_SIZE),
+    ['man'] = GenerateQuads(gTextures['man'], 16, 18),
+    ['woman'] = GenerateQuads(gTextures['man'], 16, 18)
 }
 
 -- fonts
