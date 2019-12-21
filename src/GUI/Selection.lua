@@ -17,25 +17,23 @@ function Selection:init(def)
 end
 
 function Selection:update(dt)
-    if self.cursor then
-        if love.keyboard.wasPressed('up') then
-            if self.currentSelection == 1 then
-                -- wrap around to the last item
-                self.currentSelection = #self.items
-            else
-                self.currentSelection = self.currentSelection - 1
-            end
-
-        elseif love.keyboard.wasPressed('down') then
-            if self.currentSelection == #self.items then
-                -- wrap around to the first item
-                self.currentSelection = 1
-            else
-                self.currentSelection = self.currentSelection + 1
-            end
-        elseif love.keyboard.wasPressed('return') or love.keyboard.wasPressed('enter') then
-            self.items[self.currentSelection].onSelect()
+    if love.keyboard.wasPressed('up') and self.cursor then
+        if self.currentSelection == 1 then
+            -- wrap around to the last item
+            self.currentSelection = #self.items
+        else
+            self.currentSelection = self.currentSelection - 1
         end
+
+    elseif love.keyboard.wasPressed('down') and self.cursor then
+        if self.currentSelection == #self.items then
+            -- wrap around to the first item
+            self.currentSelection = 1
+        else
+            self.currentSelection = self.currentSelection + 1
+        end
+    elseif love.keyboard.wasPressed('return') or love.keyboard.wasPressed('enter') then
+        self.items[self.currentSelection].onSelect()
     end
 end
 
@@ -51,7 +49,7 @@ function Selection:render()
         
         love.graphics.setFont(self.font)
         love.graphics.setColor(255, 255, 255, 255)
-        love.graphics.printf(self.items[i].text, self.x + TILE_SIZE, paddedY, self.width, 'left')
+        love.graphics.printf(self.items[i].text, self.x + TILE_SIZE / 2, paddedY, self.width, 'left')
     
         currentY = currentY + self.gapHeight
 

@@ -79,10 +79,20 @@ function gradientMesh(dir, ...)
     return love.graphics.newMesh(meshData, "strip", "static")
 end
 
+-- this function formats time from seconds into HH:MM:SS
 function formatTime(t)
     local hours = string.sub('0' .. math.floor(t / 3600), -2)
     local minutes = string.sub('0' .. math.floor(t / 60 % 60), -2)
     local seconds = string.sub('0' .. t % 60, -2)
 
     return hours .. ':' .. minutes .. ':' .. seconds
+end
+
+-- function to round to the nearest integer
+function Round(n)
+    if n < 0 then
+        return math.ceil(n - 0.5)
+    else 
+        return math.floor(n + 0.5)
+    end
 end

@@ -15,13 +15,13 @@ function Level:init(camera, dungeon)
 
     self.dungeon = Dungeon(80, 80, 8)
 
-    self.player = Entity {
+    self.player = Player {
         -- spawn the player in the middle of the first room
         mapX = math.modf(self.dungeon.rooms[1].x + (self.dungeon.rooms[1].width / 2)),
         mapY =  math.modf(self.dungeon.rooms[1].y + (self.dungeon.rooms[1].height / 2)),
         width = 16,
         height = 18,
-        animations = ENTITY_DEFS['player'].animations
+        animations = CHARACTER_ANIMS['main'].field
     }
 
     self.player.stateMachine = StateMachine {

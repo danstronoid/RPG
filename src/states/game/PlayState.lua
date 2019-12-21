@@ -20,7 +20,8 @@ end
 
 function PlayState:update(dt)
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
-        gStateStack:push(FieldMenuState(self.startTime))
+        -- there is a bug where you keep moving after entering this state
+        gStateStack:push(FieldMenuState(self.startTime, self.level))
     end
 
     self.level:update(dt)

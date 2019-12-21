@@ -9,9 +9,9 @@
 
 ]]
 
-ENTITY_DEFS = {
-    ['player'] = {
-        animations = {
+CHARACTER_ANIMS = {
+    ['main'] = {
+        field = {
             ['walk-left'] = {
                 texture = 'man',
                 frames = {10, 11, 12, 11},
@@ -48,6 +48,12 @@ ENTITY_DEFS = {
                 texture = 'man',
                 frames = {1}
             },
+        },
+        battle = {
+            ['idle-right'] = {
+                texture = 'man',
+                frames = {4}
+            }
         }
     }
 }

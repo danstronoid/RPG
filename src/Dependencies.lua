@@ -32,6 +32,7 @@ require 'src/states/game/FadeInState'
 require 'src/states/game/FadeOutState'
 require 'src/states/game/DialogueState'
 require 'src/states/game/FieldMenuState'
+require 'src/states/game/StatsMenuState'
 
 -- entity states
 require 'src/states/entity/EntityBaseState'
@@ -42,7 +43,12 @@ require 'src/states/entity/PlayerWalkState'
 
 -- entites
 require 'src/entities/Entity'
-require 'src/entities/entity_defs'
+require 'src/entities/Character'
+require 'src/entities/Stats'
+require 'src/entities/character_stats'
+require 'src/entities/character_anims'
+require 'src/entities/Player'
+require 'src/entities/Party'
 
 -- world
 require 'src/world/Tile'

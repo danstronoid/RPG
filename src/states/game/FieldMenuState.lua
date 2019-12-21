@@ -2,13 +2,15 @@
 
 FieldMenuState = Class{__includes = BaseState}
 
-function FieldMenuState:init(startTime)
+function FieldMenuState:init(startTime, level)
     self.startTime = startTime
+    self.level = level
+    self.party = self.level.player.party
 
     self.fieldMenu = Menu {
-        x = 2 * (VIRTUAL_WIDTH / 3),
+        x = 3 * (VIRTUAL_WIDTH / 4),
         y = 0,
-        width = VIRTUAL_WIDTH / 3,
+        width = VIRTUAL_WIDTH / 4,
         height = 3 * (VIRTUAL_HEIGHT / 4),
         color = GREY,
         cursor = true,
@@ -21,6 +23,7 @@ function FieldMenuState:init(startTime)
             {
                 text = 'stats',
                 onSelect = function()
+                    gStateStack:push(StatsMenuState(self.party))
                 end
             },
             {
@@ -32,11 +35,11 @@ function FieldMenuState:init(startTime)
         }
     }
 
-    self.currentTime = math.modf(love.timer.getTime() - self.startTime)
+    self.currentTime = math.floor(love.timer.getTime() - self.startTime)
     self.timeMenu =  Menu {
-        x = 2 * (VIRTUAL_WIDTH / 3),
+        x = 3 * (VIRTUAL_WIDTH / 4),
         y = 3 * (VIRTUAL_HEIGHT / 4),
-        width = VIRTUAL_WIDTH / 3,
+        width = VIRTUAL_WIDTH / 4,
         height = VIRTUAL_HEIGHT / 4,
         color = GREY,
         cursor = false,
