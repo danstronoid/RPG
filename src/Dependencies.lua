@@ -31,8 +31,14 @@ require 'src/states/game/PlayState'
 require 'src/states/game/FadeInState'
 require 'src/states/game/FadeOutState'
 require 'src/states/game/DialogueState'
-require 'src/states/game/FieldMenuState'
-require 'src/states/game/StatsMenuState'
+
+-- field states
+require 'src/states/game/field/FieldMenuState'
+require 'src/states/game/field/StatsMenuState'
+
+-- battle states
+require 'src/states/game/battle/BattleState'
+require 'src/states/game/battle/BattleMenuState'
 
 -- entity states
 require 'src/states/entity/EntityBaseState'
@@ -49,6 +55,8 @@ require 'src/entities/character_stats'
 require 'src/entities/character_anims'
 require 'src/entities/Player'
 require 'src/entities/Party'
+require 'src/entities/Enemy'
+require 'src/entities/enemy_defs'
 
 -- world
 require 'src/world/Tile'
@@ -68,10 +76,12 @@ require 'src/GUI/Menu'
 -- textures
 gTextures = {
     ['tiles'] = love.graphics.newImage('graphics/cave.png'),
+    ['battle'] = love.graphics.newImage('graphics/cave_battle.png'),
     ['cursor'] = love.graphics.newImage('graphics/cursor.png'),
     ['entities'] = love.graphics.newImage('graphics/temp/entities.png'),
     ['man'] = love.graphics.newImage('graphics/healer_m_16.png'),
-    ['woman'] = love.graphics.newImage('graphics/townfolk1_f_16.png')
+    ['woman'] = love.graphics.newImage('graphics/townfolk1_f_16.png'),
+    ['octopus'] = love.graphics.newImage('graphics/octopus.png')
 }
 
 -- frames

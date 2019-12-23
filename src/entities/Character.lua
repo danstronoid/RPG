@@ -1,12 +1,12 @@
 
 
 
-Character = Class{__includes = Entity}
+Character = Class{}
 
 function Character:init(def)
     self.name = def.name
     self.stats = Stats(def.stats)
-    self.animations = def.animations
+    self.animations = def.anims
 
     self.level = 1
     self.currentXP = 0

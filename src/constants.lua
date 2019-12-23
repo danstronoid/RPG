@@ -20,6 +20,7 @@ TILE_SIZE = 16
 PADDING_TILE = 4
 
 -- GUI constants
+PADDING = 8 -- padding with respect to layout
 LINE_WIDTH = 2
 BLACK = {r = 0, b = 0, g = 0, a = 255}
 WHITE = {r = 255, b = 255, g = 255, a = 255}
