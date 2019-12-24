@@ -39,6 +39,9 @@ require 'src/states/game/field/StatsMenuState'
 -- battle states
 require 'src/states/game/battle/BattleState'
 require 'src/states/game/battle/BattleMenuState'
+require 'src/states/game/battle/EnemyTurnState'
+require 'src/states/game/battle/AttackMenuState'
+require 'src/states/game/battle/BattleItemState'
 
 -- entity states
 require 'src/states/entity/EntityBaseState'

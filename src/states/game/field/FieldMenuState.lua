@@ -16,18 +16,18 @@ function FieldMenuState:init(startTime, level)
         cursor = true,
         items = {
             {
-                text = 'items',
+                text = 'Items',
                 onSelect = function()
                 end
             },
             {
-                text = 'stats',
+                text = 'Stats',
                 onSelect = function()
                     gStateStack:push(StatsMenuState(self.party))
                 end
             },
             {
-                text = 'exit',
+                text = 'Exit',
                 onSelect = function()
                     gStateStack:pop()
                 end

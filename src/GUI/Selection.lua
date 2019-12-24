@@ -48,11 +48,15 @@ function Selection:render()
         end
         
         love.graphics.setFont(self.font)
-        love.graphics.setColor(255, 255, 255, 255)
+        if self.items[i].highlighted then
+            love.graphics.setColor(255, 255, 0, 255)
+        else
+            love.graphics.setColor(255, 255, 255, 255)
+        end
+
         love.graphics.printf(self.items[i].text, self.x + TILE_SIZE / 2, paddedY, self.width, 'left')
     
         currentY = currentY + self.gapHeight
-
     end
 end
 

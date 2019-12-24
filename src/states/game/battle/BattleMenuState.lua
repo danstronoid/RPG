@@ -3,13 +3,39 @@
 BattleMenuState = Class{__includes = BaseState}
 
 
-function BattleMenuState:init(party, enemies)
+function BattleMenuState:init(party, enemies, index)
 
     self.party = party
     self.enemies = enemies
+    self.activeChar = self.party.members[index]
+
+    local statuses = {}
+
+    for i = 1, #self.party.members do
+        local item = {
+            text = self.party.members[i].name,
+            highlighted = false,
+            onSelect = function () end
+        }
+
+        if i == index then
+            item.highlighted = true
+        end
+        table.insert(statuses, item)
+    end
+
+    self.partyStatus = Menu {
+        x = 0,
+        y = 2 * (VIRTUAL_HEIGHT / 3),
+        width = VIRTUAL_WIDTH / 2,
+        height = VIRTUAL_HEIGHT / 3,
+        color = GREY,
+        cursor = false,
+        items = statuses
+    }
 
     self.battleMenu = Menu {
-        x = 3 * (VIRTUAL_WIDTH / 4),
+        x = 3 * VIRTUAL_WIDTH / 4,
         y = 2 * (VIRTUAL_HEIGHT / 3),
         width = VIRTUAL_WIDTH / 4,
         height = VIRTUAL_HEIGHT / 3,
@@ -17,22 +43,24 @@ function BattleMenuState:init(party, enemies)
         cursor = true,
         items = {
             {
-                text = 'attack',
+                text = 'Attack',
+                onSelect = function()
+                    gStateStack:push(AttackMenuState(self.activeChar, self.enemies))
+                end
+            },
+            {
+                text = 'Defend',
+                onSelect = function()
+                    gStateStack:pop()
+                end
+            },
+            {
+                text = 'Item',
                 onSelect = function()
                 end
             },
             {
-                text = 'defend',
-                onSelect = function()
-                end
-            },
-            {
-                text = 'item',
-                onSelect = function()
-                end
-            },
-            {
-                text = 'run',
+                text = 'Run',
                 onSelect = function()
                     gStateStack:push(FadeInState(BLACK, 1,
                     function()
@@ -52,5 +80,6 @@ function BattleMenuState:update(dt)
 end
 
 function BattleMenuState:render()
+    self.partyStatus:render()
     self.battleMenu:render()
 end
