@@ -12,16 +12,17 @@ function BattleMenuState:init(party, enemies, index)
     local statuses = {}
 
     for i = 1, #self.party.members do
-        local item = {
-            text = self.party.members[i].name,
-            highlighted = false,
-            onSelect = function () end
-        }
-
-        if i == index then
-            item.highlighted = true
-        end
-        table.insert(statuses, item)
+        if not self.party.members[i].dead then
+            local item = {
+                text = self.party.members[i].name,
+                highlighted = false,
+                onSelect = function () end
+            }
+                if i == index then
+                item.highlighted = true
+            end
+            table.insert(statuses, item)
+        end   
     end
 
     self.partyStatus = Menu {
@@ -64,7 +65,8 @@ function BattleMenuState:init(party, enemies, index)
                 onSelect = function()
                     gStateStack:push(FadeInState(BLACK, 1,
                     function()
-                        -- pop off the battle menu and the battle state
+                        -- pop off the battle menu, the turn state, and the battle state
+                        gStateStack:pop()
                         gStateStack:pop()
                         gStateStack:pop()
                         gStateStack:push(FadeOutState(BLACK, 1))

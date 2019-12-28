@@ -48,7 +48,6 @@ function PlayerWalkState:checkEncounter()
         gStateStack:push(FadeInState(BLACK, 1, 
             function()
                 gStateStack:push(BattleState(self.player))
-                gStateStack:push(FadeOutState(BLACK, 1))
             end))
         self.encounter = true
         self.player.steps = 0

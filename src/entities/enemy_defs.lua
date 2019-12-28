@@ -4,12 +4,12 @@ ENEMY_DEFS = {
     ['dingus'] = {
         name = 'dingus',
         stats = {
-            baseHP = 16,
-            baseMP = 8,
-            baseStr = 9,
-            baseInt = 6,
-            baseSpd = 6,
-            baseDfn = 10,
+            baseHP = 8,
+            baseMP = 0,
+            baseStr = 1,
+            baseInt = 0,
+            baseSpd = 3,
+            baseDfn = 2,
             HPIV = 5, 
             MPIV = 3,
             strIV = 4,
@@ -21,6 +21,6 @@ ENEMY_DEFS = {
         width = 48,
         height = 48,
         level = 2,
-        XPDrop = 100      
+        XPDrop = 500      
     },
 }

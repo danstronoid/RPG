@@ -31,6 +31,7 @@ require 'src/states/game/PlayState'
 require 'src/states/game/FadeInState'
 require 'src/states/game/FadeOutState'
 require 'src/states/game/DialogueState'
+require 'src/states/game/GameOverState'
 
 -- field states
 require 'src/states/game/field/FieldMenuState'
@@ -38,10 +39,13 @@ require 'src/states/game/field/StatsMenuState'
 
 -- battle states
 require 'src/states/game/battle/BattleState'
+require 'src/states/game/battle/TurnState'
 require 'src/states/game/battle/BattleMenuState'
+require 'src/states/game/battle/BattleMessageState'
 require 'src/states/game/battle/EnemyTurnState'
 require 'src/states/game/battle/AttackMenuState'
 require 'src/states/game/battle/BattleItemState'
+require 'src/states/game/battle/BattleVictoryState'
 
 -- entity states
 require 'src/states/entity/EntityBaseState'
@@ -75,6 +79,7 @@ require 'src/GUI/Panel'
 require 'src/GUI/Textbox'
 require 'src/GUI/Selection'
 require 'src/GUI/Menu'
+require 'src/GUI/Number'
 
 -- textures
 gTextures = {

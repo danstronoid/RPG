@@ -2,7 +2,7 @@
 
 CHARACTER_STATS = {
     ['zappa'] = {
-        baseHP = 16,
+        baseHP = 24,
         baseMP = 8,
         baseStr = 9,
         baseInt = 6,
@@ -14,10 +14,10 @@ CHARACTER_STATS = {
         strIV = 4,
         intIV = 2,
         spdIV = 3,
-        dfnIv = 3
+        dfnIV = 3
     },
     ['tipper'] = {
-        baseHP = 16,
+        baseHP = 24,
         baseMP = 8,
         baseStr = 9,
         baseInt = 6,
@@ -29,6 +29,6 @@ CHARACTER_STATS = {
         strIV = 4,
         intIV = 2,
         spdIV = 3,
-        dfnIv = 3
+        dfnIV = 3
     }
 }

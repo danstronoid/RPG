@@ -24,6 +24,15 @@ function PlayState:update(dt)
         gStateStack:push(FieldMenuState(self.startTime, self.level))
     end
 
+    -- heal the party, use this for debugging
+    if love.keyboard.wasPressed('h') then
+        for i = 1, #self.level.player.party.members do
+            self.level.player.party.members[i].currentHP = self.level.player.party.members[i].stats.HP
+            self.level.player.party.members[i].dead = false
+        end
+    end
+
+
     self.level:update(dt)
     self.camera:update(dt)
 
