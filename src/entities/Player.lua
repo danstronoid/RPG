@@ -35,6 +35,12 @@ function Player:init(def)
         }
     }
 
+    -- keep a table of all of the items in the player's inventory
+    self.inventory = {}
+
+    -- start with 5 potions in your inventory
+    table.insert(self.inventory, {item = ITEM_DEFS['potion'], noHeld = 5})
+
     -- keep track of the player's gold
     self.gold = 0
 end

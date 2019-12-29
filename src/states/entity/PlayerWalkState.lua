@@ -45,7 +45,7 @@ function PlayerWalkState:checkEncounter()
     if math.random(chanceEncounter) == 1 then
         self.player:changeState('idle')
 
-        gStateStack:push(FadeInState(BLACK, 1, 
+        gStateStack:push(BattleTransState(BLACK, 1, 
             function()
                 gStateStack:push(BattleState(self.player))
             end))

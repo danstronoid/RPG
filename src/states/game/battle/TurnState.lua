@@ -32,17 +32,14 @@ function TurnState:takeTurn()
     for j = 1, #self.party.members do
         if self.party.members[j].name == self.turnOrder[self.turnCounter].name 
             and not self.party.members[j].dead then
-            gStateStack:push(BattleMenuState(self.party, self.enemies, j))
-            --print('player turn')
-            --print(self.party.members[j].currentHP)
+            gStateStack:push(BattleMenuState(self.player, self.enemies, j))
         end
     end
 
     for k = 1, #self.enemies do
         if self.enemies[k].name == self.turnOrder[self.turnCounter].name 
             and not self.enemies[k].dead then
-            gStateStack:push(EnemyTurnState(self.party, self.enemies, k))
-            --print('enemy turn')        
+            gStateStack:push(EnemyTurnState(self.party, self.enemies, k))      
         end
     end
 
@@ -65,10 +62,11 @@ function TurnState:checkDeaths()
     for i = 1, #self.party.members do
         if self.party.members[i].dead then
             deadMembers = deadMembers + 1
-        elseif self.party.members[i].currentHP <=0 then
+        elseif self.party.members[i].currentHP <=0 then 
             self.party.members[i].currentHP = 0
             self.party.members[i].dead = true
             deadMembers = deadMembers + 1
+            --gStateStack:push(BattleMessageState(self.party.members[i].name .. ' has fallen.', function() end))     
         end
     end
 
@@ -94,7 +92,6 @@ function TurnState:checkDeaths()
                 gStateStack:push(FadeOutState(BLACK, 1))
             end))
         end))
-
     end
 end
 

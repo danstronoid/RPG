@@ -1,4 +1,16 @@
+--[[
+    GD50 
+    Final Project
 
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- Menu --
+
+    This class is used to create a menu.  A menu is comprised of 
+    a panel and a selection.
+
+]]
 
 
 Menu = Class{}

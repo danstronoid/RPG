@@ -3,9 +3,9 @@
 BattleMenuState = Class{__includes = BaseState}
 
 
-function BattleMenuState:init(party, enemies, index)
-
-    self.party = party
+function BattleMenuState:init(player, enemies, index)
+    self.player = player
+    self.party = player.party
     self.enemies = enemies
     self.activeChar = self.party.members[index]
 
@@ -38,9 +38,9 @@ function BattleMenuState:init(party, enemies, index)
     }
 
     self.battleMenu = Menu {
-        x = 3 * VIRTUAL_WIDTH / 4,
+        x = VIRTUAL_WIDTH / 2,
         y = 2 * (VIRTUAL_HEIGHT / 3),
-        width = VIRTUAL_WIDTH / 4,
+        width = VIRTUAL_WIDTH / 2,
         height = VIRTUAL_HEIGHT / 3,
         color = GREY,
         cursor = true,
@@ -48,23 +48,28 @@ function BattleMenuState:init(party, enemies, index)
             {
                 text = 'Attack',
                 onSelect = function()
-                    gStateStack:push(AttackMenuState(self.activeChar, self.enemies))
+                    self.battleMenu.selection:toggleCursor()
+                    gStateStack:push(AttackState(self.activeChar, self.enemies))
                 end
             },
             {
                 text = 'Defend',
                 onSelect = function()
+                    self.battleMenu.selection:toggleCursor()
                     gStateStack:pop()
                 end
             },
             {
                 text = 'Item',
                 onSelect = function()
+                    self.battleMenu.selection:toggleCursor()
+                    gStateStack:push(BattleItemState(self.player, self.activeChar, self.enemies))
                 end
             },
             {
                 text = 'Run',
                 onSelect = function()
+                    self.battleMenu.selection:toggleCursor()
                     gStateStack:push(FadeInState(BLACK, 1,
                     function()
                         -- pop off the battle menu, the turn state, and the battle state
@@ -80,6 +85,10 @@ function BattleMenuState:init(party, enemies, index)
 end
 
 function BattleMenuState:update(dt)
+    -- if the cursor is hidden, make it visible
+    if not self.battleMenu.selection.cursor then
+        self.battleMenu.selection:toggleCursor()
+    end
     self.battleMenu:update(dt)
 end
 

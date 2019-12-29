@@ -40,6 +40,9 @@ function Stats:init(def, level)
     self.int = self.baseInt
     self.spd = self.baseSpd
     self.dfn = self.baseDfn
+
+    -- table of active modifiers
+    self.modifiers = {}
 end
 
 -- increase stats on level up
@@ -55,7 +58,15 @@ function Stats:levelUp()
 end
 
 -- temporarily modify a stat during battle
-function Stats:modify()
+function Stats:addMod(mod)
+
+end
+
+function Stats:rmMod(mod)
+
+end
+
+function Stats:get(stat)
 
 end
 

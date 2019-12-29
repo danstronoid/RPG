@@ -1,4 +1,15 @@
+--[[
+    GD50 
+    Final Project
 
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- Textbox --
+    
+    This class creates a textbox which automatically pages the text.
+    This is used for dialogue and messages.
+]]
 
 Textbox = Class{}
 

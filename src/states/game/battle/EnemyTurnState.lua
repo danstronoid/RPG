@@ -23,7 +23,7 @@ function EnemyTurnState:enter()
             index = math.random(#self.party.members)
         end
 
-        attack(self.activeEnemy, self.party.members[index], self.damage, function()
+        ACTIONS['attack'](self.activeEnemy, self.party.members[index], self.damage, function()
             gStateStack:pop()
         end)
          

@@ -50,7 +50,7 @@ function FieldMenuState:init(startTime, level)
                 onSelect = function() end
             },
             {
-                text = self.level.player.gold .. ' G',
+                text = self.level.player.gold .. 'G',
                 onSelect = function() end
             } 
         }

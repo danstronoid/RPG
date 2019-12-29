@@ -32,6 +32,7 @@ require 'src/states/game/FadeInState'
 require 'src/states/game/FadeOutState'
 require 'src/states/game/DialogueState'
 require 'src/states/game/GameOverState'
+require 'src/states/game/BattleTransState'
 
 -- field states
 require 'src/states/game/field/FieldMenuState'
@@ -42,8 +43,9 @@ require 'src/states/game/battle/BattleState'
 require 'src/states/game/battle/TurnState'
 require 'src/states/game/battle/BattleMenuState'
 require 'src/states/game/battle/BattleMessageState'
+require 'src/states/game/battle/TargetSelectState'
 require 'src/states/game/battle/EnemyTurnState'
-require 'src/states/game/battle/AttackMenuState'
+require 'src/states/game/battle/AttackState'
 require 'src/states/game/battle/BattleItemState'
 require 'src/states/game/battle/BattleVictoryState'
 
@@ -65,6 +67,9 @@ require 'src/entities/Party'
 require 'src/entities/Enemy'
 require 'src/entities/enemy_defs'
 require 'src/entities/actions'
+
+-- items
+require 'src/items/item_defs'
 
 -- world
 require 'src/world/Tile'
