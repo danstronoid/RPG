@@ -3,66 +3,46 @@
 
 BattleVictoryState = Class{__includes = BaseState}
 
-function BattleVictoryState:init(party, enemies)
-    self.party = party
+function BattleVictoryState:init(player, enemies)
+    self.player = player
+    self.party = player.party
     self.enemies = enemies
 
-    local awardXP = self:calculateXP()
-    local partyList = {}
-
+    self.awardXP = self:calculateXP()
+    self.awardGold = self:calculateGold()
+    self.levelUp = ''
 
     for i = 1, #self.party.members do
-        local leveled = false
-        local memberText = self.party.members[i].name 
-
         if not self.party.members[i].dead then
-            self.party.members[i].currentXP = self.party.members[i].currentXP + awardXP
-            memberText = memberText .. ' + ' .. awardXP .. ' XP'
+            self.party.members[i].currentXP = self.party.members[i].currentXP + self.awardXP
         end
 
         -- keep doing this incase more than one level is gained
         while self.party.members[i].currentXP >= self.party.members[i].XPToLevel do
             self.party.members[i].currentXP = self.party.members[i].currentXP % self.party.members[i].XPToLevel
             self.party.members[i]:levelUp()
-            leveled = true   
+            self.levelUp = self.levelUp .. self.party.members[i].name .. ' is now level ' .. self.party.members[i].level .. '!\n'
         end
-
-        if leveled then
-            memberText = memberText .. ' Level up! '
-        end
-
-        memberText = memberText .. '\n' .. 'Lvl ' .. self.party.members[i].level .. '\n'
-            .. 'XP to Lvl ' .. self.party.members[i].level + 1 .. ' '
-            .. self.party.members[i].currentXP .. ' / ' .. self.party.members[i].XPToLevel .. '\n'
-
-        local item = {
-            text = memberText,
-            onSelect = function() 
-                -- pop off the victory state and the battle state
-                gStateStack:pop()
-                gStateStack:pop() 
-            end
-        }
-        table.insert(partyList, item)
     end
 
-    self.levelUpMenu = Menu {
-        x = 0,
-        y = 0,
-        width = VIRTUAL_WIDTH,
-        height = VIRTUAL_HEIGHT,
-        color = GREY,
-        cursor = false,
-        items = partyList
-    }
+    self.player.gold = self.player.gold + self.awardGold
 end
 
-function BattleVictoryState:update(dt)
-    self.levelUpMenu:update(dt)
-end
+function BattleVictoryState:enter()
+    gStateStack:push(BattleMessageState('You gained ' .. self.awardXP .. 'XP\n'
+    .. 'You got ' .. self.awardGold .. 'G\n\n'
+    .. self.levelUp,
+    function()
+    
+        gStateStack:push(FadeInState(BLACK, 1, 
+        function()
+            -- pop off the battlestate
+            gStateStack:pop()
+            gStateStack:pop()
+            gStateStack:push(FadeOutState(BLACK, 1))
+        end))
+    end))
 
-function BattleVictoryState:render()
-    self.levelUpMenu:render()
 end
 
 function BattleVictoryState:calculateXP()
@@ -79,4 +59,12 @@ function BattleVictoryState:calculateXP()
     end
 
     return math.floor(totalXP / totalMembers)
+end
+
+function BattleVictoryState:calculateGold()
+    local gold = 0
+    for i = 1, #self.enemies do
+        gold = gold + self.enemies[i].goldDrop
+    end
+    return gold
 end

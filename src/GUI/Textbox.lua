@@ -41,8 +41,8 @@ function Textbox:render()
     love.graphics.setFont(self.font)
     love.graphics.setColor(255, 255, 255, 255)
     for i = 1, #self.displayingChunks do
-        love.graphics.print(self.displayingChunks[i], self.x + LINE_WIDTH * 4, 
-            self.y + LINE_WIDTH * 4 + (i - 1) * TILE_SIZE)
+        love.graphics.print(self.displayingChunks[i], math.floor(self.x + LINE_WIDTH * 4), 
+            math.floor(self.y + LINE_WIDTH * 4 + (i - 1) * TILE_SIZE))
     end
 end
 
@@ -59,7 +59,7 @@ function Textbox:nextChunks()
     end
 
     -- if maxChunks is 0 (only one line is displayed per page) then still increment by 1
-    self.chunkCounter = self.chunkCounter + math.max(1, self.maxChunks)
+    self.chunkCounter = self.chunkCounter + (self.maxChunks + 1)
     --print(self.chunkCounter)
 
     return chunks

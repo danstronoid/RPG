@@ -2,7 +2,7 @@
 TurnState = Class{__includes = BaseState}
 
 function TurnState:init(battleState)
-
+    self.player = battleState.player
     self.party = battleState.party
     self.enemies = battleState.enemies
 
@@ -66,6 +66,7 @@ function TurnState:checkDeaths()
         if self.party.members[i].dead then
             deadMembers = deadMembers + 1
         elseif self.party.members[i].currentHP <=0 then
+            self.party.members[i].currentHP = 0
             self.party.members[i].dead = true
             deadMembers = deadMembers + 1
         end
@@ -76,7 +77,7 @@ function TurnState:checkDeaths()
         gStateStack:push(BattleMessageState('The enemies have been defeated!', 
         function()
             gStateStack:pop()
-            gStateStack:push(BattleVictoryState(self.party, self.enemies))
+            gStateStack:push(BattleVictoryState(self.player, self.enemies))
         end))
     end
 

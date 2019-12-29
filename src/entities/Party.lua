@@ -1,4 +1,15 @@
+--[[
+    GD50 
+    Final Project
 
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- Party --
+
+    This party class is a container class for all of the 
+    characters that belong to it.
+]]
 
 Party = Class{}
 

@@ -29,6 +29,7 @@ function PlayState:update(dt)
         for i = 1, #self.level.player.party.members do
             self.level.player.party.members[i].currentHP = self.level.player.party.members[i].stats.HP
             self.level.player.party.members[i].dead = false
+            gStateStack:push(DialogueState('The party has been healed!'))
         end
     end
 

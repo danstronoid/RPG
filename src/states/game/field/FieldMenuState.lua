@@ -42,14 +42,15 @@ function FieldMenuState:init(startTime, level)
         width = VIRTUAL_WIDTH / 4,
         height = VIRTUAL_HEIGHT / 4,
         color = GREY,
+        --top = true,
         cursor = false,
         items = {
             {
-                text = 'time ' .. formatTime(self.currentTime),
+                text = 'Time\n' .. formatTime(self.currentTime),
                 onSelect = function() end
             },
             {
-                text = 'coin 0',
+                text = self.level.player.gold .. ' G',
                 onSelect = function() end
             } 
         }

@@ -7,6 +7,9 @@
 
     -- Entity --
 
+    This class instantiates an entity that exists in the field state.
+    The player and NPC class inherit from entity and at present those are
+    the only two type of entities you might encounter.
 ]]
 
 Entity = Class{}

@@ -14,7 +14,9 @@ function BattleMenuState:init(party, enemies, index)
     for i = 1, #self.party.members do
         if not self.party.members[i].dead then
             local item = {
-                text = self.party.members[i].name,
+                text = self.party.members[i].name .. ' '
+                    .. self.party.members[i].currentHP .. '/' 
+                    .. self.party.members[i].stats.HP,
                 highlighted = false,
                 onSelect = function () end
             }

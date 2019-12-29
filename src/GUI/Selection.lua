@@ -12,6 +12,7 @@ function Selection:init(def)
     self.font = def.font or gFonts['small']
     self.gapHeight = (self.height - PADDING) / #self.items
 
+    self.top = def.top or false
     self.cursor = def.cursor
     self.currentSelection = 1
 end
@@ -43,6 +44,10 @@ function Selection:render()
     for i = 1, #self.items do
         local paddedY = math.floor(currentY + (self.gapHeight / 2) - self.font:getHeight() / 2 + PADDING)
 
+        if self.top then
+            paddedY = math.floor(currentY + PADDING)
+        end
+
         if i == self.currentSelection and self.cursor then
             love.graphics.draw(gTextures['cursor'], self.x - TILE_SIZE / 2, paddedY)
         end
@@ -54,10 +59,14 @@ function Selection:render()
             love.graphics.setColor(255, 255, 255, 255)
         end
 
-        love.graphics.printf(self.items[i].text, self.x + TILE_SIZE / 2, paddedY, self.width, 'left')
+        love.graphics.printf(self.items[i].text, self.x + PADDING, paddedY, self.width - PADDING * 2, 'left')
     
         currentY = currentY + self.gapHeight
     end
+end
+
+function Selection:toggleCursor()
+    self.cursor = not self.cursor
 end
 
 

@@ -5,7 +5,10 @@
     Author: Daniel Schwartz
     daniel.schwartz.music@gmail.com
 
-    -- entity definitions--
+    -- character animations--
+
+    This table defines all of the animations, both field and battle for all 
+    of the character sprites.
 
 ]]
 

@@ -39,7 +39,7 @@ function BattleState:render()
     love.graphics.setColor(0, 0, 0, 255)
     love.graphics.rectangle('fill', 0, 0, VIRTUAL_WIDTH, VIRTUAL_HEIGHT)
     love.graphics.setColor(255, 255, 255, 255)
-    love.graphics.draw(gTextures['battle'], 0, TILE_SIZE * 2 - VIRTUAL_HEIGHT / 3)
+    love.graphics.draw(gTextures['battle'], 0, math.floor(TILE_SIZE * 2 - VIRTUAL_HEIGHT / 3))
 
     self.panel:render()
 

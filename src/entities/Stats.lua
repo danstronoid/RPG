@@ -1,4 +1,16 @@
+--[[
+    GD50 
+    Final Project
 
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- Stats --
+
+    The class contains all stats and belongs to the character and 
+    enemy classes.  The stats class also does calculations for leveling up
+    and modifying stats in battle.
+]]
 
 Stats = Class{}
 

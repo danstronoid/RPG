@@ -1,8 +1,20 @@
+--[[
+    GD50 
+    Final Project
 
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- enemy definitions--
+
+    This table defines all of the stats and definitions
+    relevant to each enemy.
+
+]]
 
 ENEMY_DEFS = {
     ['dingus'] = {
-        name = 'dingus',
+        name = 'Dingus',
         stats = {
             baseHP = 8,
             baseMP = 0,
@@ -21,6 +33,7 @@ ENEMY_DEFS = {
         width = 48,
         height = 48,
         level = 2,
-        XPDrop = 500      
+        XPDrop = 500,
+        goldDrop = 20      
     },
 }

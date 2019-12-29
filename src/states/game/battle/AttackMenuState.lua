@@ -16,27 +16,10 @@ function AttackMenuState:init(activeChar, enemies)
                 onSelect = function() 
                     self.attacked = true
 
-                    Timer.tween(0.05, {
-                        [self.activeChar] = {x = math.floor(self.activeChar.x + self.activeChar.width / 2)}
-                    }):finish(function ()
-                        Timer.tween(0.05, {
-                            [self.activeChar] = {x = math.floor(self.activeChar.x - self.activeChar.width / 2)}
-                        })
+                    attack(self.activeChar, self.enemies[i], self.damage, function()
+                        gStateStack:pop()
+                        gStateStack:pop()
                     end)
-                    --:finish(function ()
-                        local dmg = self.activeChar.stats.str
-                        self.enemies[i].currentHP = self.enemies[i].currentHP - dmg
-                        self.damage:setNum(dmg, self.enemies[i].x + self.enemies[i].width / 2, 
-                            self.enemies[i].y - gFonts['small']:getHeight())
-                        --print(self.enemies[i].currentHP)
-
-                        Timer.every(0.1, function()
-                            self.enemies[i].opacity = self.enemies[i].opacity == 0 and 255 or 0
-                        end):limit(6):finish(function()
-                            gStateStack:pop()
-                            gStateStack:pop()
-                        end)   
-                    --end)
                 end
             }
         table.insert(enemyList, item)

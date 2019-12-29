@@ -89,7 +89,7 @@ function formatTime(t)
 end
 
 -- function to round to the nearest integer
-function Round(n)
+function round(n)
     if n < 0 then
         return math.ceil(n - 0.5)
     else 

@@ -64,6 +64,7 @@ require 'src/entities/Player'
 require 'src/entities/Party'
 require 'src/entities/Enemy'
 require 'src/entities/enemy_defs'
+require 'src/entities/actions'
 
 -- world
 require 'src/world/Tile'

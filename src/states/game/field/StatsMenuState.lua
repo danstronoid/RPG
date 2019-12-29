@@ -4,21 +4,15 @@ StatsMenuState = Class{__includes = BaseState}
 
 function StatsMenuState:init(party)
     self.party = party
-
-    self.panel = Panel(0, 0, VIRTUAL_WIDTH, VIRTUAL_HEIGHT, GREY)
-    self.text = {}
     self.charStats = {}
 
+    self.panel = Panel(0, 0, VIRTUAL_WIDTH, VIRTUAL_HEIGHT, GREY)
+
     for i = 1, #self.party.members do
-        local text = self.party.members[i].name .. '\n \n'
-        .. 'Lvl ' .. self.party.members[i].level .. '\n'
-        .. 'HP ' .. self.party.members[i].stats.HP .. '\n'
-        .. 'MP ' .. self.party.members[i].stats.MP .. '\n'
-        .. 'Str ' .. self.party.members[i].stats.str .. '\n'
-        .. 'Int ' .. self.party.members[i].stats.int .. '\n'
-        .. 'Spd ' .. self.party.members[i].stats.spd .. '\n'
-        .. 'Def ' .. self.party.members[i].stats.dfn .. '\n'
-        table.insert(self.text, text)
+        local charText = self.party.members[i].name .. '\n'
+        .. 'Lvl ' .. self.party.members[i].level .. '\n\n'
+        .. 'XP ' .. self.party.members[i].currentXP .. '/ ' .. self.party.members[i].XPToLevel .. '\n\n'
+        .. self.party.members[i]:printStats()
 
         self.charStats[i] = Menu {
             x = (i - 1) * (VIRTUAL_WIDTH / 4),
@@ -26,17 +20,14 @@ function StatsMenuState:init(party)
             width = VIRTUAL_WIDTH / 4,
             height = VIRTUAL_HEIGHT,
             color = GREY,
+            top = true,
             cursor = false,
             items = {
                 {
-                    text = self.text[i],
+                    text = charText,
                     onSelect = function()
                         gStateStack:pop()
                     end
-                },
-                {
-                    text = '',
-                    onSelect = function() end
                 }
             }
         }
