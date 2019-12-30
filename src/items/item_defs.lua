@@ -2,7 +2,7 @@
 
 
 ITEM_DEFS = {
-    ['potion'] = {
+    ['Potion'] = {
         name = 'Potion',
         type = 'consumable',
         action = 'item_restoreHP',
@@ -10,6 +10,7 @@ ITEM_DEFS = {
             select = 'party',
             type = 'one'
         },
+        text = 'Heals a small amount of HP.',
         restore = 40,
         price = 10
     }

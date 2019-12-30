@@ -25,22 +25,24 @@ function Player:init(def)
             Character({
                 name = 'Zappa',
                 stats = CHARACTER_STATS['zappa'],
+                magic = CHARACTER_MAGIC['zappa'][1],
                 anims = CHARACTER_ANIMS['zappa']
             }),
             Character({
                 name = 'Tipper',
                 stats = CHARACTER_STATS['tipper'],
+                magic = CHARACTER_MAGIC['tipper'][1],
                 anims = CHARACTER_ANIMS['tipper']
             }),
         }
     }
 
     -- keep a table of all of the items in the player's inventory
-    self.inventory = {}
+    self.inventory = Inventory()
 
     -- start with 5 potions in your inventory
-    table.insert(self.inventory, {item = ITEM_DEFS['potion'], noHeld = 5})
-
+    self.inventory:addItem('Potion', 5)
+    
     -- keep track of the player's gold
     self.gold = 0
 end

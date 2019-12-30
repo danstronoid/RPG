@@ -37,6 +37,7 @@ require 'src/states/game/BattleTransState'
 -- field states
 require 'src/states/game/field/FieldMenuState'
 require 'src/states/game/field/StatsMenuState'
+require 'src/states/game/field/ItemMenuState'
 
 -- battle states
 require 'src/states/game/battle/BattleState'
@@ -46,6 +47,7 @@ require 'src/states/game/battle/BattleMessageState'
 require 'src/states/game/battle/TargetSelectState'
 require 'src/states/game/battle/EnemyTurnState'
 require 'src/states/game/battle/AttackState'
+require 'src/states/game/battle/BattleMagicState'
 require 'src/states/game/battle/BattleItemState'
 require 'src/states/game/battle/BattleVictoryState'
 
@@ -56,20 +58,26 @@ require 'src/states/entity/EntityWalkState'
 require 'src/states/entity/PlayerIdleState'
 require 'src/states/entity/PlayerWalkState'
 
+-- items
+require 'src/items/item_defs'
+require 'src/items/Inventory'
+
+-- magic
+require 'src/magic/magic_defs'
+require 'src/magic/Magic'
+
 -- entites
 require 'src/entities/Entity'
 require 'src/entities/Character'
 require 'src/entities/Stats'
 require 'src/entities/character_stats'
+require 'src/entities/character_magic'
 require 'src/entities/character_anims'
 require 'src/entities/Player'
 require 'src/entities/Party'
 require 'src/entities/Enemy'
 require 'src/entities/enemy_defs'
 require 'src/entities/actions'
-
--- items
-require 'src/items/item_defs'
 
 -- world
 require 'src/world/Tile'

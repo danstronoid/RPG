@@ -24,6 +24,7 @@ function Menu:init(def)
         y = def.y,
         width = def.width,
         height = def.height,
+        justify = def.justify,
         top = def.top,
         cursor = def.cursor
     }

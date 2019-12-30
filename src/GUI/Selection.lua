@@ -22,8 +22,16 @@ function Selection:init(def)
     self.height = def.height
 
     self.font = def.font or gFonts['small']
+    self.justify = def.justify or 'center'
+
+    -- the maximum number of items to display per page
+    self.maxItems = math.min(#self.items, math.floor((self.height - PADDING) / self.font:getHeight()))
+
     -- used to spread the items across the y-axis
-    self.gapHeight = (self.height - PADDING) / #self.items
+    self.gapHeight = (self.height - PADDING) / self.maxItems
+
+    -- use an offset to page up and down throught the items
+    self.offset = 0
 
     -- flag for whether to center the items, or align to the top of the box
     -- by default items are centered
@@ -40,6 +48,7 @@ function Selection:update(dt)
         if self.currentSelection == 1 then
             -- wrap around to the last item
             self.currentSelection = #self.items
+            self.offset = #self.items - self.maxItems 
         else
             self.currentSelection = self.currentSelection - 1
         end
@@ -47,18 +56,25 @@ function Selection:update(dt)
         if self.currentSelection == #self.items then
             -- wrap around to the first item
             self.currentSelection = 1
+            self.offset = 0
         else
             self.currentSelection = self.currentSelection + 1
         end
     elseif love.keyboard.wasPressed('return') or love.keyboard.wasPressed('enter') then
         self.items[self.currentSelection].onSelect()
     end
+
+    if self.currentSelection > (self.maxItems + self.offset) then
+        self.offset = self.offset + 1
+    elseif self.currentSelection <= self.offset then
+        self.offset = self.offset - 1
+    end
 end
 
 function Selection:render()
     local currentY = self.y 
 
-    for i = 1, #self.items do
+    for i = 1 + self.offset, self.maxItems + self.offset do
         -- calculate the Y for each item
         local paddedY = math.floor(currentY + (self.gapHeight / 2) - self.font:getHeight() / 2 + PADDING)
 
@@ -66,21 +82,27 @@ function Selection:render()
         if self.top then
             paddedY = math.floor(currentY + PADDING)
         end
-
-        if i == self.currentSelection and self.cursor then
-            love.graphics.draw(gTextures['cursor'], self.x - TILE_SIZE / 2, paddedY)
-        end
         
         love.graphics.setFont(self.font)
         -- if the item is supposed to be highlighted then set the font to yellow
         if self.items[i].highlighted then
             love.graphics.setColor(255, 255, 0, 255)
+        elseif self.items[i].greyed then
+            love.graphics.setColor(128, 128, 128, 255)
         else
             love.graphics.setColor(255, 255, 255, 255)
         end
 
-        love.graphics.printf(self.items[i].text, self.x + PADDING, paddedY, self.width - PADDING * 2, 'left')
-    
+        love.graphics.printf(self.items[i].text, self.x + PADDING, paddedY, self.width - PADDING * 2, self.justify)
+
+        -- reset the color
+        love.graphics.setColor(255, 255, 255, 255)
+
+        if i == self.currentSelection and self.cursor then
+            love.graphics.draw(gTextures['cursor'], self.x - TILE_SIZE / 2, paddedY)
+        end
+
+        -- increment the current Y
         currentY = currentY + self.gapHeight
     end
 end

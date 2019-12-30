@@ -19,6 +19,7 @@ Character = Class{}
 function Character:init(def)
     self.name = def.name
     self.stats = Stats(def.stats)
+    self.magic = Magic(def.magic)
     self.animations = def.anims
 
     -- keep track of position for battle actions

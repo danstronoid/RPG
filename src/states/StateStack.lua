@@ -45,3 +45,9 @@ function StateStack:pop()
     self.states[#self.states]:exit()
     table.remove(self.states)
 end
+
+-- return the state on top of the stack
+-- need to give states an id for this to work
+function StateStack:top()
+    return self.states[#self.states].id
+end

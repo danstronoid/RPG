@@ -19,8 +19,9 @@ function TargetSelectState:init(party, enemies, def, callback)
 
     local targetList = {}
     for i = 1, #self.targets do
+        local item = {}
         if not self.targets[i].dead then
-            local item = {
+            item = {
                 text = self.targets[i].name,
                 onSelect = function() 
                     self.selected = true 
@@ -28,7 +29,14 @@ function TargetSelectState:init(party, enemies, def, callback)
                     gStateStack:pop()         
                 end
             }
-        table.insert(targetList, item)
+            table.insert(targetList, item)
+        elseif self.select == 'party' then
+            item = {
+                text = self.targets[i].name,
+                greyed = true,
+                onSelect = function() end
+            }
+            table.insert(targetList, item)
         end
     end
 
@@ -48,6 +56,7 @@ function TargetSelectState:init(party, enemies, def, callback)
         width = VIRTUAL_WIDTH / 2,
         height = VIRTUAL_HEIGHT / 3,
         color = GREY,
+        justify = 'left',
         cursor = true,
         items = targetList
     }

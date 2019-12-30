@@ -5,7 +5,7 @@
 BattleItemState = Class{__includes = BaseState}
 
 function BattleItemState:init(player, activeChar, enemies)
-
+    self.player = player
     self.inventory = player.inventory 
     self.party = player.party
     self.activeChar = activeChar
@@ -14,37 +14,32 @@ function BattleItemState:init(player, activeChar, enemies)
     self.itemUsed = false
 
     local itemList = {}
-    for i = 1, #self.inventory do
-        local item = {
-            text = self.inventory[i].item.name .. ' : ' .. self.inventory[i].noHeld,
+    for k, item in pairs(self.inventory.items) do
+        table.insert(itemList, {
+            text = item.def.name .. ' : ' .. item.noHeld,
             onSelect = function() 
                 self.itemMenu.selection:toggleCursor()
-                gStateStack:push(TargetSelectState(self.party, self.enemies, self.inventory[i].item.target,
+                gStateStack:push(TargetSelectState(self.party, self.enemies, item.def.target,
                 function(target)
                     self.itemUsed = true
-                    ACTIONS[self.inventory[i].item.action](self.inventory[i].item, self.activeChar, target, self.number,
+                    ACTIONS[item.def.action](item.def, self.activeChar, target, self.number,
                     function()
-                        self.inventory[i].noHeld = self.inventory[i].noHeld - 1
-                        if self.inventory[i].noHeld == 0 then
-                            table.remove(self.inventory, i)
-                        end
+                        self.inventory:rmItem(k, 1)
                         -- pop off the item state and the menu state
                         gStateStack:pop()
                         gStateStack:pop()
                     end)
                 end))
             end
-        }
-        table.insert(itemList, item)
+        })
     end
-
-    local cancel = {
+    
+    table.insert(itemList, {
         text = 'Cancel',
         onSelect = function()
             gStateStack:pop()
         end
-    }
-    table.insert(itemList, cancel)
+    })
 
     self.itemMenu = Menu {
         x = VIRTUAL_WIDTH / 2,

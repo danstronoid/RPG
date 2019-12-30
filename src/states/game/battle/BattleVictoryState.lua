@@ -11,6 +11,7 @@ function BattleVictoryState:init(player, enemies)
     self.awardXP = self:calculateXP()
     self.awardGold = self:calculateGold()
     self.levelUp = ''
+    self.awardItems = ''
 
     for i = 1, #self.party.members do
         if not self.party.members[i].dead then
@@ -26,11 +27,19 @@ function BattleVictoryState:init(player, enemies)
     end
 
     self.player.gold = self.player.gold + self.awardGold
+
+    for i = 1, #self.enemies do
+        if math.random(self.enemies[i].itemChance) == 1 then
+            self.player.inventory:addItem(self.enemies[i].itemDrop, 1)
+            self.awardItems = self.awardItems .. self.enemies[i].name .. ' dropped a ' .. self.enemies[i].itemDrop .. '.\n'
+        end
+    end
 end
 
 function BattleVictoryState:enter()
-    gStateStack:push(BattleMessageState('You gained ' .. self.awardXP .. 'XP\n'
-    .. 'You got ' .. self.awardGold .. 'G\n\n'
+    gStateStack:push(BattleMessageState('You gained ' .. self.awardXP .. ' XP.\n'
+    .. 'You got ' .. self.awardGold .. ' G.\n'
+    .. self.awardItems
     .. self.levelUp,
     function()
     

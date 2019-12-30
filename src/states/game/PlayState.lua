@@ -19,13 +19,17 @@ function PlayState:init()
 end
 
 function PlayState:update(dt)
-    if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
+    --[[This is kind of a brute force way of stopping a bug where you continue to move
+    if you hold down one of the arrow keys while opening the menu.  There is probably a better
+    way to solve this, but this works for now.]] 
+    if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') 
+        and not (love.keyboard.isDown('up') or love.keyboard.isDown('down') 
+        or love.keyboard.isDown('left') or love.keyboard.isDown('right')) then
         -- there is a bug where you keep moving after entering this state
         gStateStack:push(FieldMenuState(self.startTime, self.level))
-    end
 
     -- heal the party, use this for debugging
-    if love.keyboard.wasPressed('h') then
+    elseif love.keyboard.wasPressed('h') then
         for i = 1, #self.level.player.party.members do
             self.level.player.party.members[i].currentHP = self.level.player.party.members[i].stats.HP
             self.level.player.party.members[i].dead = false
@@ -33,9 +37,9 @@ function PlayState:update(dt)
         end
     end
 
-
     self.level:update(dt)
     self.camera:update(dt)
+
 
     self.fps = love.timer.getFPS()
 end

@@ -19,7 +19,6 @@ CHARACTER_STATS = {
         baseInt = 6,
         baseSpd = 6,
         baseDfn = 10,
-
         HPIV = 5, 
         MPIV = 3,
         strIV = 4,
@@ -34,7 +33,6 @@ CHARACTER_STATS = {
         baseInt = 8,
         baseSpd = 7,
         baseDfn = 9,
-
         HPIV = 4, 
         MPIV = 4,
         strIV = 3,

@@ -81,7 +81,7 @@ end
 
 -- this function formats time from seconds into HH:MM:SS
 function formatTime(t)
-    local hours = string.sub('0' .. math.floor(t / 3600), -2)
+    local hours = math.floor(t / 3600)
     local minutes = string.sub('0' .. math.floor(t / 60 % 60), -2)
     local seconds = string.sub('0' .. t % 60, -2)
 

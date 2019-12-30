@@ -32,6 +32,10 @@ function Enemy:init(def)
     self.XPDrop = def.XPDrop
     self.goldDrop = def.goldDrop
 
+    -- each enemy has a chance of dropping an item
+    self.itemDrop = def.itemDrop
+    self.itemChance = def.itemChance
+
     -- when an enemy is instantiated increase it's stats up to
     -- its defined level
     for i = 1, self.level do
@@ -41,12 +45,4 @@ function Enemy:init(def)
     self.currentHP = self.stats.HP
 
     self.dead = false
-end
-
-function Enemy:update(dt)
-
-end
-
-function Enemy:render()
-
 end

@@ -18,6 +18,12 @@ function FieldMenuState:init(startTime, level)
             {
                 text = 'Items',
                 onSelect = function()
+                    gStateStack:push(ItemMenuState(self.level.player))
+                end
+            },
+            {
+                text = 'Magic',
+                onSelect = function()
                 end
             },
             {
@@ -46,16 +52,20 @@ function FieldMenuState:init(startTime, level)
         cursor = false,
         items = {
             {
-                text = 'Time\n' .. formatTime(self.currentTime),
+                text = formatTime(self.currentTime),
                 onSelect = function() end
             },
             {
-                text = self.level.player.gold .. 'G',
+                text = self.level.player.gold .. ' G',
                 onSelect = function() end
             } 
         }
     }
 
+end
+
+function FieldMenuState:enter()
+    self.level.player:changeState('idle')
 end
 
 function FieldMenuState:update(dt)

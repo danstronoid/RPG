@@ -34,6 +34,8 @@ ENEMY_DEFS = {
         height = 48,
         level = 2,
         XPDrop = 500,
-        goldDrop = 20      
+        goldDrop = 20,
+        itemDrop = 'Potion',
+        itemChance = 6     
     },
 }

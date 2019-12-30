@@ -3,28 +3,30 @@
 BattleMenuState = Class{__includes = BaseState}
 
 
-function BattleMenuState:init(player, enemies, index)
+function BattleMenuState:init(player, enemies, index, turn)
     self.player = player
     self.party = player.party
     self.enemies = enemies
     self.activeChar = self.party.members[index]
+    self.turn = turn -- the total number of turns that have passed
 
     local statuses = {}
 
     for i = 1, #self.party.members do
-        if not self.party.members[i].dead then
-            local item = {
-                text = self.party.members[i].name .. ' '
-                    .. self.party.members[i].currentHP .. '/' 
-                    .. self.party.members[i].stats.HP,
-                highlighted = false,
-                onSelect = function () end
-            }
-                if i == index then
-                item.highlighted = true
-            end
-            table.insert(statuses, item)
-        end   
+       
+        local item = {
+            text = self.party.members[i].name .. ' '
+                .. self.party.members[i].currentHP .. '/' 
+                .. self.party.members[i].stats.HP,
+            highlighted = false,
+            onSelect = function () end
+        }
+        if i == index then
+            item.highlighted = true
+        elseif self.party.members[i].dead then
+            item.greyed = true
+        end
+        table.insert(statuses, item)
     end
 
     self.partyStatus = Menu {
@@ -33,14 +35,15 @@ function BattleMenuState:init(player, enemies, index)
         width = VIRTUAL_WIDTH / 2,
         height = VIRTUAL_HEIGHT / 3,
         color = GREY,
+        justify = 'left',
         cursor = false,
         items = statuses
     }
 
     self.battleMenu = Menu {
-        x = VIRTUAL_WIDTH / 2,
+        x = VIRTUAL_WIDTH / 2 + VIRTUAL_WIDTH / 8,
         y = 2 * (VIRTUAL_HEIGHT / 3),
-        width = VIRTUAL_WIDTH / 2,
+        width = VIRTUAL_WIDTH / 4,
         height = VIRTUAL_HEIGHT / 3,
         color = GREY,
         cursor = true,
@@ -53,10 +56,10 @@ function BattleMenuState:init(player, enemies, index)
                 end
             },
             {
-                text = 'Defend',
+                text = 'Magic',
                 onSelect = function()
                     self.battleMenu.selection:toggleCursor()
-                    gStateStack:pop()
+                    gStateStack:push(BattleMagicState(self.activeChar, self.party, self.enemies))
                 end
             },
             {
@@ -70,14 +73,16 @@ function BattleMenuState:init(player, enemies, index)
                 text = 'Run',
                 onSelect = function()
                     self.battleMenu.selection:toggleCursor()
-                    gStateStack:push(FadeInState(BLACK, 1,
+                    ACTIONS['run'](self.activeChar, self.enemies[math.random(#self.enemies)],
                     function()
-                        -- pop off the battle menu, the turn state, and the battle state
-                        gStateStack:pop()
-                        gStateStack:pop()
-                        gStateStack:pop()
-                        gStateStack:push(FadeOutState(BLACK, 1))
-                    end))
+                        gStateStack:push(FadeInState(BLACK, 1,
+                        function()
+                            -- pop off the turn state, and the battle state
+                            gStateStack:pop()
+                            gStateStack:pop()
+                            gStateStack:push(FadeOutState(BLACK, 1))
+                        end))
+                    end)
                 end
             }
         }

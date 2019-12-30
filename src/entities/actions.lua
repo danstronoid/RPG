@@ -43,6 +43,79 @@ ACTIONS = {
 
     end,
 
+['run'] = 
+    function(owner, target, callback)
+        local callback = callback or function() end
+        local escapeChance 
+        if owner.level >= target.level then
+            escapeChance = 3
+        else
+            escapeChance = 6
+        end
+
+        if math.random(escapeChance) == 1 then
+            gStateStack:push(BattleMessageState('You got away safely.', 
+            function()
+                -- pop off the battle menu
+                gStateStack:pop()
+                callback()
+            end))
+        else
+            gStateStack:push(BattleMessageState("Can't escape!", 
+            function()
+                gStateStack:pop()
+            end))
+        end
+    end,
+-- magic actions
+['element_spell'] = 
+    function(spell, owner, target, Number, callback)
+        local callback = callback or function() end
+        local dmg 
+
+        if target.currentHP > 0 then
+            dmg = spell.base_dmg[1] + owner.stats.int
+            target.currentHP = math.max(0, target.currentHP - dmg)
+        end
+        
+        owner.currentMP = owner.currentMP - spell.mp_cost
+
+        Number:setNum(dmg, target.x + target.width / 2, 
+            target.y - gFonts['small']:getHeight())
+
+        Timer.every(0.1, function()
+            target.opacity = target.opacity == 0 and 255 or 0
+        end):limit(8):finish(function()
+            target.opacity = 255
+            callback()
+        end)   
+    end,
+
+['hp_restore_spell'] =
+    function(spell, owner, target, Number, callback)
+        local callback = callback or function() end
+        local restore
+
+        if target.currentHP > 0 then
+            restore = spell.base_heal
+            target.currentHP = math.min(target.stats.HP, target.currentHP + restore)
+        end
+
+        owner.currentMP = owner.currentMP - spell.mp_cost
+        
+        Number:setNum(restore, target.x + target.width / 2, 
+            target.y - gFonts['small']:getHeight())
+
+        Timer.every(0.1, function()
+            target.opacity = target.opacity == 0 and 255 or 0
+        end):limit(8):finish(function()
+            target.opacity = 255
+            callback()
+        end)   
+    end,
+
+-- item actions
+
 ['item_restoreHP'] =
     function(item, owner, target, Number, callback)
         local callback = callback or function() end
