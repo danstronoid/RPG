@@ -11,6 +11,7 @@ function BattleVictoryState:init(player, enemies)
     self.awardXP = self:calculateXP()
     self.awardGold = self:calculateGold()
     self.levelUp = ''
+    self.newSpells = ''
     self.awardItems = ''
 
     for i = 1, #self.party.members do
@@ -23,6 +24,14 @@ function BattleVictoryState:init(player, enemies)
             self.party.members[i].currentXP = self.party.members[i].currentXP % self.party.members[i].XPToLevel
             self.party.members[i]:levelUp()
             self.levelUp = self.levelUp .. self.party.members[i].name .. ' is now level ' .. self.party.members[i].level .. '!\n'
+
+            -- add any new spells and print a message if you do
+            local spells = self.party.members[i]:newSpells()
+            if spells then
+                for j = 1, #spells do
+                    self.newSpells = self.newSpells .. self.party.members[i].name .. ' learned ' .. spells[j] .. '!\n'
+                end
+            end
         end
     end
 
@@ -40,7 +49,8 @@ function BattleVictoryState:enter()
     gStateStack:push(BattleMessageState('You gained ' .. self.awardXP .. ' XP.\n'
     .. 'You got ' .. self.awardGold .. ' G.\n'
     .. self.awardItems
-    .. self.levelUp,
+    .. self.levelUp
+    .. self.newSpells,
     function()
     
         gStateStack:push(FadeInState(BLACK, 1, 

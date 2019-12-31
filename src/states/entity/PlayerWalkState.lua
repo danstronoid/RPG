@@ -32,8 +32,10 @@ function PlayerWalkState:checkEncounter()
     local chanceEncounter = 0
     local steps = self.player.steps 
 
-    if steps <= 5 then
-        chanceEncounter = 50
+    if steps < 3 then
+        chanceEncounter = 500
+    elseif steps >= 3 and steps <= 5 then
+        chanceEncounter = 40
     elseif steps > 5 and steps <= 10 then
         chanceEncounter = 20
     elseif steps > 10 and steps <= 20 then

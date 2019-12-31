@@ -119,5 +119,6 @@ gFonts = {
     ['xsmall'] = love.graphics.newFont('fonts/CT.ttf', 8),
     ['small'] = love.graphics.newFont('fonts/CT.ttf', 16),
     ['medium'] = love.graphics.newFont('fonts/CT.ttf', 32),
-    ['large'] = love.graphics.newFont('fonts/CT.ttf', 64)
+    ['large'] = love.graphics.newFont('fonts/CT.ttf', 64),
+    ['title'] = love.graphics.newFont('fonts/title.ttf', 56)
 }

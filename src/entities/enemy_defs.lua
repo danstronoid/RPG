@@ -33,6 +33,7 @@ ENEMY_DEFS = {
         width = 48,
         height = 48,
         level = 2,
+        weak = 'ice',
         XPDrop = 500,
         goldDrop = 20,
         itemDrop = 'Potion',

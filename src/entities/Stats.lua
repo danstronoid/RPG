@@ -42,6 +42,10 @@ function Stats:init(def, level)
     self.dfn = self.baseDfn
 
     -- table of active modifiers
+    --[[in the format self.modifiers[name] = {
+        add = {[stat] = value}, 
+        mult = {[stat] = value}
+    } ]]
     self.modifiers = {}
 end
 
@@ -58,16 +62,51 @@ function Stats:levelUp()
 end
 
 -- temporarily modify a stat during battle
-function Stats:addMod(mod)
-
+function Stats:addMod(name, mod)
+    if self.modifiers[name] == nil then
+        self.modifiers[name] = {
+            add = mod.add or {},
+            mult = mod.mult or {}
+        }
+    end
 end
 
-function Stats:rmMod(mod)
-
+-- remove a modifier
+function Stats:rmMod(name)
+    self.modifiers[name] = nil
 end
 
+-- remove all modifiers
+function Stats:clearMods()
+    self.modifiers = {}
+end
+
+-- returns a given modified stat
 function Stats:get(stat)
+    local add = 0
+    local mult = 0
 
+    for k, mod in pairs(self.modifiers) do
+        add = add + (mod.add[stat] or 0)
+        mult = mult + (mod.mult[stat] or 0)
+    end
+
+    if stat == 'HP' then
+        return (self.HP + add) + (self.HP * mult)
+    elseif stat == 'MP' then
+        return (self.MP + add) + (self.MP * mult)
+    elseif stat == 'str' then
+        return (self.str + add) + (self.str * mult)
+    elseif stat == 'int' then
+        return (self.int + add) + (self.int * mult)
+    elseif stat == 'spd' then
+        return (self.spd + add) + (self.spd * mult)
+    elseif stat == 'dfn' then
+        return (self.dfn + add) + (self.dfn * mult)
+    else 
+        print('invalid stat')
+        return
+    end
 end
 
 -- calculate how much to increase a stat based on its IV

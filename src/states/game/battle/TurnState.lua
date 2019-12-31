@@ -9,7 +9,7 @@ function TurnState:init(battleState)
     self.turnStarted = false
     self.turnCounter = 1 -- this counter rolls over after each entity has taken a turn
     self.turnOrder = sortTurns(self.party, self.enemies)
-    self.turnTotal = 1 -- this is the total number of turns that have passed since the battle began
+    self.turnTimer = 0 -- this is the total number of turns that have passed since the battle began
 
     -- halt all turns if we've reached the end of the battle
     self.endOfBattle = false
@@ -33,20 +33,22 @@ function TurnState:takeTurn()
     for j = 1, #self.party.members do
         if self.party.members[j].name == self.turnOrder[self.turnCounter].name 
             and not self.party.members[j].dead then
-            gStateStack:push(BattleMenuState(self.player, self.enemies, j, self.turnTotal))
+                Event.dispatch('newTurn')
+                gStateStack:push(BattleMenuState(self.player, self.enemies, j, self.turnTotal))
         end
     end
 
     for k = 1, #self.enemies do
         if self.enemies[k].name == self.turnOrder[self.turnCounter].name 
             and not self.enemies[k].dead then
-            gStateStack:push(EnemyTurnState(self.party, self.enemies, k))      
+                Event.dispatch('newTurn')
+                gStateStack:push(EnemyTurnState(self.party, self.enemies, k))      
         end
     end
 
     self.turnStarted = false
     self.turnCounter = self.turnCounter + 1
-    self.turnTotal = self.turnTotal + 1
+    self.turnTimer = self.turnTimer + 1
 end
 
 function TurnState:checkDeaths()

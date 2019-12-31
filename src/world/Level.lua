@@ -21,7 +21,7 @@ function Level:init(camera, dungeon)
         mapY =  math.floor(self.dungeon.rooms[1].y + (self.dungeon.rooms[1].height / 2)),
         width = 16,
         height = 18,
-        animations = CHARACTER_ANIMS['zappa'].field
+        animations = CHARACTER_ANIMS['Zappa'].field
     }
 
     self.player.stateMachine = StateMachine {

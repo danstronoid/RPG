@@ -16,6 +16,7 @@ ACTIONS = {
 ['attack'] = 
     function(owner, target, Number, callback)
         local callback = callback or function() end
+        local dmg = round(owner.stats:get('str') * (MAX_DFN - target.stats:get('dfn')) / MAX_DFN + 1)
 
         Timer.tween(0.05, {
             [owner] = {x = math.floor(owner.x + owner.width / 2)}
@@ -23,7 +24,6 @@ ACTIONS = {
             Timer.tween(0.05, {
                 [owner] = {x = math.floor(owner.x - owner.width / 2)}
             }):finish(function ()
-                local dmg = round(owner.stats.str * (MAX_DFN - target.stats.dfn) / MAX_DFN + 1)
                 target.currentHP = target.currentHP - dmg
                 Number:setNum(dmg, target.x + target.width / 2, 
                     target.y - gFonts['small']:getHeight())
@@ -67,14 +67,21 @@ ACTIONS = {
             end))
         end
     end,
+
 -- magic actions
 ['element_spell'] = 
     function(spell, owner, target, Number, callback)
         local callback = callback or function() end
         local dmg 
+        local index = 1
+
+        if target.weak == spell.element then
+            index = 2
+        end
 
         if target.currentHP > 0 then
-            dmg = spell.base_dmg[1] + owner.stats.int
+            dmg = round((spell.base_dmg[index] + owner.stats:get('int')) 
+                * (MAX_DFN - target.stats:get('dfn')) / MAX_DFN + 1)
             target.currentHP = math.max(0, target.currentHP - dmg)
         end
         
@@ -98,7 +105,7 @@ ACTIONS = {
 
         if target.currentHP > 0 then
             restore = spell.base_heal
-            target.currentHP = math.min(target.stats.HP, target.currentHP + restore)
+            target.currentHP = math.min(target.stats:get('HP'), target.currentHP + restore)
         end
 
         owner.currentMP = owner.currentMP - spell.mp_cost
@@ -114,6 +121,37 @@ ACTIONS = {
         end)   
     end,
 
+['buff_spell'] =
+    function(spell, owner, target, __, callback)
+        local callback = callback or function() end
+        
+        local turnsPassed = 0
+        local turnCounter = Event.on('newTurn', function() 
+            turnsPassed = turnsPassed + 1
+            print('New turn' .. turnsPassed) 
+            if turnsPassed == spell.duration then
+                target.stats:rmMod(spell.name)
+                gStateStack:push(BattleMessageState(target.name .. "'s defense returned to normal"))
+                removeCounter()
+            end
+        end)
+        removeCounter = function() turnCounter:remove() end
+
+        target.stats:addMod(spell.name, spell.mod)
+
+        owner.currentMP = owner.currentMP - spell.mp_cost
+
+        Timer.every(0.1, function()
+            target.opacity = target.opacity == 0 and 255 or 0
+        end):limit(8):finish(function()
+            target.opacity = 255
+            gStateStack:push(BattleMessageState(target.name .. "'s defense rose!",
+            function()
+                callback()
+            end)) 
+        end)   
+    end,
+
 -- item actions
 
 ['item_restoreHP'] =
@@ -121,7 +159,7 @@ ACTIONS = {
         local callback = callback or function() end
 
         if target.currentHP > 0 then
-            target.currentHP = math.min(target.stats.HP, target.currentHP + item.restore)
+            target.currentHP = math.min(target.stats:get('HP'), target.currentHP + item.restore)
         end
         
         Number:setNum(item.restore, target.x + target.width / 2, 

@@ -43,7 +43,7 @@ end
 -- level up the character and increase stats
 function Character:levelUp()
     self.stats:levelUp()
-
+    
     -- restore HP and MP when you level up
     self.currentHP = self.stats.HP
     self.currentMP = self.stats.MP
@@ -51,6 +51,18 @@ function Character:levelUp()
     self.level = self.level + 1
     self.XPToLevel = self:nextLevel(self.level)
 end
+
+-- add any new spells, call this when leveling up
+function Character:newSpells()
+    local newSpells = CHARACTER_MAGIC[self.name][self.level]
+    if newSpells then
+        for i = 1, #newSpells do
+            self.magic:addSpell(newSpells[i])
+        end
+    end
+    return newSpells
+end
+
 
 -- calculates the XP needed to reach the next level
 function Character:nextLevel(level)
@@ -61,11 +73,11 @@ end
 
 -- format the character stats into a string that can be used in a GUI element
 function Character:printStats()
-    local text =  'HP ' .. self.currentHP .. '/\n' .. self.stats.HP .. '\n'
-        .. 'MP ' .. self.currentMP .. '/\n' .. self.stats.MP .. '\n\n'
-        .. 'Str ' .. self.stats.str .. '\n'
-        .. 'Int ' .. self.stats.int .. '\n'
-        .. 'Spd ' .. self.stats.spd .. '\n'
-        .. 'Def ' .. self.stats.dfn .. '\n'
+    local text =  'HP ' .. self.currentHP .. '/\n' .. self.stats:get('HP') .. '\n'
+        .. 'MP ' .. self.currentMP .. '/\n' .. self.stats:get('MP') .. '\n\n'
+        .. 'Str ' .. self.stats:get('str') .. '\n'
+        .. 'Int ' .. self.stats:get('int') .. '\n'
+        .. 'Spd ' .. self.stats:get('spd') .. '\n'
+        .. 'Def ' .. self.stats:get('dfn') .. '\n'
     return text
 end

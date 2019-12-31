@@ -19,7 +19,9 @@ function Panel:init(x, y, width, height, color)
 
     -- create a color gradient
     self.mesh =  gradientMesh('vertical',
-    {color.r * 2, color.g * 2, color.b * 2},
+    {math.min(255, color.r * 2), 
+    math.min(255, color.g * 2), 
+    math.min(255, color.b * 2)},
     {color.r, color.g, color.b})
 
     self.visible = true

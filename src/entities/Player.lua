@@ -24,15 +24,15 @@ function Player:init(def)
         members = {
             Character({
                 name = 'Zappa',
-                stats = CHARACTER_STATS['zappa'],
-                magic = CHARACTER_MAGIC['zappa'][1],
-                anims = CHARACTER_ANIMS['zappa']
+                stats = CHARACTER_STATS['Zappa'],
+                magic = CHARACTER_MAGIC['Zappa'][1],
+                anims = CHARACTER_ANIMS['Zappa']
             }),
             Character({
                 name = 'Tipper',
-                stats = CHARACTER_STATS['tipper'],
-                magic = CHARACTER_MAGIC['tipper'][1],
-                anims = CHARACTER_ANIMS['tipper']
+                stats = CHARACTER_STATS['Tipper'],
+                magic = CHARACTER_MAGIC['Tipper'][1],
+                anims = CHARACTER_ANIMS['Tipper']
             }),
         }
     }

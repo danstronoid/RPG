@@ -13,7 +13,7 @@
 ]]
 
 CHARACTER_ANIMS = {
-    ['zappa'] = {
+    ['Zappa'] = {
         field = {
             ['walk-left'] = {
                 texture = 'man',
@@ -57,7 +57,7 @@ CHARACTER_ANIMS = {
             frame = 4
         }
     },
-    ['tipper'] = {
+    ['Tipper'] = {
         field = {
             ['walk-left'] = {
                 texture = 'woman',

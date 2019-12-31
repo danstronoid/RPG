@@ -2,10 +2,10 @@
 
 
 CHARACTER_MAGIC = {
-    ['zappa'] = {
-        [1] = {'Heal'}
+    ['Zappa'] = {
+        [1] = {'Heal', 'Protect'}
     },
-    ['tipper'] = {
+    ['Tipper'] = {
         [1] = {'Fire'},
         [3] = {'Ice'}
     }
