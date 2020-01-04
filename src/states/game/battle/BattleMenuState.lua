@@ -16,8 +16,8 @@ function BattleMenuState:init(player, enemies, index, turn)
        
         local item = {
             text = self.party.members[i].name .. ' '
-                .. self.party.members[i].currentHP .. '/' 
-                .. self.party.members[i].stats.HP,
+                .. self.party.members[i].currentHP .. '/'
+                .. self.party.members[i].stats:get('HP') .. ' HP',
             highlighted = false,
             onSelect = function () end
         }
@@ -41,11 +41,12 @@ function BattleMenuState:init(player, enemies, index, turn)
     }
 
     self.battleMenu = Menu {
-        x = VIRTUAL_WIDTH / 2 + VIRTUAL_WIDTH / 8,
+        x = VIRTUAL_WIDTH / 2,
         y = 2 * (VIRTUAL_HEIGHT / 3),
-        width = VIRTUAL_WIDTH / 4,
+        width = VIRTUAL_WIDTH / 2,
         height = VIRTUAL_HEIGHT / 3,
         color = GREY,
+        justify = 'left',
         cursor = true,
         items = {
             {
@@ -75,6 +76,11 @@ function BattleMenuState:init(player, enemies, index, turn)
                     self.battleMenu.selection:toggleCursor()
                     ACTIONS['run'](self.activeChar, self.enemies[math.random(#self.enemies)],
                     function()
+                        -- remove any temporary stat mods
+                        for i = 1, #self.party.members do
+                            self.party.members[i].stats:clearTempMods()
+                        end
+
                         gStateStack:push(FadeInState(BLACK, 1,
                         function()
                             -- pop off the turn state, and the battle state

@@ -124,18 +124,6 @@ ACTIONS = {
 ['buff_spell'] =
     function(spell, owner, target, __, callback)
         local callback = callback or function() end
-        
-        local turnsPassed = 0
-        local turnCounter = Event.on('newTurn', function() 
-            turnsPassed = turnsPassed + 1
-            print('New turn' .. turnsPassed) 
-            if turnsPassed == spell.duration then
-                target.stats:rmMod(spell.name)
-                gStateStack:push(BattleMessageState(target.name .. "'s defense returned to normal"))
-                removeCounter()
-            end
-        end)
-        removeCounter = function() turnCounter:remove() end
 
         target.stats:addMod(spell.name, spell.mod)
 
@@ -147,6 +135,14 @@ ACTIONS = {
             target.opacity = 255
             gStateStack:push(BattleMessageState(target.name .. "'s defense rose!",
             function()
+                -- this is time based, find a way to make this turn based
+                TurnCounter:after(spell.duration, function()
+                    if not target.dead and target then
+                        target.stats:rmMod(spell.name)
+                        gStateStack:push(BattleMessageState(target.name .. "'s defense returned to normal."))
+                    end
+                end)
+
                 callback()
             end)) 
         end)   

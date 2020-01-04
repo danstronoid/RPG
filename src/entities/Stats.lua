@@ -44,7 +44,8 @@ function Stats:init(def, level)
     -- table of active modifiers
     --[[in the format self.modifiers[name] = {
         add = {[stat] = value}, 
-        mult = {[stat] = value}
+        mult = {[stat] = value},
+        temp = bool
     } ]]
     self.modifiers = {}
 end
@@ -66,7 +67,8 @@ function Stats:addMod(name, mod)
     if self.modifiers[name] == nil then
         self.modifiers[name] = {
             add = mod.add or {},
-            mult = mod.mult or {}
+            mult = mod.mult or {},
+            temp = mod.temp or false
         }
     end
 end
@@ -77,8 +79,17 @@ function Stats:rmMod(name)
 end
 
 -- remove all modifiers
-function Stats:clearMods()
+function Stats:clearAllMods()
     self.modifiers = {}
+end
+
+-- removes all temporary modifiers
+function Stats:clearTempMods()
+    for k, mod in pairs(self.modifiers) do
+        if mod.temp then
+            self:rmMod(k)
+        end
+    end
 end
 
 -- returns a given modified stat

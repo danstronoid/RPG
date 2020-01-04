@@ -14,6 +14,9 @@ Push = require 'lib/push'
 Event = require 'lib/knife.event'
 Timer = require 'lib/knife.timer'
 
+require 'src/TurnCounter'
+TurnCounter = TurnCounter()
+
 -- misc
 require 'src/constants'
 require 'src/util'

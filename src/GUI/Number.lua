@@ -24,6 +24,10 @@ end
 function Number:render()
     if self.visible then
         love.graphics.setFont(gFonts['small'])
+        -- add a drop shadow
+        love.graphics.setColor(0, 0, 0, 255)
+        love.graphics.print(self.num, self.x + 1, self.y + 1)
+        
         love.graphics.setColor(255, 255, 255, 255)
         love.graphics.print(self.num, self.x, self.y)
     end

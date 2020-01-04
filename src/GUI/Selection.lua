@@ -84,6 +84,13 @@ function Selection:render()
         end
         
         love.graphics.setFont(self.font)
+
+        -- add a drop shadow
+        love.graphics.setColor(0, 0, 0, 255)
+        love.graphics.printf(self.items[i].text, self.x + PADDING + 1, paddedY + 1, 
+            self.width - PADDING * 2, self.justify)
+
+
         -- if the item is supposed to be highlighted then set the font to yellow
         if self.items[i].highlighted then
             love.graphics.setColor(255, 255, 0, 255)
@@ -93,7 +100,8 @@ function Selection:render()
             love.graphics.setColor(255, 255, 255, 255)
         end
 
-        love.graphics.printf(self.items[i].text, self.x + PADDING, paddedY, self.width - PADDING * 2, self.justify)
+        love.graphics.printf(self.items[i].text, self.x + PADDING, paddedY, 
+            self.width - PADDING * 2, self.justify)
 
         -- reset the color
         love.graphics.setColor(255, 255, 255, 255)

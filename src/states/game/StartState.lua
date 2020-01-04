@@ -32,7 +32,7 @@ function StartState:render()
     love.graphics.clear(0, 0, 0, 255)
 
     love.graphics.setColor(255, 255, 255, 255)
-    love.graphics.setFont(gFonts['title'])
+    love.graphics.setFont(gFonts['large'])
     love.graphics.printf('FINAL PROJECT', 0, VIRTUAL_HEIGHT / 2 - 64, VIRTUAL_WIDTH, 'center')
     love.graphics.setFont(gFonts['small'])
     love.graphics.printf('Press Enter', 0, VIRTUAL_HEIGHT / 2 + 32, VIRTUAL_WIDTH, 'center')

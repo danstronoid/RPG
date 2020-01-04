@@ -15,6 +15,9 @@ function BattleVictoryState:init(player, enemies)
     self.awardItems = ''
 
     for i = 1, #self.party.members do
+        -- remove any temporary stat mods
+        self.party.members[i].stats:clearTempMods()
+
         if not self.party.members[i].dead then
             self.party.members[i].currentXP = self.party.members[i].currentXP + self.awardXP
         end

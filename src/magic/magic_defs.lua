@@ -42,9 +42,10 @@ MAGIC_DEFS = {
         action = 'buff_spell',
         mp_cost = 4,
         mod = {
-            mult = {['dfn'] = 1}
+            mult = {['dfn'] = 1},
+            temp = true
         },
-        duration = 2,
+        duration = 8,
         target = {
             select = 'party',
             type = 'one'
