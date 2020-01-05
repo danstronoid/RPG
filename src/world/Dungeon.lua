@@ -23,14 +23,14 @@ function Dungeon:init(mapWidth, mapHeight, maxRooms)
 
     self.floor = self:createFloor()
     self.water = self:createWater()
-    --self.walls = self:createWalls()
+    self.walls = self:createWalls()
     self:addDetails()
 end
 
 function Dungeon:render(camera)
     self.floor:render(camera)
     self.water:render(camera)
-    --self.walls:render(camera)
+    self.walls:render(camera)
 end
 
 -- generates a dungeon map with a given number of rooms
@@ -234,18 +234,28 @@ function Dungeon:createWalls()
 
     for y = 1, self.mapHeight do
         for x = 1, self.mapWidth do
+            -- alternate blocks
+            local indexX, indexY = 1, 1
+            if x % 2 == 0 then
+                indexX = 2
+            end
+
+            if y % 2 == 0 then
+                indexY = 2
+            end
+
             if x == leftEdge and y > topEdge and y < botEdge then
-                walls.tiles[y][x].id = TILE_IDS['wall-left-edge']
+                walls.tiles[y][x].id = TILE_IDS['wall-left-edge'][indexY]
                 walls.tiles[y][x].solid = true
             elseif x == rightEdge and y > topEdge and y < botEdge then
-                walls.tiles[y][x].id = TILE_IDS['wall-right-edge']
+                walls.tiles[y][x].id = TILE_IDS['wall-right-edge'][indexY]
                 walls.tiles[y][x].solid = true
             end
 
             if y == topEdge and x > leftEdge and x < rightEdge then
                 self:topEdgeSpawn(walls, x, y)
             elseif y == botEdge and x > leftEdge and x < rightEdge then
-                walls.tiles[y][x].id = TILE_IDS['wall-bot-edge']
+                walls.tiles[y][x].id = TILE_IDS['wall-bot-edge'][indexX]
                 walls.tiles[y][x].solid = true
             end
 

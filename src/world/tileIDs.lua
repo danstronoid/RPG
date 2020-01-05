@@ -24,9 +24,9 @@ TILE_IDS = {
     ['wall-top-edge-w'] = {158, 159},
     ['wall-top-edge-1'] = {30, 31},
     ['wall-top-edge-2'] = {14, 15},
-    ['wall-bot-edge'] = 62,
-    ['wall-left-edge'] = 23,
-    ['wall-right-edge'] = 24,
+    ['wall-bot-edge'] = {62, 63},
+    ['wall-left-edge'] = {23, 39},
+    ['wall-right-edge'] = {24, 40},
 
     -- details
     ['rocks'] = {113, 116, 130, 148, 148, 148, 149, 149, 149},
