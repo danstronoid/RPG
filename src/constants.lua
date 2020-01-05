@@ -22,7 +22,7 @@ MAX_DFN = 256
 
 -- Tile constants
 TILE_SIZE = 16
-PADDING_TILE = 4
+PADDING_TILE = 6
 
 -- GUI constants
 PADDING = 8 -- padding with respect to layout

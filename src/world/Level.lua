@@ -13,7 +13,7 @@ Level = Class{}
 function Level:init(camera, dungeon)
     self.camera = camera
 
-    self.dungeon = Dungeon(80, 80, 8)
+    self.dungeon = Dungeon(100, 100, 10)
 
     self.player = Player {
         -- spawn the player in the middle of the first room

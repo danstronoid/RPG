@@ -87,8 +87,7 @@ function Dungeon:createFloor()
         for y = 1, self.mapHeight do
             for x = 1, self.mapWidth do
                 if self.rooms[i].tiles[y][x] == true or self.corridors[i].tiles[y][x] == true then
-                    floor.tiles[y][x].id = TILE_IDS['ground'][math.random(#TILE_IDS['ground'])]
-                    floor.tiles[y][x].solid = false
+                    changeTileID(floor, x, y, 'ground', false, math.random(#TILE_IDS['ground']))
                 end
             end
         end
@@ -101,12 +100,10 @@ function Dungeon:createFloor()
             if x > 1 and x < self.mapWidth and y > 1 and y < self.mapHeight then
                 if floor.tiles[y][x].solid and not floor.tiles[y - 1][x].solid
                     and not floor.tiles[y + 1][x].solid then
-                        floor.tiles[y][x].id = TILE_IDS['ground'][math.random(#TILE_IDS['ground'])]
-                        floor.tiles[y][x].solid = false
+                        changeTileID(floor, x, y, 'ground', false, math.random(#TILE_IDS['ground']))
                 elseif floor.tiles[y][x].solid and not floor.tiles[y][x - 1].solid
                     and not floor.tiles[y][x + 1].solid then
-                        floor.tiles[y][x].id = TILE_IDS['ground'][math.random(#TILE_IDS['ground'])]
-                        floor.tiles[y][x].solid = false
+                        changeTileID(floor, x, y, 'ground', false, math.random(#TILE_IDS['ground']))
                 end
             end
         end
@@ -136,59 +133,46 @@ function Dungeon:createWater()
                     -- create the edges
                     if not self.floor.tiles[y][x + 1].solid then
                         if not self.floor.tiles[y + 1][x].solid then
-                            water.tiles[y][x].id = TILE_IDS['water-top-left']
-                            water.tiles[y][x].solid = true
+                            changeTileID(water, x, y, 'water-top-left', true)
                         elseif not self.floor.tiles[y - 1][x].solid then
-                            water.tiles[y][x].id = TILE_IDS['water-bot-left']
-                            water.tiles[y][x].solid = true
+                            changeTileID(water, x, y, 'water-bot-left', true)
                         else
-                            water.tiles[y][x].id = TILE_IDS['water-left-edge']
-                            water.tiles[y][x].solid = true
+                            changeTileID(water, x, y, 'water-left-edge', true)
                         end
                     elseif not self.floor.tiles[y][x - 1].solid then
                         if not self.floor.tiles[y + 1][x].solid then
-                            water.tiles[y][x].id = TILE_IDS['water-top-right']
-                            water.tiles[y][x].solid = true
+                            changeTileID(water, x, y, 'water-top-right', true)
                         elseif not self.floor.tiles[y - 1][x].solid then
-                            water.tiles[y][x].id = TILE_IDS['water-bot-right']
-                            water.tiles[y][x].solid = true
+                            changeTileID(water, x, y, 'water-bot-right', true)
                         else
-                            water.tiles[y][x].id = TILE_IDS['water-right-edge']
-                            water.tiles[y][x].solid = true
+                            changeTileID(water, x, y, 'water-right-edge', true)
                         end
                     elseif not self.floor.tiles[y + 1][x].solid then
-                        water.tiles[y][x].id = TILE_IDS['water-top-edge']
-                        water.tiles[y][x].solid = true
+                        changeTileID(water, x, y, 'water-top-edge', true)
                     elseif not self.floor.tiles[y - 1][x].solid then
-                        water.tiles[y][x].id = TILE_IDS['water-bot-edge']
-                        water.tiles[y][x].solid = true
+                        changeTileID(water, x, y, 'water-bot-edge', true)
                     end
 
 
                     -- add the corners
                     if self.floor.tiles[y][x + 1].solid and self.floor.tiles[y + 1][x].solid
                         and not self.floor.tiles[y + 1 ][x + 1].solid then
-                            water.tiles[y][x].id = TILE_IDS['water-top-left-corner']
-                            water.tiles[y][x].solid = true
+                            changeTileID(water, x, y, 'water-top-left-corner', true)
                     elseif self.floor.tiles[y][x - 1].solid and self.floor.tiles[y + 1][x].solid
                         and not self.floor.tiles[y + 1 ][x - 1].solid then
-                            water.tiles[y][x].id = TILE_IDS['water-top-right-corner']
-                            water.tiles[y][x].solid = true
+                            changeTileID(water, x, y, 'water-top-right-corner', true)
                     elseif self.floor.tiles[y][x + 1].solid and self.floor.tiles[y - 1][x].solid
                         and not self.floor.tiles[y - 1 ][x + 1].solid then
-                            water.tiles[y][x].id = TILE_IDS['water-bot-left-corner']
-                            water.tiles[y][x].solid = true
+                            changeTileID(water, x, y, 'water-bot-left-corner', true)
                     elseif self.floor.tiles[y][x - 1].solid and self.floor.tiles[y - 1][x].solid
                         and not self.floor.tiles[y - 1 ][x - 1].solid then
-                            water.tiles[y][x].id = TILE_IDS['water-bot-right-corner']
-                            water.tiles[y][x].solid = true
+                            changeTileID(water, x, y, 'water-bot-right-corner', true)
                     end
                 end 
 
                 -- if none of the conditions have been met, but the tile is solid
                 if self.floor.tiles[y][x].solid and water.tiles[y][x].id == TILE_IDS['empty'] then
-                    water.tiles[y][x].id = TILE_IDS['water']
-                    water.tiles[y][x].solid = true
+                    changeTileID(water, x, y, 'water', true)
                 end              
                 
             end
@@ -234,34 +218,39 @@ function Dungeon:createWalls()
 
     for y = 1, self.mapHeight do
         for x = 1, self.mapWidth do
-            -- alternate blocks
-            local indexX, indexY = 1, 1
-            if x % 2 == 0 then
-                indexX = 2
-            end
-
-            if y % 2 == 0 then
-                indexY = 2
-            end
-
+            -- add the edges
             if x == leftEdge and y > topEdge and y < botEdge then
-                walls.tiles[y][x].id = TILE_IDS['wall-left-edge'][indexY]
-                walls.tiles[y][x].solid = true
+                if self.water.tiles[y][x].id == TILE_IDS['water'] then
+                    changeTileID(walls, x, y, 'wall-left-edge-w', true, 'y')
+                else
+                    changeTileID(walls, x, y, 'wall-left-edge', true, 'y')
+                end
             elseif x == rightEdge and y > topEdge and y < botEdge then
-                walls.tiles[y][x].id = TILE_IDS['wall-right-edge'][indexY]
-                walls.tiles[y][x].solid = true
-            end
-
-            if y == topEdge and x > leftEdge and x < rightEdge then
+                if self.water.tiles[y][x].id == TILE_IDS['water'] then
+                    changeTileID(walls, x, y, 'wall-right-edge-w', true, 'y')
+                else
+                    changeTileID(walls, x, y, 'wall-right-edge', true, 'y')
+                end
+            elseif y == topEdge and x > leftEdge and x < rightEdge then
                 self:topEdgeSpawn(walls, x, y)
             elseif y == botEdge and x > leftEdge and x < rightEdge then
-                walls.tiles[y][x].id = TILE_IDS['wall-bot-edge'][indexX]
-                walls.tiles[y][x].solid = true
+                changeTileID(walls, x, y, 'wall-bot-edge', true, 'x')
             end
 
+            -- add the corners
+            if y == botEdge and x == leftEdge then
+                changeTileID(walls, x, y, 'wall-bot-left-corner', true)
+            elseif y == botEdge and x == rightEdge then
+                changeTileID(walls, x, y, 'wall-bot-right-corner', true)
+            elseif y == topEdge and x == leftEdge then
+                self:topLeftCorner(walls, x, y)
+            elseif y == topEdge and x == rightEdge then
+                self:topRightCorner(walls, x, y)
+            end
+
+            -- fill in the rest
             if x < leftEdge or y < topEdge or x > rightEdge or y > botEdge then
-                walls.tiles[y][x].id = TILE_IDS['dark']
-                walls.tiles[y][x].solid = true
+                changeTileID(walls, x, y, 'dark', true)
             end
         end
     end
@@ -271,36 +260,69 @@ function Dungeon:createWalls()
     return walls
 end
 
+-- create the pattern for the top edge
+function Dungeon:topEdgeSpawn(walls, x, y)
+    for i = 1, 4 do
+        changeTileID(walls, x, y - i, 'wall-top-edge-' .. i, true, 'x')
+    end
+end
+
+-- create the pattern for the top left corner
+function Dungeon:topLeftCorner(walls, x, y)
+    for i = y, y - 3, -1 do
+        changeTileID(walls, x, i, 'wall-left-edge', true, 'y')
+    end
+
+    if self.water.tiles[y][x].id == TILE_IDS['water'] then
+        changeTileID(walls, x, y, 'wall-left-edge-w', true, 'y')
+    end
+
+    if self.water.tiles[y - 1][x].id == TILE_IDS['water'] then
+        changeTileID(walls, x, y - 1, 'wall-left-edge-w', true, 'y')
+    end
+
+    changeTileID(walls, x, y - 4, 'wall-top-left-corner', true)
+end
+
+-- create the pattern for the top right corner
+function Dungeon:topRightCorner(walls, x, y)
+    for i = y, y - 3, -1 do
+        changeTileID(walls, x, i, 'wall-right-edge', true, 'y')
+    end
+    if self.water.tiles[y][x].id == TILE_IDS['water'] then
+        changeTileID(walls, x, y, 'wall-right-edge-w', true, 'y')
+    end
+    changeTileID(walls, x, y - 4, 'wall-top-right-corner', true)
+end
+
 function Dungeon:addDetails()
     for y = 1, self.mapHeight do
         for x = 1, self.mapWidth do
             if not self.floor.tiles[y][x].solid then 
                 if math.random(64) == 1 then
-                    self.floor.tiles[y][x].id = TILE_IDS['rocks'][math.random(#TILE_IDS['rocks'])]
+                    changeTileID(self.floor, x, y, 'rocks', false, math.random(#TILE_IDS['rocks']))
                 elseif math.random(64) == 1 then
-                    self.floor.tiles[y][x].id = TILE_IDS['cracks']
+                    changeTileID(self.floor, x, y, 'cracks', false)
                 elseif math.random(256) == 1 then
-                    self.floor.tiles[y][x].id = TILE_IDS['hole']
-                    self.water.tiles[y][x].solid = true
+                    changeTileID(self.floor, x, y, 'hole', true)
                 end
             end
         end
     end
 end
 
-function Dungeon:topEdgeSpawn(walls, x, y)
-    -- alternate between two tiles
-    local index = 1
-    if x % 2 == 0 then
-        index = 2
+-- change the id of a tile, the alt parameter is used to alternate tiles on 
+-- the x or y axis. Alt can also be a numerical index of a particular tile id.
+function changeTileID(tileMap, x, y, id, solid, alt)
+    if alt == 'y' then
+        tileMap.tiles[y][x].id = TILE_IDS[id][y % 2 + 1]
+    elseif alt == 'x' then
+        tileMap.tiles[y][x].id = TILE_IDS[id][x % 2 + 1]
+    elseif alt == nil then
+        tileMap.tiles[y][x].id = TILE_IDS[id]
+    else
+        tileMap.tiles[y][x].id = TILE_IDS[id][alt]
     end
-
-    walls.tiles[y][x].id = TILE_IDS['wall-top-edge'][index]
-    walls.tiles[y][x].solid = true
-
-    walls.tiles[y - 1][x].id = TILE_IDS['wall-top-edge-1'][index]
-    walls.tiles[y - 1][x].solid = true
-
-    walls.tiles[y - 2][x].id = TILE_IDS['wall-top-edge-2'][index]
-    walls.tiles[y - 2][x].solid = true
+        
+    tileMap.tiles[y][x].solid = solid
 end

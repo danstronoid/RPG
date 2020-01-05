@@ -20,13 +20,21 @@ TILE_IDS = {
     ['water-bot-right-corner'] = 35,
 
     -- wall edges
-    ['wall-top-edge'] = {46, 47},
-    ['wall-top-edge-w'] = {158, 159},
-    ['wall-top-edge-1'] = {30, 31},
-    ['wall-top-edge-2'] = {14, 15},
+    ['wall-top-edge-1'] = {174, 175},
+    ['wall-top-edge-2'] = {158, 159},
+    ['wall-top-edge-3'] = {142, 143},
+    ['wall-top-edge-4'] = {126, 127},
     ['wall-bot-edge'] = {62, 63},
     ['wall-left-edge'] = {23, 39},
+    ['wall-left-edge-w'] = {56, 72},
     ['wall-right-edge'] = {24, 40},
+    ['wall-right-edge-w'] = {57, 73},
+
+    -- corners
+    ['wall-top-left-corner'] = 7,
+    ['wall-top-right-corner'] = 8,
+    ['wall-bot-left-corner'] = 60,
+    ['wall-bot-right-corner'] = 76,
 
     -- details
     ['rocks'] = {113, 116, 130, 148, 148, 148, 149, 149, 149},
