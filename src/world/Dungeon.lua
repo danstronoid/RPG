@@ -23,13 +23,14 @@ function Dungeon:init(mapWidth, mapHeight, maxRooms)
 
     self.floor = self:createFloor()
     self.water = self:createWater()
-    self.details = self:createDetails()
+    --self.walls = self:createWalls()
+    self:addDetails()
 end
 
 function Dungeon:render(camera)
     self.floor:render(camera)
     self.water:render(camera)
-    self.details:render(camera)
+    --self.walls:render(camera)
 end
 
 -- generates a dungeon map with a given number of rooms
@@ -39,10 +40,12 @@ function Dungeon:generateMap(maxRooms)
 
     -- fill the empty map with rooms
     for i = 1, maxRooms do
+        -- spawn the first room somewhere in the middle of the map
         if i == 1 then
-            -- spawn the first room somewhere in the middle of the map
             rooms[i] = Room(self.mapWidth, self.mapHeight)
             corridors[i] = Corridor(self.mapWidth, self.mapHeight, rooms[i])
+
+        -- spawn the last room
         elseif i == maxRooms then            
             rooms[i] = Room(self.mapWidth, self.mapHeight, corridors[i - 1])
             corridors[i] = Corridor(self.mapWidth, self.mapHeight, rooms[i])
@@ -54,6 +57,8 @@ function Dungeon:generateMap(maxRooms)
                     corridors[i].tiles[y][x] = false
                 end
             end
+        
+        -- spawn all other rooms
         else
             rooms[i] = Room(self.mapWidth, self.mapHeight, corridors[i - 1])
             corridors[i] = Corridor(self.mapWidth, self.mapHeight, rooms[i])
@@ -193,31 +198,99 @@ function Dungeon:createWater()
     return water
 end
 
-function Dungeon:createDetails()
-    local details = TileMap(self.mapWidth, self.mapHeight)
+function Dungeon:createWalls()
+    local walls = TileMap(self.mapWidth, self.mapHeight)
 
     -- create a map filled with empty tiles
     for y = 1, self.mapHeight do
-        table.insert(details.tiles, {})
+        table.insert(walls.tiles, {})
         for x = 1, self.mapWidth do
-            table.insert(details.tiles[y], Tile(x, y, TILE_IDS['empty']))
+            table.insert(walls.tiles[y], Tile(x, y, TILE_IDS['empty']))
         end
     end 
 
+    local leftEdge = self.mapWidth
+    local rightEdge = 0
+    local topEdge = self.mapHeight
+    local botEdge = 0
+
     for y = 1, self.mapHeight do
         for x = 1, self.mapWidth do
-            if not self.floor.tiles[y][x].solid then 
-                if math.random(64) == 1 then
-                    details.tiles[y][x].id = TILE_IDS['rocks'][math.random(#TILE_IDS['rocks'])]
-                elseif math.random(64) == 1 then
-                    details.tiles[y][x].id = TILE_IDS['cracks']
-                elseif math.random(256) == 1 then
-                    details.tiles[y][x].id = TILE_IDS['hole']
-                    self.water.tiles[y][x].solid = true
+            if not self.floor.tiles[y][x].solid then
+                if x < leftEdge then
+                    leftEdge = x - 1
+                elseif x >= rightEdge then
+                    rightEdge = x + 1
+                end
+
+                if y < topEdge then
+                    topEdge = y - 1
+                elseif y >= botEdge then
+                    botEdge = y + 1
                 end
             end
         end
     end
 
-    return details
+    for y = 1, self.mapHeight do
+        for x = 1, self.mapWidth do
+            if x == leftEdge and y > topEdge and y < botEdge then
+                walls.tiles[y][x].id = TILE_IDS['wall-left-edge']
+                walls.tiles[y][x].solid = true
+            elseif x == rightEdge and y > topEdge and y < botEdge then
+                walls.tiles[y][x].id = TILE_IDS['wall-right-edge']
+                walls.tiles[y][x].solid = true
+            end
+
+            if y == topEdge and x > leftEdge and x < rightEdge then
+                self:topEdgeSpawn(walls, x, y)
+            elseif y == botEdge and x > leftEdge and x < rightEdge then
+                walls.tiles[y][x].id = TILE_IDS['wall-bot-edge']
+                walls.tiles[y][x].solid = true
+            end
+
+            if x < leftEdge or y < topEdge or x > rightEdge or y > botEdge then
+                walls.tiles[y][x].id = TILE_IDS['dark']
+                walls.tiles[y][x].solid = true
+            end
+        end
+    end
+
+    --print(leftEdge .. ', ' .. rightEdge ..', ' .. topEdge .. ', ' .. botEdge)
+
+    return walls
+end
+
+function Dungeon:addDetails()
+    for y = 1, self.mapHeight do
+        for x = 1, self.mapWidth do
+            if not self.floor.tiles[y][x].solid then 
+                if math.random(64) == 1 then
+                    self.floor.tiles[y][x].id = TILE_IDS['rocks'][math.random(#TILE_IDS['rocks'])]
+                elseif math.random(64) == 1 then
+                    self.floor.tiles[y][x].id = TILE_IDS['cracks']
+                elseif math.random(256) == 1 then
+                    self.floor.tiles[y][x].id = TILE_IDS['hole']
+                    self.water.tiles[y][x].solid = true
+                end
+            end
+        end
+    end
+end
+
+function Dungeon:topEdgeSpawn(walls, x, y)
+    -- alternate between two tiles
+    local index = 1
+    if x % 2 == 0 then
+        index = 2
+    end
+
+    walls.tiles[y][x].id = TILE_IDS['wall-top-edge'][index]
+    walls.tiles[y][x].solid = true
+
+    walls.tiles[y - 1][x].id = TILE_IDS['wall-top-edge-1'][index]
+    walls.tiles[y - 1][x].solid = true
+
+    walls.tiles[y - 2][x].id = TILE_IDS['wall-top-edge-2'][index]
+    walls.tiles[y - 2][x].solid = true
 end

@@ -2,6 +2,7 @@ TILE_IDS = {
     ['ground'] = {145, 146, 161, 162},
     ['empty'] = 67,
     ['water'] = 51,
+    ['dark'] = 55,
     --edges
     ['water-top-edge'] = 2,
     ['water-bot-edge'] = 34,
@@ -17,6 +18,15 @@ TILE_IDS = {
     ['water-top-right-corner'] = 3,
     ['water-bot-left-corner'] = 33,
     ['water-bot-right-corner'] = 35,
+
+    -- wall edges
+    ['wall-top-edge'] = {46, 47},
+    ['wall-top-edge-w'] = {158, 159},
+    ['wall-top-edge-1'] = {30, 31},
+    ['wall-top-edge-2'] = {14, 15},
+    ['wall-bot-edge'] = 62,
+    ['wall-left-edge'] = 23,
+    ['wall-right-edge'] = 24,
 
     -- details
     ['rocks'] = {113, 116, 130, 148, 148, 148, 149, 149, 149},

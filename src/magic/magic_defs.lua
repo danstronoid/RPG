@@ -45,7 +45,7 @@ MAGIC_DEFS = {
             mult = {['dfn'] = 1},
             temp = true
         },
-        duration = 8,
+        duration = 6,
         target = {
             select = 'party',
             type = 'one'

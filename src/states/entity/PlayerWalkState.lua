@@ -21,7 +21,7 @@ end
 function PlayerWalkState:enter()
     self.player.steps = self.player.steps + 1
     --print(self.entity.steps)
-    self:checkEncounter()
+    --self:checkEncounter()
 
     if not self.encounter then
         self:move()

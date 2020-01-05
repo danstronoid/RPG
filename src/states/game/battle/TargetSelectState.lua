@@ -25,8 +25,8 @@ function TargetSelectState:init(party, enemies, def, callback)
                 text = self.targets[i].name,
                 onSelect = function() 
                     self.selected = true 
-                    self.callback(self.targets[i]) 
-                    gStateStack:pop()         
+                    gStateStack:pop()  
+                    self.callback(self.targets[i])        
                 end
             }
             table.insert(targetList, item)

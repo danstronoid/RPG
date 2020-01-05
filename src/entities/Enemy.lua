@@ -29,6 +29,7 @@ function Enemy:init(def)
     self.opacity = 255
 
     self.level = def.level
+    self.weak = def.weak
     self.XPDrop = def.XPDrop
     self.goldDrop = def.goldDrop
 

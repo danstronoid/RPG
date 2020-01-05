@@ -48,7 +48,7 @@ ACTIONS = {
         local callback = callback or function() end
         local escapeChance 
         if owner.level >= target.level then
-            escapeChance = 3
+            escapeChance = 2
         else
             escapeChance = 6
         end
@@ -80,16 +80,16 @@ ACTIONS = {
         end
 
         if target.currentHP > 0 then
-            dmg = round((spell.base_dmg[index] + owner.stats:get('int')) 
-                * (MAX_DFN - target.stats:get('dfn')) / MAX_DFN + 1)
+            dmg = round((spell.base_dmg[index] * owner.stats:get('int')) 
+                * (MAX_DFN - target.stats:get('int')) / MAX_DFN + 1)
             target.currentHP = math.max(0, target.currentHP - dmg)
         end
-        
-        owner.currentMP = owner.currentMP - spell.mp_cost
 
+        owner.currentMP = owner.currentMP - spell.mp_cost
+        
         Number:setNum(dmg, target.x + target.width / 2, 
             target.y - gFonts['small']:getHeight())
-
+        
         Timer.every(0.1, function()
             target.opacity = target.opacity == 0 and 255 or 0
         end):limit(8):finish(function()
@@ -135,8 +135,7 @@ ACTIONS = {
             target.opacity = 255
             gStateStack:push(BattleMessageState(target.name .. "'s defense rose!",
             function()
-                -- this is time based, find a way to make this turn based
-                TurnCounter:after(spell.duration, function()
+                TurnCounter:after(spell.duration + math.random(3), function()
                     if not target.dead and target then
                         target.stats:rmMod(spell.name)
                         gStateStack:push(BattleMessageState(target.name .. "'s defense returned to normal."))

@@ -19,19 +19,22 @@ function BattleMagicState:init(activeChar, party, enemies)
         table.insert(magicList, {
             text = spell.name .. ' : ' .. spell.mp_cost .. ' MP',
             greyed = greyed,
-            onSelect = function() 
+            onSelect = function()
                 if self.activeChar.currentMP >= spell.mp_cost then
                     self.magicMenu.selection:toggleCursor()
                     gStateStack:push(TargetSelectState(self.party, self.enemies, spell.target,
                     function(target)
+                        local target = target
                         self.spellCast = true
-                        ACTIONS[spell.action](spell, self.activeChar, target, self.number,
+                        gStateStack:push(PopUpState(spell.name, 1,
                         function()
-                            gStateStack:pop()
-                            gStateStack:pop()
-                        end)
+                            ACTIONS[spell.action](spell, self.activeChar, target, self.number,
+                            function()
+                                gStateStack:pop()
+                                gStateStack:pop()
+                            end)
+                        end))
                     end))
-
                 end
             end
         })

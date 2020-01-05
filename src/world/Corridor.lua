@@ -18,25 +18,36 @@ function Corridor:init(mapWidth, mapHeight, room)
     self.type = CORRIDOR_TYPES[math.random(4)]
     --print(self.type)    
 
+    -- prevent corridors from doubling back too much
+    local counter = 0
+    while room.corridor and room.corridor.opposite == self.type and counter < 3 do
+        self.type = CORRIDOR_TYPES[math.random(4)]
+        counter = counter + 1
+    end
+
     local smDim = math.random(2)
     local lgDim = math.random(6, 10)
 
     if self.type == 'top' then
+        self.opposite = 'bottom'
         self.width = smDim
         self.height = lgDim 
         self.x = room.x + math.random(0, room.width - self.width)
         self.y = room.y - self.height
     elseif self.type == 'bottom' then
+        self.opposite = 'top'
         self.width = smDim
         self.height = lgDim 
         self.x = room.x + math.random(0, room.width - self.width)
         self.y = room.y + room.height
     elseif self.type == 'left' then
+        self.opposite = 'right'
         self.width = lgDim
         self.height = smDim 
         self.x = room.x - self.width
         self.y = room.y + math.random(0, room.height - self.height)
     else
+        self.opposite = 'left'
         self.width = lgDim
         self.height = smDim 
         self.x = room.x + room.width

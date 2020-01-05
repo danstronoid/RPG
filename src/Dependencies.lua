@@ -14,6 +14,7 @@ Push = require 'lib/push'
 Event = require 'lib/knife.event'
 Timer = require 'lib/knife.timer'
 
+-- create a global turn counter for timing battle callbacks
 require 'src/TurnCounter'
 TurnCounter = TurnCounter()
 
@@ -34,6 +35,7 @@ require 'src/states/game/PlayState'
 require 'src/states/game/FadeInState'
 require 'src/states/game/FadeOutState'
 require 'src/states/game/DialogueState'
+require 'src/states/game/PopUpState'
 require 'src/states/game/GameOverState'
 require 'src/states/game/BattleTransState'
 
@@ -94,6 +96,7 @@ require 'src/world/Corridor'
 -- GUI
 require 'src/GUI/Panel'
 require 'src/GUI/Textbox'
+require 'src/GUI/PopUp'
 require 'src/GUI/Selection'
 require 'src/GUI/Menu'
 require 'src/GUI/Number'
