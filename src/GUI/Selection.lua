@@ -60,7 +60,8 @@ function Selection:update(dt)
         else
             self.currentSelection = self.currentSelection + 1
         end
-    elseif love.keyboard.wasPressed('return') or love.keyboard.wasPressed('enter') then
+    elseif love.keyboard.wasPressed('return') or love.keyboard.wasPressed('enter') or
+        love.keyboard.wasPressed('space') then
         self.items[self.currentSelection].onSelect()
     end
 

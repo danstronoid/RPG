@@ -41,7 +41,8 @@ function Textbox:init(x, y, width, height, text, font)
 end
 
 function Textbox:update(dt)
-    if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
+    if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') or 
+        love.keyboard.wasPressed('space')then
         self:next()
     end
 end

@@ -46,6 +46,7 @@ require 'src/states/game/field/ItemMenuState'
 
 -- battle states
 require 'src/states/game/battle/BattleState'
+require 'src/states/game/battle/BossBattleState'
 require 'src/states/game/battle/TurnState'
 require 'src/states/game/battle/BattleMenuState'
 require 'src/states/game/battle/BattleMessageState'
@@ -73,6 +74,8 @@ require 'src/magic/Magic'
 
 -- entites
 require 'src/entities/Entity'
+require 'src/entities/NPC'
+require 'src/entities/npc_defs'
 require 'src/entities/Character'
 require 'src/entities/Stats'
 require 'src/entities/character_stats'
@@ -103,21 +106,30 @@ require 'src/GUI/Number'
 
 -- textures
 gTextures = {
+    -- world
     ['tiles'] = love.graphics.newImage('graphics/cave.png'),
     ['battle'] = love.graphics.newImage('graphics/cave_battle.png'),
+    -- GUI
     ['cursor'] = love.graphics.newImage('graphics/cursor.png'),
-    ['entities'] = love.graphics.newImage('graphics/temp/entities.png'),
+    -- characters
     ['man'] = love.graphics.newImage('graphics/healer_m_16.png'),
     ['woman'] = love.graphics.newImage('graphics/townfolk1_f_16.png'),
-    ['octopus'] = love.graphics.newImage('graphics/octopus.png')
+    -- enemies
+    ['octopus'] = love.graphics.newImage('graphics/enemies/octopus.png'),
+    ['lg_alien'] = love.graphics.newImage('graphics/enemies/lg_alien.png'),
+    ['alien_16'] = love.graphics.newImage('graphics/enemies/alien_16.png'),
+    ['sm_alien'] = love.graphics.newImage('graphics/enemies/sm_alien.png'),
+    ['mush_man'] = love.graphics.newImage('graphics/enemies/mush_man.png'),
+    ['tent_head'] = love.graphics.newImage('graphics/enemies/tent_head.png')
+
 }
 
 -- frames
 gFrames = {
     ['tiles'] = GenerateQuads(gTextures['tiles'], TILE_SIZE, TILE_SIZE),
-    ['entities'] = GenerateQuads(gTextures['entities'], TILE_SIZE, TILE_SIZE),
     ['man'] = GenerateQuads(gTextures['man'], 16, 18),
-    ['woman'] = GenerateQuads(gTextures['man'], 16, 18)
+    ['woman'] = GenerateQuads(gTextures['man'], 16, 18),
+    ['alien_16'] = GenerateQuads(gTextures['alien_16'], 16, 18)
 }
 
 -- fonts

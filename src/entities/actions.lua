@@ -47,13 +47,15 @@ ACTIONS = {
     function(owner, target, callback)
         local callback = callback or function() end
         local escapeChance 
-        if owner.level >= target.level then
+        if target.boss then
+            escapeChance = 0
+        elseif owner.level >= target.level then
             escapeChance = 2
         else
             escapeChance = 6
         end
 
-        if math.random(escapeChance) == 1 then
+        if math.random(escapeChance) == 1 and not escapeChance == 0 then
             gStateStack:push(BattleMessageState('You got away safely.', 
             function()
                 -- pop off the battle menu

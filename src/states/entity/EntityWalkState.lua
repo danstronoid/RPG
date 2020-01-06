@@ -39,12 +39,25 @@ function EntityWalkState:move()
         toCamY = toCamY + TILE_SIZE
     end
 
+
+    -- There is a bug where this continually will trigger, 
+    -- need to find a better way.
+    
     -- if the tile is solid then don't move and return
     local tile = self.level.dungeon.water.tiles[toY][toX]
-
     if tile.solid then
+        self.entity.steps = 0
         self.entity:changeState('idle')
         return
+    end
+
+    -- check collision with entities
+    for k, entity in pairs(self.level.entities) do
+        if entity.mapX == toX and entity.mapY == toY then
+            self.entity.steps = 0
+            self.entity:changeState('idle')
+            return
+        end
     end
 
     self.entity.mapX = toX

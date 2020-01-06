@@ -25,7 +25,7 @@ function Tile:render(camera)
     -- only render the tile if it's within the camera's view
     -- there is a margin of 4 tiles on each side
     local xPos = math.floor((self.x - 1) * TILE_SIZE)
-    local yPos =  math.floor((self.y - 1) * TILE_SIZE)
+    local yPos = math.floor((self.y - 1) * TILE_SIZE)
     if (xPos) > (camera.x + math.floor(camera.offsetX) - TILE_SIZE * 4) and 
         (xPos) < (camera.width + math.floor(camera.offsetX) + TILE_SIZE * 4) and
         (yPos) > (camera.y + math.floor(camera.offsetY) - TILE_SIZE * 4) and 

@@ -14,7 +14,8 @@ function BattleState:init(player)
     -- generate a table of enemies
     self.enemies = {}
     for i = 1, math.random(3) do
-        self.enemies[i] = Enemy(ENEMY_DEFS['dingus'])
+        local enemyParty = ENEMY_PARTIES[1][math.random(#ENEMY_PARTIES[1])]
+        self.enemies[i] = Enemy(ENEMY_DEFS[enemyParty])
         self.enemies[i].name = self.enemies[i].name .. ' ' .. i
     end
 
@@ -61,7 +62,7 @@ end
 
 function BattleState:setPositions()
     for i = 1, #self.party.members do
-        self.party.members[i].x = math.floor(VIRTUAL_WIDTH / 4 - (i - 1) * TILE_SIZE / 2)
+        self.party.members[i].x = math.floor(VIRTUAL_WIDTH / 4 - (i - 1) * TILE_SIZE / 2 - TILE_SIZE)
         -- the padded height above the battle menu, TILE_SIZE is used as padding here to make the party closer together
         local gapHeight = (2 * (VIRTUAL_HEIGHT / 3) - TILE_SIZE * 2) / #self.party.members
         -- spread the pary evenly across the y-axis, the height of a character sprite is 18
@@ -76,10 +77,10 @@ function BattleState:setPositions()
         self.enemies[i].y = math.floor(gapHeight / 2 * (i * 2 - 1) - self.enemies[i].height / 2 + TILE_SIZE + PADDING)
 
         -- altenate enemies between front and back
-        if i % 2 == 0 then
-            self.enemies[i].x = math.floor(VIRTUAL_WIDTH - (VIRTUAL_WIDTH / 4))
+        if i % 2 == 1 then
+            self.enemies[i].x = math.floor(VIRTUAL_WIDTH - (VIRTUAL_WIDTH / 4) - TILE_SIZE)
         else
-            self.enemies[i].x = math.floor(VIRTUAL_WIDTH - (VIRTUAL_WIDTH / 4) - self.enemies[i].width)
+            self.enemies[i].x = math.floor(VIRTUAL_WIDTH - (VIRTUAL_WIDTH / 4) - TILE_SIZE - self.enemies[i].width)
         end
     end
 end

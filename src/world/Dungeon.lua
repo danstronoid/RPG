@@ -305,6 +305,7 @@ function Dungeon:addDetails()
                     changeTileID(self.floor, x, y, 'cracks', false)
                 elseif math.random(256) == 1 then
                     changeTileID(self.floor, x, y, 'hole', true)
+                    self.water.tiles[y][x].solid = true
                 end
             end
         end

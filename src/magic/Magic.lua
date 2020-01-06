@@ -25,6 +25,15 @@ function Magic:rmSpell(spell)
     end
 end
 
+-- returns a random spell
+function Magic:rndSpell()
+    local list = {}
+    for k, spell in pairs(self.spells) do
+        table.insert(list, spell.name)
+    end
+    return self.spells[list[math.random(#list)]]
+end
+
 function Magic:printSpells()
     for k, spell in pairs(self.spells) do
         print(spell.name)

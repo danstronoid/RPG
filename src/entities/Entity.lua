@@ -25,6 +25,9 @@ function Entity:init(def)
     self.direction = 'down'
     self.animations = self:getAnimations(def.animations)
     self.currentAnimation = self.animations['idle-down']
+
+    self.stateMachine = StateMachine(def.states)
+    --self.stateMachine:change('idle')
 end
 
 function Entity:update(dt)
@@ -55,4 +58,10 @@ end
 
 function Entity:changeAnimation(name)
     self.currentAnimation = self.animations[name]
+end
+
+-- AABB collision
+function Entity:collides(other)
+    return not (other.x > (self.x + self.width) or self.x > (other.x + other.width) or
+        other.y > (self.y + self.height) or self.y > (other.y + other.height))
 end

@@ -11,8 +11,8 @@ function DialogueState:update(dt)
     self.textbox:update(dt)
 
     if self.textbox:isClosed() then
-        self.callback()
         gStateStack:pop()
+        self.callback()
     end
 end
 

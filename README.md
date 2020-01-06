@@ -1,10 +1,9 @@
 # TODO
 
-- finish dungeon generation
-- adjust camera
 - add boss
-- add more enemies
+- add enemy magic
 - add more items
 - add equipment
+- add sound and music
 - better aciton animations
 - add NPC

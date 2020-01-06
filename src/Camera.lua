@@ -14,7 +14,7 @@ Camera = Class{}
 function Camera:init()
     self.x = 0
     self.y = 0
-    self.offsetX = -8
+    self.offsetX = 0
     self.offsetY = 0
     self.width = VIRTUAL_WIDTH
     self.height = VIRTUAL_HEIGHT

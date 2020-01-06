@@ -30,6 +30,8 @@ function Enemy:init(def)
 
     self.level = def.level
     self.weak = def.weak
+    self.magic = Magic(def.magic)
+
     self.XPDrop = def.XPDrop
     self.goldDrop = def.goldDrop
 
@@ -43,7 +45,8 @@ function Enemy:init(def)
         self.stats:levelUp()
     end
 
-    self.currentHP = self.stats.HP
+    self.currentHP = self.stats:get('HP')
+    self.currentMP = self.stats:get('MP')
 
     self.dead = false
 end
