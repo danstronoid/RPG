@@ -54,8 +54,8 @@ ACTIONS = {
         else
             escapeChance = 6
         end
-
-        if math.random(escapeChance) == 1 and not escapeChance == 0 then
+        print(escapeChance)
+        if math.random(escapeChance) == 1 and escapeChance > 0 then
             gStateStack:push(BattleMessageState('You got away safely.', 
             function()
                 -- pop off the battle menu
@@ -168,5 +168,27 @@ ACTIONS = {
             target.opacity = 255
             callback()
         end)   
+    end,
+
+
+['item_revive'] = 
+    function(item, owner, target, Number, callback)
+        local callback = callback or function() end
+
+        if target.dead then
+            target.currentHP = math.min(target.stats:get('HP'), target.currentHP + item.restore)         
+            target.dead = false
+        end
+
+        Number:setNum(item.restore, target.x + target.width / 2, 
+            target.y - gFonts['small']:getHeight())
+
+        Timer.every(0.1, function()
+            target.opacity = target.opacity == 0 and 255 or 0
+        end):limit(8):finish(function()
+            target.opacity = 255
+            callback()
+        end)   
     end
+
 }

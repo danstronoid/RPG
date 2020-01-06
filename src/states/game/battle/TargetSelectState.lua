@@ -5,8 +5,11 @@ TargetSelectState = Class{__includes = BaseState}
 function TargetSelectState:init(party, enemies, def, callback)
     self.party = party
     self.enemies = enemies
+
     self.select = def.select
     self.type = def.type
+    self.revive = def.revive or false
+
     self.callback = callback or function() end
     self.targets = {}
     self.selected = false
@@ -20,7 +23,8 @@ function TargetSelectState:init(party, enemies, def, callback)
     local targetList = {}
     for i = 1, #self.targets do
         local item = {}
-        if not self.targets[i].dead then
+        if (not self.targets[i].dead and not self.revive) or
+            (self.targets[i].dead and self.revive) then
             item = {
                 text = self.targets[i].name,
                 onSelect = function() 

@@ -74,18 +74,22 @@ require 'src/magic/Magic'
 
 -- entites
 require 'src/entities/Entity'
-require 'src/entities/NPC'
-require 'src/entities/npc_defs'
-require 'src/entities/Character'
 require 'src/entities/Stats'
-require 'src/entities/character_stats'
-require 'src/entities/character_magic'
-require 'src/entities/character_anims'
 require 'src/entities/Player'
 require 'src/entities/Party'
-require 'src/entities/Enemy'
-require 'src/entities/enemy_defs'
 require 'src/entities/actions'
+-- characters
+require 'src/entities/characters/character_stats'
+require 'src/entities/characters/character_magic'
+require 'src/entities/characters/character_anims'
+require 'src/entities/characters/Character'
+-- enemies
+require 'src/entities/enemies/Enemy'
+require 'src/entities/enemies/enemy_defs'
+-- npc
+require 'src/entities/npc/NPC'
+require 'src/entities/npc/npc_defs'
+
 
 -- world
 require 'src/world/Tile'

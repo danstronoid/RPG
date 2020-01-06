@@ -147,6 +147,7 @@ BOSS_DEFS = {
         width = 82,
         height = 82,
         level = 1,
+        boss = true,
         weak = 'ice',
         magic = {'Fire'},
         XPDrop = 2000,

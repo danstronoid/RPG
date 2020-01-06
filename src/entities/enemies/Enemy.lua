@@ -29,6 +29,7 @@ function Enemy:init(def)
     self.opacity = 255
 
     self.level = def.level
+    self.boss = def.boss or false
     self.weak = def.weak
     self.magic = Magic(def.magic)
 

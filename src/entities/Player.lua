@@ -42,6 +42,9 @@ function Player:init(def)
 
     -- start with 5 potions in your inventory
     self.inventory:addItem('Potion', 5)
+
+    -- start with 2 revives in your inventory
+    self.inventory:addItem('Revive', 2)
     
     -- keep track of the player's gold
     self.gold = 0
