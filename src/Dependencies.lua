@@ -144,3 +144,10 @@ gFonts = {
     ['large'] = love.graphics.newFont('fonts/CT.ttf', 64),
     ['title'] = love.graphics.newFont('fonts/title.ttf', 56)
 }
+
+-- music
+gMusic = {
+    ['intro'] = love.audio.newSource('sounds/music/Intro_Piano_Demo.wav'),
+    ['gameover'] = love.audio.newSource('sounds/music/GameOver_Piano_Demo.wav'),
+    ['dungeon'] = love.audio.newSource('sounds/music/Dungeon_Piano_Demo.wav')
+}

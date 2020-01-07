@@ -54,7 +54,7 @@ ACTIONS = {
         else
             escapeChance = 6
         end
-        print(escapeChance)
+        --print(escapeChance)
         if math.random(escapeChance) == 1 and escapeChance > 0 then
             gStateStack:push(BattleMessageState('You got away safely.', 
             function()

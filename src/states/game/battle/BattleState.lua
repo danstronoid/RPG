@@ -78,9 +78,9 @@ function BattleState:setPositions()
 
         -- altenate enemies between front and back
         if i % 2 == 1 then
-            self.enemies[i].x = math.floor(VIRTUAL_WIDTH - (VIRTUAL_WIDTH / 4) - TILE_SIZE)
+            self.enemies[i].x = math.floor(VIRTUAL_WIDTH - (VIRTUAL_WIDTH / 4) -  i * (TILE_SIZE / 2))
         else
-            self.enemies[i].x = math.floor(VIRTUAL_WIDTH - (VIRTUAL_WIDTH / 4) - TILE_SIZE - self.enemies[i].width)
+            self.enemies[i].x = math.floor(VIRTUAL_WIDTH - (VIRTUAL_WIDTH / 4) -  i * (TILE_SIZE / 2) - self.enemies[i].width)
         end
     end
 end

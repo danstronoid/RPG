@@ -8,6 +8,9 @@ function FadeOutState:init(color, time, callback)
     self.time = time
     self.callback = callback or function() end
 
+    -- reset the master volume
+    love.audio.setVolume(1)
+
     Timer.tween(self.time, {
         [self] = {opacity = 0}
     }):finish(function()

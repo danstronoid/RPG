@@ -15,6 +15,9 @@ function PlayState:init()
     self.level = Level(self.camera)
     self.startTime = love.timer.getTime()
 
+    gMusic['dungeon']:setLooping(true)
+    gMusic['dungeon']:play()
+
     self.fps = 0
 end
 

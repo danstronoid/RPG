@@ -10,13 +10,18 @@
 
 StartState = Class{__includes = BaseState}
 
-function StartState:init() end
+function StartState:init() 
+    gMusic['intro']:setLooping(true)
+    gMusic['intro']:play()
+
+end
 
 function StartState:update(dt) 
 
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
         gStateStack:push(FadeInState(BLACK, 1, 
         function ()
+            gMusic['intro']:stop()
             gStateStack:pop()
             gStateStack:push(PlayState())
             gStateStack:push(FadeOutState(BLACK, 1,

@@ -1,11 +1,17 @@
 
 GameOverState = Class{__includes = BaseState}
 
+function GameOverState:init()
+    love.audio.stop()
+    gMusic['gameover']:play()
+end
+
 function GameOverState:update(dt) 
 
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
         gStateStack:push(FadeInState(BLACK, 1, 
         function ()
+            gMusic['gameover']:stop()
             gStateStack:pop()
             gStateStack:push(StartState())
             gStateStack:push(FadeOutState(BLACK, 1))
