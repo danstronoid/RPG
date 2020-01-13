@@ -27,6 +27,7 @@ end
 function BattleState:enter()
     gStateStack:push(FadeOutState(BLACK, 1, 
     function ()
+        gMusic['battle']:play()
         gStateStack:push(BattleMessageState('A group of enemies appeared!', 
         function()
             gStateStack:push(TurnState(self))

@@ -43,6 +43,7 @@ end
 function Textbox:update(dt)
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') or 
         love.keyboard.wasPressed('space')then
+        gSfx['menu_select']:play()
         self:next()
     end
 end

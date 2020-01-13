@@ -45,6 +45,7 @@ end
 function Selection:update(dt)
     -- don't allow navigation up or down if there is no cursor
     if love.keyboard.wasPressed('up') and self.cursor then
+        gSfx['menu_nav']:play()
         if self.currentSelection == 1 then
             -- wrap around to the last item
             self.currentSelection = #self.items
@@ -53,6 +54,7 @@ function Selection:update(dt)
             self.currentSelection = self.currentSelection - 1
         end
     elseif love.keyboard.wasPressed('down') and self.cursor then
+        gSfx['menu_nav']:play()
         if self.currentSelection == #self.items then
             -- wrap around to the first item
             self.currentSelection = 1
@@ -62,6 +64,7 @@ function Selection:update(dt)
         end
     elseif love.keyboard.wasPressed('return') or love.keyboard.wasPressed('enter') or
         love.keyboard.wasPressed('space') then
+        gSfx['menu_select']:play()
         self.items[self.currentSelection].onSelect()
     end
 

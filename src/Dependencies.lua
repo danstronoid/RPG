@@ -147,7 +147,15 @@ gFonts = {
 
 -- music
 gMusic = {
-    ['intro'] = love.audio.newSource('sounds/music/Intro_Piano_Demo.wav'),
-    ['gameover'] = love.audio.newSource('sounds/music/GameOver_Piano_Demo.wav'),
-    ['dungeon'] = love.audio.newSource('sounds/music/Dungeon_Piano_Demo.wav')
+    ['intro'] = love.audio.newSource('sounds/music/Overture_Mockup.wav'),
+    ['gameover'] = love.audio.newSource('sounds/music/GameOver_Mockup.wav'),
+    ['dungeon'] = love.audio.newSource('sounds/music/Dungeon_Mockup.wav'),
+    ['battle'] = love.audio.newSource('sounds/music/Overture_Mockup.wav')
+}
+
+-- sound fx
+gSfx = {
+    ['menu_nav'] = love.audio.newSource('sounds/sfx/menu_nav.wav'),
+    ['menu_select'] = love.audio.newSource('sounds/sfx/start_select.wav'),
+    ['start_select'] = love.audio.newSource('sounds/sfx/start_select.wav')
 }

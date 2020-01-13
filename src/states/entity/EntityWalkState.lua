@@ -38,10 +38,6 @@ function EntityWalkState:move()
         toY = toY + 1
         toCamY = toCamY + TILE_SIZE
     end
-
-
-    -- There is a bug where this continually will trigger, 
-    -- need to find a better way.
     
     -- if the tile is solid then don't move and return
     local tile = self.level.dungeon.water.tiles[toY][toX]
@@ -69,6 +65,7 @@ function EntityWalkState:move()
         [self.entity] = {x = (toX -1) * TILE_SIZE, y = (toY -1) * TILE_SIZE - 4},
         [self.camera] = {offsetX = toCamX, offsetY = toCamY}
     }):finish(function ()
+        self.entity.steps = self.entity.steps + 1
         if love.keyboard.isDown('up') then
             self.entity.direction = 'up'
             self.entity:changeState('walk')

@@ -19,7 +19,6 @@ function PlayerWalkState:init(player, level)
 end
 
 function PlayerWalkState:enter()
-    self.player.steps = self.player.steps + 1
     --print(self.entity.steps)
     self:checkEncounter()
 
@@ -46,6 +45,7 @@ function PlayerWalkState:checkEncounter()
 
     if math.random(chanceEncounter) == 1 then
         self.player:changeState('idle')
+        gMusic['dungeon']:pause()
 
         gStateStack:push(BattleTransState(BLACK, 1, 
             function()

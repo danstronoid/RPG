@@ -19,6 +19,7 @@ end
 function StartState:update(dt) 
 
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
+        gSfx['start_select']:play()
         gStateStack:push(FadeInState(BLACK, 1, 
         function ()
             gMusic['intro']:stop()
