@@ -14,7 +14,8 @@ function Level:init(camera, dungeon)
     self.camera = camera
 
     -- create a new dungeon
-    self.dungeon = Dungeon(100, 100, 10)
+    self.maxRooms = 10 
+    self.dungeon = Dungeon(100, 100, self.maxRooms)
 
     -- initialize the player
     self.player = Player {
@@ -31,10 +32,26 @@ function Level:init(camera, dungeon)
     }
     self.player:changeState('idle')
 
+    self.merchant = NPC {
+        mapX = self.player.mapX,
+        mapY =  self.player.mapY - 4,
+        width = 16, 
+        height = 18,
+        animations = NPC_DEFS['Merchant'].animations,
+        states = {['idle'] = function() return EntityIdleState(self.merchant) end},
+        onInteract = function() 
+            local inventory = {'Potion', 'Revive'}
+            gStateStack:push(DialogueState('Looking for something?', function()
+                gStateStack:push(ShopMenuState(self.player, inventory))
+            end))
+        end
+    }
+    self.merchant:changeState('idle')
+
     self.boss = NPC {
         -- spawn the player in the middle of the first room
-        mapX = math.floor(self.dungeon.rooms[2].x + (self.dungeon.rooms[2].width / 2)),
-        mapY =  math.floor(self.dungeon.rooms[2].y + (self.dungeon.rooms[2].height / 2)),
+        mapX = math.floor(self.dungeon.rooms[self.maxRooms].x + (self.dungeon.rooms[self.maxRooms].width / 2)),
+        mapY =  math.floor(self.dungeon.rooms[self.maxRooms].y + (self.dungeon.rooms[self.maxRooms].height / 2)),
         width = 16,
         height = 18,
         animations = NPC_DEFS['Trolgus'].animations,
@@ -51,12 +68,29 @@ function Level:init(camera, dungeon)
             end))
         end
     }
+    self.boss:changeState('idle')
 
-    -- keep a table of all entities in the level
-    self.entities = {self.boss}
+    -- keep a table of all entities in the level, this includes chests which do not belong to the entity class
+    self.entities = {self.merchant, self.boss}
 
-    for k, entity in pairs(self.entities) do
-        entity:changeState('idle')
+    -- random chance to spawn a chest in each room except the first or last
+    for i = 2, (self.maxRooms - 1) do
+        if math.random(6) == 1 then
+            -- 50/50 chance to contain an item or gold
+            if math.random(2) == 1 then    
+                local contents = {'Potion', 'Revive'}
+                table.insert(self.entities, Chest(
+                    math.floor(self.dungeon.rooms[i].x + math.random(self.dungeon.rooms[i].width - 1)),
+                    math.floor(self.dungeon.rooms[i].y + math.random(self.dungeon.rooms[i].height - 1)),
+                    contents[math.random(#contents)]
+                ))
+            else
+                table.insert(self.entities, Chest(
+                    math.floor(self.dungeon.rooms[i].x + math.random(self.dungeon.rooms[i].width - 1)),
+                    math.floor(self.dungeon.rooms[i].y + math.random(self.dungeon.rooms[i].height - 1)),
+                    500, true))
+            end
+        end
     end
 
     -- set the camera position to the player's position

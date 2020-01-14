@@ -24,18 +24,23 @@ function Selection:init(def)
     self.font = def.font or gFonts['small']
     self.justify = def.justify or 'center'
 
+    -- flag for whether to center the items, or align to the top of the box
+    -- by default items are centered
+    self.top = def.top or false
+
     -- the maximum number of items to display per page
     self.maxItems = math.min(#self.items, math.floor((self.height - PADDING) / self.font:getHeight()))
 
     -- used to spread the items across the y-axis
     self.gapHeight = (self.height - PADDING) / self.maxItems
 
+    -- if aligned to the top then don't space the items
+    if self.top then
+        self.gapHeight = self.font:getHeight()
+    end
+
     -- use an offset to page up and down throught the items
     self.offset = 0
-
-    -- flag for whether to center the items, or align to the top of the box
-    -- by default items are centered
-    self.top = def.top or false
 
     -- flag to display the cursor or not
     self.cursor = def.cursor
@@ -77,6 +82,12 @@ end
 
 function Selection:render()
     local currentY = self.y 
+    local paddedX = self.x + PADDING
+
+    -- pad the x by the width of cursor
+    if self.justify == 'left' then
+        paddedX = paddedX - PADDING + (TILE_SIZE + 2)
+    end
 
     for i = 1 + self.offset, self.maxItems + self.offset do
         -- calculate the Y for each item
@@ -91,7 +102,7 @@ function Selection:render()
 
         -- add a drop shadow
         love.graphics.setColor(0, 0, 0, 255)
-        love.graphics.printf(self.items[i].text, self.x + PADDING + 1, paddedY + 1, 
+        love.graphics.printf(self.items[i].text, paddedX + 1, paddedY + 1, 
             self.width - PADDING * 2, self.justify)
 
 
@@ -104,14 +115,14 @@ function Selection:render()
             love.graphics.setColor(255, 255, 255, 255)
         end
 
-        love.graphics.printf(self.items[i].text, self.x + PADDING, paddedY, 
+        love.graphics.printf(self.items[i].text, paddedX, paddedY, 
             self.width - PADDING * 2, self.justify)
 
         -- reset the color
         love.graphics.setColor(255, 255, 255, 255)
 
         if i == self.currentSelection and self.cursor then
-            love.graphics.draw(gTextures['cursor'], self.x - TILE_SIZE / 2, paddedY)
+            love.graphics.draw(gTextures['cursor'], self.x + 3, paddedY - 4)
         end
 
         -- increment the current Y
@@ -124,4 +135,6 @@ function Selection:toggleCursor()
     self.cursor = not self.cursor
 end
 
-
+function Selection:getCurrentSelection()
+    return self.items[self.currentSelection].text
+end

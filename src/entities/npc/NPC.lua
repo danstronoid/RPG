@@ -8,6 +8,6 @@ function NPC:init(def)
     self.onInteract = def.onInteract or function() end
 end
 
-function NPC:onInteract(callback)
+function NPC:onInteract()
     self.onInteract()
 end

@@ -48,6 +48,7 @@ function BattleItemState:init(player, activeChar, enemies)
         height = VIRTUAL_HEIGHT / 3,
         color = GREY,
         cursor = true,
+        justify = 'left',
         items = itemList
     }
 end

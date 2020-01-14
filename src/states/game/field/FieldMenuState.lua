@@ -14,6 +14,7 @@ function FieldMenuState:init(startTime, level)
         height = 3 * (VIRTUAL_HEIGHT / 4),
         color = GREY,
         cursor = true,
+        justify = 'left',
         items = {
             {
                 text = 'Items',
@@ -50,6 +51,7 @@ function FieldMenuState:init(startTime, level)
         color = GREY,
         --top = true,
         cursor = false,
+        justify = 'left',
         items = {
             {
                 text = formatTime(self.currentTime),
@@ -69,6 +71,10 @@ function FieldMenuState:enter()
 end
 
 function FieldMenuState:update(dt)
+    -- keep updating the time
+    self.currentTime = math.floor(love.timer.getTime() - self.startTime)
+    self.timeMenu.selection.items[1].text = formatTime(self.currentTime)
+
     self.fieldMenu:update(dt)
     self.timeMenu:update(dt)
 end

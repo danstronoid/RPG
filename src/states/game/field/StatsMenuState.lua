@@ -25,9 +25,7 @@ function StatsMenuState:init(party)
             items = {
                 {
                     text = charText,
-                    onSelect = function()
-                        gStateStack:pop()
-                    end
+                    onSelect = function() end
                 }
             }
         }
@@ -35,6 +33,11 @@ function StatsMenuState:init(party)
 end
 
 function StatsMenuState:update(dt)
+    if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') 
+        or love.keyboard.wasPressed('space') then
+        gStateStack:pop()
+    end
+    
     for i = 1, #self.charStats do
         self.charStats[i]:update(dt)
     end

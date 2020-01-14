@@ -43,6 +43,7 @@ require 'src/states/game/BattleTransState'
 require 'src/states/game/field/FieldMenuState'
 require 'src/states/game/field/StatsMenuState'
 require 'src/states/game/field/ItemMenuState'
+require 'src/states/game/field/ShopMenuState'
 
 -- battle states
 require 'src/states/game/battle/BattleState'
@@ -67,6 +68,7 @@ require 'src/states/entity/PlayerWalkState'
 -- items
 require 'src/items/item_defs'
 require 'src/items/Inventory'
+require 'src/items/Chest'
 
 -- magic
 require 'src/magic/magic_defs'
@@ -117,14 +119,21 @@ gTextures = {
     ['cursor'] = love.graphics.newImage('graphics/cursor.png'),
     -- characters
     ['man'] = love.graphics.newImage('graphics/healer_m_16.png'),
-    ['woman'] = love.graphics.newImage('graphics/townfolk1_f_16.png'),
+    ['woman'] = love.graphics.newImage('graphics/mage_f_16.png'),
+
+    -- NPC
+    ['merchant'] = love.graphics.newImage('graphics/townfolk1_m_16.png'),
+    ['boss'] = love.graphics.newImage('graphics/enemies/boss.png'),
+
     -- enemies
     ['octopus'] = love.graphics.newImage('graphics/enemies/octopus.png'),
     ['lg_alien'] = love.graphics.newImage('graphics/enemies/lg_alien.png'),
-    ['alien_16'] = love.graphics.newImage('graphics/enemies/alien_16.png'),
     ['sm_alien'] = love.graphics.newImage('graphics/enemies/sm_alien.png'),
     ['mush_man'] = love.graphics.newImage('graphics/enemies/mush_man.png'),
-    ['tent_head'] = love.graphics.newImage('graphics/enemies/tent_head.png')
+    ['tent_head'] = love.graphics.newImage('graphics/enemies/tent_head.png'),
+
+    -- items
+    ['items'] = love.graphics.newImage('graphics/items.png')
 
 }
 
@@ -133,7 +142,9 @@ gFrames = {
     ['tiles'] = GenerateQuads(gTextures['tiles'], TILE_SIZE, TILE_SIZE),
     ['man'] = GenerateQuads(gTextures['man'], 16, 18),
     ['woman'] = GenerateQuads(gTextures['man'], 16, 18),
-    ['alien_16'] = GenerateQuads(gTextures['alien_16'], 16, 18)
+    ['merchant'] = GenerateQuads(gTextures['merchant'], 16, 18),
+    ['boss'] = GenerateQuads(gTextures['boss'], 16, 18),
+    ['items'] = GenerateQuads(gTextures['items'], 16, 16)
 }
 
 -- fonts

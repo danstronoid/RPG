@@ -80,7 +80,7 @@ CHARACTER_ANIMS = {
                 interval = 0.15
             },
             ['idle-left'] = {
-                texture = 'man',
+                texture = 'woman',
                 frames = {10}
             },
             ['idle-right'] = {

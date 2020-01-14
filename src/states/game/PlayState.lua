@@ -26,7 +26,7 @@ function PlayState:update(dt)
     for k, entity in pairs(self.level.entities) do
         if self.level.player:collides(entity) and love.keyboard.wasPressed('space') 
             and checkDirectionals() then
-            entity:onInteract()
+            entity:onInteract(self.level.player)
         end
     end
 

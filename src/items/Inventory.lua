@@ -27,3 +27,18 @@ function Inventory:printInventory()
         print(k, item.noHeld)
     end
 end
+
+-- in order to implement this need to copy inventory into array 
+-- and then will need to add a get inventory method
+function Inventory:sort()
+    local sortedInventory = {}
+
+    for k, item in pairs(self.items) do
+        table.insert(sortedInventory, k)
+    end
+
+    table.sort(sortedInventory)
+    --table.foreachi(sortedInventory, print)
+
+    return sortedInventory
+end

@@ -12,20 +12,27 @@ function ItemMenuState:init(player)
             text = item.def.name .. ' : ' .. item.noHeld,
             onSelect = function()
                 gStateStack:push(DialogueState(item.def.text, function()
-                    gStateStack:pop()
                 end)) 
             end
         })
     end
+    
+    table.insert(itemList, {
+        text = 'Exit',
+        onSelect = function()
+            gStateStack:pop()
+        end
+    })
 
     self.itemMenu = Menu{
-        x = VIRTUAL_WIDTH / 2,
+        x = 0,
         y = 0,
-        width = VIRTUAL_WIDTH / 2,
+        width = 3 * (VIRTUAL_WIDTH / 4),
         height = VIRTUAL_HEIGHT,
         color = GREY,
         top = true,
         cursor = true,
+        justify = 'left',
         items = itemList
     }
 end

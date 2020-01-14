@@ -54,6 +54,7 @@ function BattleMagicState:init(activeChar, party, enemies)
         height = VIRTUAL_HEIGHT / 3,
         color = GREY,
         cursor = true,
+        justify = 'left',
         items = magicList
     }
 
