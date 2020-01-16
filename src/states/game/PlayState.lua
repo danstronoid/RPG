@@ -19,27 +19,53 @@ function PlayState:init()
     gMusic['dungeon']:play()
 
     self.fps = 0
+
+    self.endOfGame = false
+    self.cutScene = false
+
+    Event.on('endOfGame', function()
+        self.endOfGame = true
+    end)
 end
 
 function PlayState:update(dt)
-    -- check collisions between entities
-    for k, entity in pairs(self.level.entities) do
-        if self.level.player:collides(entity) and love.keyboard.wasPressed('space') 
-            and checkDirectionals() then
-            entity:onInteract(self.level.player)
+    -- short cut scene to play if you beat the boss, then the game starts over
+    if self.endOfGame and not self.cutScene then
+        self.cutScene = true
+        gStateStack:push(DialogueState('I am defeated.', 
+        function()
+            gSfx['death']:play()
+            self.level.boss.dead = true
+            Timer.after(2, function()
+                gStateStack:push(FadeInState(BLACK, 1, function()
+                    -- pop off the playstate
+                    gStateStack:pop()
+                    gStateStack:push(VictoryState())
+                    gStateStack:push(FadeOutState(BLACK, 1))
+                end))
+            end)
+        end))
+    elseif not self.endOfGame then
+        -- check collisions between entities
+        for k, entity in pairs(self.level.entities) do
+            if self.level.player:collides(entity) and love.keyboard.wasPressed('space') 
+                and checkDirectionals() then
+                entity:onInteract(self.level.player)
+            end
         end
+
+        --[[This is kind of a brute force way of stopping a bug where you continue to move
+        if you hold down one of the arrow keys while opening the menu.  There is probably a better
+        way to solve this, but this works for now.]] 
+        if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') 
+            and checkDirectionals() then
+            -- there is a bug where you keep moving after entering this state
+            gStateStack:push(FieldMenuState(self.startTime, self.level))
+        end
+
+        self.level:update(dt)
     end
 
-    --[[This is kind of a brute force way of stopping a bug where you continue to move
-    if you hold down one of the arrow keys while opening the menu.  There is probably a better
-    way to solve this, but this works for now.]] 
-    if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') 
-        and checkDirectionals() then
-        -- there is a bug where you keep moving after entering this state
-        gStateStack:push(FieldMenuState(self.startTime, self.level))
-    end
-
-    self.level:update(dt)
     self.camera:update(dt)
 
     self.fps = love.timer.getFPS()

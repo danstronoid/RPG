@@ -81,7 +81,9 @@ function TurnState:checkDeaths()
     end
 
     if deadEnemies == #self.enemies then
-        self.endOfBattle = true        
+        self.endOfBattle = true 
+        gMusic['battle']:stop()
+        gMusic['battle_victory']:play()       
         gStateStack:push(BattleMessageState('The enemies have been defeated!', 
         function()
             gStateStack:pop()

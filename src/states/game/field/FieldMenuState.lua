@@ -67,6 +67,7 @@ function FieldMenuState:init(startTime, level)
 end
 
 function FieldMenuState:enter()
+    gSfx['menu_select']:play()
     self.level.player:changeState('idle')
 end
 

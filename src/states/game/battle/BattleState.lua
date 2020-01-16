@@ -27,6 +27,7 @@ end
 function BattleState:enter()
     gStateStack:push(FadeOutState(BLACK, 1, 
     function ()
+        gMusic['battle']:setLooping(true)
         gMusic['battle']:play()
         gStateStack:push(BattleMessageState('A group of enemies appeared!', 
         function()
@@ -82,6 +83,11 @@ function BattleState:setPositions()
             self.enemies[i].x = math.floor(VIRTUAL_WIDTH - (VIRTUAL_WIDTH / 4) -  i * (TILE_SIZE / 2))
         else
             self.enemies[i].x = math.floor(VIRTUAL_WIDTH - (VIRTUAL_WIDTH / 4) -  i * (TILE_SIZE / 2) - self.enemies[i].width)
+        end
+
+        -- guard to make sure enemies are clipping beyond the screen width
+        while (self.enemies[i].x + self.enemies[i].width) > VIRTUAL_WIDTH do
+            self.enemies[i].x = self.enemies[i].x - TILE_SIZE
         end
     end
 end

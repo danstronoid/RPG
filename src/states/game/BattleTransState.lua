@@ -13,6 +13,8 @@ function BattleTransState:init(color, time, callback)
         gStateStack:pop()
         self.callback()
     end)
+
+    gMusic['battle_trans']:play()
 end
 
 function BattleTransState:update(dt)

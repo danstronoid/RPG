@@ -38,6 +38,7 @@ require 'src/states/game/DialogueState'
 require 'src/states/game/PopUpState'
 require 'src/states/game/GameOverState'
 require 'src/states/game/BattleTransState'
+require 'src/states/game/VictoryState'
 
 -- field states
 require 'src/states/game/field/FieldMenuState'
@@ -161,12 +162,20 @@ gMusic = {
     ['intro'] = love.audio.newSource('sounds/music/Overture_Mockup.wav'),
     ['gameover'] = love.audio.newSource('sounds/music/GameOver_Mockup.wav'),
     ['dungeon'] = love.audio.newSource('sounds/music/Dungeon_Mockup.wav'),
-    ['battle'] = love.audio.newSource('sounds/music/Overture_Mockup.wav')
+    ['battle'] = love.audio.newSource('sounds/music/Battle_Mockup.wav'),
+    ['battle_trans'] = love.audio.newSource('sounds/music/Battle_Trans_Mockup.wav'),
+    ['battle_victory'] = love.audio.newSource('sounds/music/Battle_Victory_Mockup.wav')
 }
 
 -- sound fx
 gSfx = {
     ['menu_nav'] = love.audio.newSource('sounds/sfx/menu_nav.wav'),
-    ['menu_select'] = love.audio.newSource('sounds/sfx/start_select.wav'),
-    ['start_select'] = love.audio.newSource('sounds/sfx/start_select.wav')
+    ['menu_select'] = love.audio.newSource('sounds/sfx/menu_select.wav'),
+    ['fail'] = love.audio.newSource('sounds/sfx/fail.wav'),
+    ['hit'] = love.audio.newSource('sounds/sfx/hit.wav'),
+    ['hurt'] = love.audio.newSource('sounds/sfx/hurt.wav'),
+    ['elemental'] = love.audio.newSource('sounds/sfx/elemental_spell.wav'),
+    ['heal'] = love.audio.newSource('sounds/sfx/heal.wav'),
+    ['step'] = love.audio.newSource('sounds/sfx/step.wav'),
+    ['death'] = love.audio.newSource('sounds/sfx/death.wav')
 }

@@ -7,6 +7,10 @@ function DialogueState:init(text, callback)
     self.callback = callback or function() end
 end
 
+function DialogueState:enter()
+    --gSfx['menu_nav']:play()
+end
+
 function DialogueState:update(dt)
     self.textbox:update(dt)
 

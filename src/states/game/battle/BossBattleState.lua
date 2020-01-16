@@ -9,3 +9,7 @@ function BossBattleState:init(player)
     
     self:setPositions()
 end
+
+function BossBattleState:exit()
+    Event.dispatch('endOfGame')
+end

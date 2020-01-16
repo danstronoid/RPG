@@ -21,6 +21,18 @@ function love.load()
         resizable = true
     })
 
+    -- set sound levels
+    for k, music in pairs(gMusic) do 
+        music:setVolume(MASTER_VOL * MUSIC_VOL)
+    end 
+    
+    for k, sfx in pairs(gSfx) do 
+        sfx:setVolume(MASTER_VOL * SFX_VOL)
+    end
+
+    -- set the start time
+    START_TIME = love.timer.getTime()
+
     gStateStack = StateStack()
     gStateStack:push(StartState())
 

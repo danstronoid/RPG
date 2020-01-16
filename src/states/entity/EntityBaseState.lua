@@ -23,7 +23,9 @@ function EntityBaseState:exit() end
 function EntityBaseState:render(camera)
     local animation = self.entity.currentAnimation
     --print('Texture ' .. animation.texture .. ' frame ' .. animation:getCurrentFrame())
-    love.graphics.draw(gTextures[animation.texture], gFrames[animation.texture][animation:getCurrentFrame()],
-        math.floor(self.entity.x), math.floor(self.entity.y),
-        0, 1, 1, math.floor(camera.offsetX), math.floor(camera.offsetY))
+    if not self.entity.dead then
+        love.graphics.draw(gTextures[animation.texture], gFrames[animation.texture][animation:getCurrentFrame()],
+            math.floor(self.entity.x), math.floor(self.entity.y),
+            0, 1, 1, math.floor(camera.offsetX), math.floor(camera.offsetY))
+    end
 end

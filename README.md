@@ -1,7 +1,7 @@
 # TODO
 
-- add boss
+- improve start screen
 - add more items
 - add equipment
 - add sound and music
-- better aciton animations
+- better action animations

@@ -15,7 +15,7 @@ function Level:init(camera, dungeon)
 
     -- create a new dungeon
     self.maxRooms = 10 
-    self.dungeon = Dungeon(100, 100, self.maxRooms)
+    self.dungeon = Dungeon(120, 120, self.maxRooms)
 
     -- initialize the player
     self.player = Player {
@@ -61,6 +61,7 @@ function Level:init(camera, dungeon)
             
             gStateStack:push(DialogueState('I am error.', 
             function()
+                gMusic['dungeon']:pause()
                 gStateStack:push(BattleTransState(BLACK, 1, 
                 function()
                     gStateStack:push(BossBattleState(self.player))

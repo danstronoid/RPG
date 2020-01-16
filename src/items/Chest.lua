@@ -27,6 +27,7 @@ function Chest:render(camera)
 end
 
 function Chest:onInteract(player)
+    gSfx['step']:play()
     if not self.opened then
         if self.gold then
             gStateStack:push(DialogueState('You found '.. self.contents .. 'G!',

@@ -18,6 +18,7 @@ ACTIONS = {
         local callback = callback or function() end
         local dmg = round(owner.stats:get('str') * (MAX_DFN - target.stats:get('dfn')) / MAX_DFN + 1)
 
+        gSfx['hit']:play()
         Timer.tween(0.05, {
             [owner] = {x = math.floor(owner.x + owner.width / 2)}
         }):finish(function ()
@@ -27,7 +28,8 @@ ACTIONS = {
                 target.currentHP = target.currentHP - dmg
                 Number:setNum(dmg, target.x + target.width / 2, 
                     target.y - gFonts['small']:getHeight())
-        
+                
+                gSfx['hurt']:play()
                 Timer.every(0.1, function()
                     target.opacity = target.opacity == 0 and 255 or 0
                 end):limit(8):finish(function()
@@ -56,6 +58,7 @@ ACTIONS = {
         end
         --print(escapeChance)
         if math.random(escapeChance) == 1 and escapeChance > 0 then
+            gSfx['step']:play()
             gStateStack:push(BattleMessageState('You got away safely.', 
             function()
                 -- pop off the battle menu
@@ -63,6 +66,7 @@ ACTIONS = {
                 callback()
             end))
         else
+            gSfx['fail']:play()
             gStateStack:push(BattleMessageState("Can't escape!", 
             function()
                 gStateStack:pop()
@@ -92,6 +96,8 @@ ACTIONS = {
         Number:setNum(dmg, target.x + target.width / 2, 
             target.y - gFonts['small']:getHeight())
         
+        gSfx['elemental']:play()
+        gSfx['hurt']:play()
         Timer.every(0.1, function()
             target.opacity = target.opacity == 0 and 255 or 0
         end):limit(8):finish(function()
@@ -115,6 +121,7 @@ ACTIONS = {
         Number:setNum(restore, target.x + target.width / 2, 
             target.y - gFonts['small']:getHeight())
 
+        gSfx['heal']:play()
         Timer.every(0.1, function()
             target.opacity = target.opacity == 0 and 255 or 0
         end):limit(8):finish(function()
@@ -131,6 +138,7 @@ ACTIONS = {
 
         owner.currentMP = owner.currentMP - spell.mp_cost
 
+        gSfx['heal']:play()
         Timer.every(0.1, function()
             target.opacity = target.opacity == 0 and 255 or 0
         end):limit(8):finish(function()
@@ -161,7 +169,8 @@ ACTIONS = {
         
         Number:setNum(item.restore, target.x + target.width / 2, 
             target.y - gFonts['small']:getHeight())
-
+            
+        gSfx['heal']:play()
         Timer.every(0.1, function()
             target.opacity = target.opacity == 0 and 255 or 0
         end):limit(8):finish(function()
@@ -183,6 +192,7 @@ ACTIONS = {
         Number:setNum(item.restore, target.x + target.width / 2, 
             target.y - gFonts['small']:getHeight())
 
+        gSfx['heal']:play()
         Timer.every(0.1, function()
             target.opacity = target.opacity == 0 and 255 or 0
         end):limit(8):finish(function()

@@ -8,7 +8,9 @@ end
 
 function GameOverState:update(dt) 
 
-    if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
+    if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return')
+        or love.keyboard.wasPressed('space') then
+        gSfx['menu_select']:play()
         gStateStack:push(FadeInState(BLACK, 1, 
         function ()
             gMusic['gameover']:stop()
@@ -27,7 +29,4 @@ function GameOverState:render()
     love.graphics.printf('GAME OVER', 0, VIRTUAL_HEIGHT / 2 - 64, VIRTUAL_WIDTH, 'center')
     love.graphics.setFont(gFonts['small'])
     love.graphics.printf('Press Enter', 0, VIRTUAL_HEIGHT / 2 + 32, VIRTUAL_WIDTH, 'center')
-
-    --love.graphics.setFont(gFonts['small'])
-    
 end
