@@ -7,6 +7,12 @@
 
     -- EntityWalkState --
 
+    This state is used when an entity is walking.  At present
+    this only works for the player entity and would need to be modified
+    to be used with other entities.  This state changes both the player position
+    and the camera position in tandem to give the illusion of the camera following
+    the player.  A flag could be added for whether or the the camera should
+    follow this entity.
 ]]
 
 EntityWalkState = Class{__includes = EntityBaseState}

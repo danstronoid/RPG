@@ -1,4 +1,15 @@
+--[[
+    GD50 
+    Final Project
 
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- Shop Menu State --
+
+    This state is pushed when you interact with a merchant NPC in the field.
+    It allows you to view the merchants inventory and purchase items.
+]]
 
 ShopMenuState = Class{__includes = BaseState}
 

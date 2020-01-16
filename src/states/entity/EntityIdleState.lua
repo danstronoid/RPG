@@ -7,6 +7,7 @@
 
     -- EntityIdleState --
 
+    This state is used when an entity is idle.
 ]]
 
 EntityIdleState = Class{__includes = EntityBaseState}

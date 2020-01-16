@@ -7,6 +7,9 @@
 
     -- PlayerIdleState --
 
+    This state inherits from the Entity Idle State with the difference
+    being that this allows you to change state to walking if you press 
+    one of the directionals keys.
 ]]
 
 

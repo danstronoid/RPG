@@ -6,6 +6,10 @@
     daniel.schwartz.music@gmail.com
 
     -- PlayState --
+
+    This is the main play/field state that is pushed after you leave the start
+    screen.  This state should remain on the stack until the player is defeated or
+    the player defeats the final boss.
 ]]
 
 PlayState = Class{__includes = BaseState}

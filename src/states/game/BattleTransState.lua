@@ -1,3 +1,16 @@
+--[[
+    GD50 
+    Final Project
+
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- Battle Transition State --
+
+    This state is used for a transition when entering the battle state.  
+    Creates a spinning black rectangle, which should then be followed by a fade out state.
+]]
+
 BattleTransState = Class{__includes = BaseState}
 
 function BattleTransState:init(color, time, callback)
@@ -20,7 +33,6 @@ end
 function BattleTransState:update(dt)
     self.rotation = self.rotation + dt * math.pi * 2
 end
-
 
 function BattleTransState:render()
     love.graphics.setColor(self.color.r, self.color.b, self.color.g, self.color.a)

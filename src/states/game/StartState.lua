@@ -6,6 +6,10 @@
     daniel.schwartz.music@gmail.com
 
     -- StartState --
+
+    This state is pushed when the game is first loaded and begin the game loop.
+    The player is sent back here if they are defeated or if they defeat the final
+    boss.
 ]]
 
 StartState = Class{__includes = BaseState}

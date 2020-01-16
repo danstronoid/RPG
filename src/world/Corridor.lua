@@ -5,7 +5,12 @@
     Author: Daniel Schwartz
     daniel.schwartz.music@gmail.com
 
-    -- Room --
+    -- Corridor --
+
+    This class is used to create a new corridor starting from the last room.
+    The corridor is a table of booleans in a 2D array of size equal to the map dimensions.
+    The corridor branches off from the room in a random direction and the
+    end of the corridor is the starting point for the next room.
 ]]
 
 Corridor = Class{}

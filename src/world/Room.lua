@@ -6,6 +6,9 @@
     daniel.schwartz.music@gmail.com
 
     -- Room --
+
+    This class is used to create a new room starting from the last corridor, or creates the first room.
+    The room is a table of booleans in a 2D array of size equal to the map dimensions.
 ]]
 
 Room = Class{}

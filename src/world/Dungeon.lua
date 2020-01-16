@@ -8,7 +8,10 @@
     -- Dungeon --
 
     This class creates a randomly generated dungeon filled with rooms 
-    and corridors.
+    and corridors. The dungeon has three layers of tile maps.  The first created
+    is the floor which contains the general layout.  This is then filled with water
+    which adds edges and corners.  The last is a layer of walls which boxes the entire map
+    in a rectangle.  The generate map function is responsible for the randomized generation.
 ]]
 Dungeon = Class{}
 
@@ -33,7 +36,7 @@ function Dungeon:render(camera)
     self.walls:render(camera)
 end
 
--- generates a dungeon map with a given number of rooms
+-- generates a dungeon map with a given number of rooms, the map is a table of booleans
 function Dungeon:generateMap(maxRooms)
     local rooms = {}
     local corridors = {}

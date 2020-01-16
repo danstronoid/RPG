@@ -18,7 +18,7 @@ WINDOW_HEIGHT = 720
 -- set volume of sounds
 MASTER_VOL = 1
 MUSIC_VOL = 1
-SFX_VOL = 0.75
+SFX_VOL = 0.6
 
 -- the maximum for various stats
 MAX_HP = 9999

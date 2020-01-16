@@ -7,7 +7,10 @@
 
     -- Tile --
 
-    Class representing an individual tile.
+    Class representing an individual tile.  This class is 
+    responsible for rendering each tile.  Tiles are only rendered if they
+    are within the camera's view.  This allows us to create arbirarily large
+    maps without any performance issues.
 ]]
 
 Tile = Class{}

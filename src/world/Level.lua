@@ -6,11 +6,17 @@
     daniel.schwartz.music@gmail.com
 
     -- Level --
+
+    The level class creates a level with a dungeon and entities which the
+    player can interact with.  At present this just creates a single level of a given size
+    and initializes the player and all entities.  To make this reusable, it would be
+    better to pass in the player and a table of entities.  Then you could use this to spawn a
+    dungeon, town, or any other map.
 ]]
 
 Level = Class{}
 
-function Level:init(camera, dungeon)
+function Level:init(camera)
     self.camera = camera
 
     -- create a new dungeon

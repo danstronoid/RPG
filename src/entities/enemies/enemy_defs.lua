@@ -11,6 +11,8 @@
     relevant to each enemy.
 
 ]]
+
+-- This table defines which enemies you might find in a given level
 ENEMY_PARTIES = {
     [1] = {'Glomulorme', 'Fungurkk', 'Mukgnarre', 'Krolk'}
 }
@@ -40,7 +42,7 @@ ENEMY_DEFS = {
         magic = {'Heal'},
         XPDrop = 500,
         goldDrop = 20,
-        itemDrop = 'Potion',
+        itemDrop = 'Revive',
         itemChance = 6     
     },
     ['Fungurkk'] = {
@@ -126,6 +128,8 @@ ENEMY_DEFS = {
     },
 }
 
+-- definitions for each boss
+-- all bosses are level 1 and have fixed stats
 BOSS_DEFS = {
     ['Trolgus'] = {
         stats = {
@@ -152,7 +156,7 @@ BOSS_DEFS = {
         magic = {'Fire'},
         XPDrop = 2000,
         goldDrop = 100,
-        itemDrop = 'Potion',
-        itemChance = 6  
+        itemDrop = 'Revive',
+        itemChance = 3  
     },
 }

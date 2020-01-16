@@ -7,6 +7,7 @@
 
     -- Panel --
 
+    Create a panel which is filled with a color gradient.
 ]]
 
 Panel = Class{}

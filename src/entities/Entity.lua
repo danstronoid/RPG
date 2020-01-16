@@ -26,10 +26,9 @@ function Entity:init(def)
     self.animations = self:getAnimations(def.animations)
     self.currentAnimation = self.animations['idle-down']
 
-    self.dead = false
-
+    -- worth noting that after creating an entity, 
+    -- you need to call a state change to 'idle'
     self.stateMachine = StateMachine(def.states)
-    --self.stateMachine:change('idle')
 end
 
 function Entity:update(dt)

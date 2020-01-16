@@ -1,4 +1,16 @@
+--[[
+    GD50 
+    Final Project
 
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- Battle Menu State --
+
+    This state is pushed when it is the player's turn.  This menu displays
+    the various actions which a character can take during their turn as well 
+    as displaying the current HP of all party members.
+]]
 
 BattleMenuState = Class{__includes = BaseState}
 

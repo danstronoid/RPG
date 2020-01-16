@@ -1,4 +1,17 @@
+--[[
+    GD50 
+    Final Project
 
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- Enemy Turn State --
+
+    This state is pushed when it is the enemy's turn.  This state
+    contains the AI for all enemy actions.  If the enemy can cast spells
+    then there is a random chance they will cast a spell on a random target, 
+    otherwise they will attack a random party member.
+]]
 
 
 EnemyTurnState = Class{__includes = BaseState}

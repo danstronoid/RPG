@@ -1,6 +1,16 @@
+--[[
+    GD50 
+    Final Project
 
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
 
+    -- Battle Item State --
 
+    This state is pushed when the player chooses to use an item from the 
+    battle menu.  After an item has been selected, it pushes a target select state 
+    and then the appropriate item action is called on that target.
+]]
 
 BattleItemState = Class{__includes = BaseState}
 

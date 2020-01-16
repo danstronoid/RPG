@@ -1,4 +1,15 @@
+--[[
+    GD50 
+    Final Project
 
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- Field Menu State --
+
+    This state displays the field menu when opened in the field.  Currently,
+    this menu only allows players to view items and stats.
+]]
 
 FieldMenuState = Class{__includes = BaseState}
 

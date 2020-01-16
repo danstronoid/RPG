@@ -1,3 +1,16 @@
+--[[
+    GD50 
+    Final Project
+
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- Victory State --
+
+    This state is pushed when the player defeats the final boss, after a brief cutscene.  
+    From here you return back to the start state and restart the game loop.
+]]
+
 VictoryState = Class{__includes = BaseState}
 
 function VictoryState:init()

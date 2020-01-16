@@ -7,7 +7,7 @@
 
     -- Tile Map --
 
-    Class representing a map of tiles
+    Class used as a container for a map of Tile objects. 
 ]]
 
 TileMap = Class{}

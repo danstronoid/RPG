@@ -1,4 +1,17 @@
+--[[
+    GD50 
+    Final Project
 
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- Item Menu State --
+
+    This state displays the item menu when opened from the field menu.
+    It displays the player's current inventory and allows you to inspect items
+    to see their descriptions.  This should be modified to allow you to use items
+    in the field.
+]]
 
 ItemMenuState = Class{__includes = BaseState}
 

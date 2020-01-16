@@ -1,4 +1,15 @@
+--[[
+    GD50 
+    Final Project
 
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- Magic --
+    
+    This class is used to manage a table of all of the spells that a 
+    player or entity can cast.
+]]
 
 Magic = Class{}
 

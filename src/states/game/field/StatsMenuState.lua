@@ -1,4 +1,15 @@
+--[[
+    GD50 
+    Final Project
 
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- Stats Menu State --
+
+    This state can be opened from the field menu and displays all 
+    party member and their current stats.
+]]
 
 StatsMenuState = Class{__includes = BaseState}
 

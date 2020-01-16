@@ -1,3 +1,15 @@
+--[[
+    GD50 
+    Final Project
+
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- tile IDs --
+
+    This is a table of tile ids using the cave.png tileset.
+]]
+
 TILE_IDS = {
     ['ground'] = {145, 146, 161, 162},
     ['empty'] = 67,
@@ -41,29 +53,3 @@ TILE_IDS = {
     ['cracks'] = 132,
     ['hole'] = 147
 }
-
-
-
---[[
-
--- these IDs are for a more complicated set of tiles that I may implement later
-    ['ground'] = {145, 146, 161, 162},
-    ['empty'] = 67,
-    --edges
-    ['top-edge'] = 46,
-    ['bot-edge'] = 62,
-    ['left-edge'] = 23,
-    ['right-edge'] = 24,
-    -- inner corners
-    ['top-left'] = 48,
-    ['top-right'] = 45,
-    ['bot-left'] = 64,
-    ['bot-right'] = 61,
-    -- corners
-    ['top-left-corner'] = 7,
-    ['top-right-corner'] = 8,
-    ['bot-left-corner'] = 60,
-    ['bot-right-corner'] = 76
-
-
-]]

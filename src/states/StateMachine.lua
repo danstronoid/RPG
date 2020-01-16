@@ -7,7 +7,7 @@
 
     -- State Machine --
 
-    A regular state machine.
+    A state machine.
 ]]
 StateMachine = Class{}
 

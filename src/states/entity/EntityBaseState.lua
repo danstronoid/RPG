@@ -7,6 +7,9 @@
 
     -- EntityBaseState --
 
+    This is the base state that serves as a template for all entity states.
+    Each entity has it's own state machine which processes these states, 
+    not the global state stack.
 ]]
 
 EntityBaseState = Class{}

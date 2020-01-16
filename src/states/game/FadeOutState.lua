@@ -1,3 +1,15 @@
+--[[
+    GD50 
+    Final Project
+
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- Fade Out State --
+
+    This class is used to transition between states.  Transition is 
+    2 parts, should be preceded by a Fade in.
+]]
 
 
 FadeOutState = Class{__includes = BaseState}

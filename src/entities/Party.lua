@@ -14,5 +14,11 @@
 Party = Class{}
 
 function Party:init(def)
-    self.members = def.members
+    -- this is a table of Character or Enemy objects
+    self.members = def.members or {}
 end
+
+-- implement these in the future
+function Party:addMember() end
+
+function Party:rmMember() end

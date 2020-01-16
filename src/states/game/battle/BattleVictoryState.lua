@@ -1,4 +1,16 @@
+--[[
+    GD50 
+    Final Project
 
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- Battle Victory State --
+
+    This state is pushed after the enemies have been defeated.  This state is responsible
+    for awarding XP, Gold, and items from the defeated enemies.  This state is also responsible
+    for leveling up the player if needed, and this state removes any temporary status modifications.
+]]
 
 
 BattleVictoryState = Class{__includes = BaseState}

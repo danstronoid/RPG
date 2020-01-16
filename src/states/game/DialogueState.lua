@@ -1,4 +1,14 @@
+--[[
+    GD50 
+    Final Project
 
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- Dialogue State --
+
+    This state is used for displaying dialogue and text in the field.
+]]
 
 DialogueState = Class{__includes = BaseState}
 

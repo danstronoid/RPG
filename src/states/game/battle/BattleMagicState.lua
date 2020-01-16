@@ -1,4 +1,17 @@
+--[[
+    GD50 
+    Final Project
 
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- Battle Magic State --
+
+    This state is pushed when the player chooses to use magic from the 
+    battle menu.  After a spell has been selected, it pushes a target select state 
+    and then the appropriate spell action is called on that target.  It also
+    changes the party status display to show current MP rather than HP.
+]]
 
 BattleMagicState = Class{__includes = BaseState}
 

@@ -1,3 +1,19 @@
+--[[
+    GD50 
+    Final Project
+
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- Turn State --
+
+    This state is pushed from the battle state and should remain on the stack
+    until the battle has ended.  This state generates an order for entities 
+    to take turns and pushes each turn until the each entity has taken a turn.
+    Then the turn order is recalculated and the loop continues until either the
+    party is defeated or the enemies are defeated.
+]]
+
 
 TurnState = Class{__includes = BaseState}
 
@@ -14,6 +30,8 @@ function TurnState:init(battleState)
     self.endOfBattle = false
 end
 
+-- reset the turn counter at the end of the battle, 
+-- this also removes any counters that were active
 function TurnState:exit()
     TurnCounter:reset()
 end
@@ -25,6 +43,7 @@ function TurnState:update(dt)
     end 
 end
 
+-- push a turn and increment the turn counter
 function TurnState:takeTurn()
     self.turnStarted = true
 
@@ -54,6 +73,8 @@ function TurnState:takeTurn()
     self.turnStarted = false
 end
 
+-- check if any entities have died and then 
+-- check for victory or defeat
 function TurnState:checkDeaths()
     local deadEnemies = 0
     for i = 1, #self.enemies do
@@ -108,7 +129,7 @@ function TurnState:checkDeaths()
     end
 end
 
--- returns a table of the order for this turn
+-- returns a table of the turn order for this round
 -- turn order is calculated by comparing speed stat plus a 1D3 roll
 function sortTurns(party, enemies)
 

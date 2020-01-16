@@ -1,3 +1,15 @@
+--[[
+    GD50 
+    Final Project
+
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- Game Over State --
+
+    This state is pushed when the player has been defeated.  From here
+    you return back to the start state and restart the game loop.
+]]
 
 GameOverState = Class{__includes = BaseState}
 

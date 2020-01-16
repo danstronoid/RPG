@@ -7,6 +7,8 @@
 
     -- Animation --
 
+    This class is used to update and manage frame animations. 
+    This was adopted from Colton Ogden's lecture in GD50.
 ]]
 
 Animation = Class{}

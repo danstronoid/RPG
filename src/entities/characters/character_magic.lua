@@ -1,10 +1,23 @@
+--[[
+    GD50 
+    Final Project
 
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- character magic --
+
+    This table keeps track of all of the spells each character
+    starts with and which spells should be given to the player 
+    at each level.
+
+]]
 
 
 CHARACTER_MAGIC = {
     ['Zappa'] = {
         [1] = {'Heal'},
-        [4] = {'Protect'}
+        [2] = {'Protect'}
     },
     ['Tipper'] = {
         [1] = {'Fire'},

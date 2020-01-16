@@ -1,4 +1,17 @@
+--[[
+    GD50 
+    Final Project
 
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- Battle State --
+
+    This state is pushed when an encounter is triggered in the field and will remain on
+    the stack until the battle is finished.  This state generates a random group of enemies from 
+    the supplied definitions.  This state determines position of all party and enemies and is responsible
+    for rendering the battle scene.
+]]
 
 BattleState = Class{__includes = BaseState}
 
@@ -62,6 +75,7 @@ function BattleState:render()
     end
 end
 
+-- set the positions of all entities
 function BattleState:setPositions()
     for i = 1, #self.party.members do
         self.party.members[i].x = math.floor(VIRTUAL_WIDTH / 4 - (i - 1) * TILE_SIZE / 2 - TILE_SIZE)

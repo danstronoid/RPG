@@ -1,4 +1,16 @@
+--[[
+    GD50 
+    Final Project
 
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- Pop Up --
+
+    Display a small text box that's size varies on the
+    text which it displays. This is used when casting spells
+    to display the spell name.
+]]
 
 PopUp = Class{}
 
@@ -17,7 +29,8 @@ function PopUp:init(text)
 end
 
 function PopUp:update(dt)
-    if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
+    if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') 
+        or love.keyboard.wasPressed('space') then
         self.closed = true
     end
 end

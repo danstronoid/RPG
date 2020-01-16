@@ -9,7 +9,8 @@
     
     This class creates a selection GUI which displays a list of items
     evenly spaced in a given height.  Selecting an item triggers its onSelect
-    function.
+    function.  By using the top flag, items can be listed starting from the
+    top of the screen and are spaced using the font height.
 ]]
 
 Selection = Class{}

@@ -7,6 +7,10 @@
 
     -- PlayerWalkState --
 
+    This state inherits from the Entity Walk State with the difference
+    being that this state also checks for encounters.  The chance of an
+    encounter increases depending on how many steps the player has taken
+    since their last encounter.
 ]]
 
 

@@ -7,6 +7,8 @@
 
     -- Camera --
 
+    This class creates a camera object which keeps track
+    of an offset that is used in all calls to love.draw.
 ]]
 
 Camera = Class{}

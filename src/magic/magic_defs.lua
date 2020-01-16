@@ -1,4 +1,32 @@
+--[[
+    GD50 
+    Final Project
 
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- Magic Defs --
+    
+    This is a table of all magic spells and their definitions.
+    
+    Each spell is in the format:
+    ['spell name'] = {
+        name = spell name (needs to be consistent with table key),
+        action = name of action function to call when used,
+        element = the elemental attribute of a spell,
+        mp_cost = the mp needed to cast the spell,
+        base_dmg = the base damage amount, can be a table {normal, critical},
+        base_heal = the base amount of healing,
+        mod = a table of any status modifications (for buff spells),
+        duration = the duration of any status effects,
+        target = {
+            select = does it target the party or the enemies
+            type = how many (one or all)
+            revive = boolean for whether it can target dead characters
+        },
+        text = brief description,
+    }
+]]
 
 
 MAGIC_DEFS = {
@@ -12,7 +40,7 @@ MAGIC_DEFS = {
             select = 'enemies',
             type = 'one'
         },
-        description = 'Damage an enemy with fire.'
+        text = 'Damage an enemy with fire.'
     },
     ['Ice'] = {
         name = 'Ice',
@@ -24,7 +52,7 @@ MAGIC_DEFS = {
             select = 'enemies',
             type = 'one'
         },
-        description = 'Damage an enemy with ice.'
+        text = 'Damage an enemy with ice.'
     },
     ['Heal'] = {
         name = 'Heal',
@@ -35,7 +63,7 @@ MAGIC_DEFS = {
             select = 'party',
             type = 'one'
         },
-        description = 'Restores a small amount of HP to a party member.'
+        text = 'Restores a small amount of HP to a party member.'
     },
     ['Protect'] = {
         name = 'Protect',
@@ -50,6 +78,6 @@ MAGIC_DEFS = {
             select = 'party',
             type = 'one'
         },
-        description = 'Temporarily increases the defense of a party member.'
+        text = 'Temporarily increases the defense of a party member.'
     }
 }

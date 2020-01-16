@@ -1,4 +1,14 @@
+--[[
+    GD50 
+    Final Project
 
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- Battle Message State --
+
+    This state displays a message during battle.
+]]
 
 BattleMessageState = Class{__includes = BaseState}
 

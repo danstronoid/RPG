@@ -14,7 +14,7 @@
     Given an "atlas" (a texture with multiple sprites), as well as a
     width and a height for the tiles therein, split the texture into
     all of the quads by simply dividing it evenly.
-    Taken from Colton Ogden - 50Mon.
+    Taken from Colton Ogden in the GD50 lectures.
 ]]
 function GenerateQuads(atlas, tilewidth, tileheight)
     local sheetWidth = atlas:getWidth() / tilewidth
@@ -38,8 +38,7 @@ end
 --[[ This is a function taken from the Love2D wiki used for creating
 gradients.  source: https://love2d.org/wiki/Gradients ]]
 -- Color multipler
-local COLOR_MUL = love._version >= "11.0" and 1 or 255
- 
+local COLOR_MUL = love._version >= "11.0" and 1 or 255 
 function gradientMesh(dir, ...)
     -- Check for direction
     local isHorizontal = true
@@ -78,6 +77,7 @@ function gradientMesh(dir, ...)
     -- Resulting Mesh has 1x1 image size
     return love.graphics.newMesh(meshData, "strip", "static")
 end
+
 
 -- this function formats time from seconds into HH:MM:SS
 function formatTime(t)

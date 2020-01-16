@@ -1,4 +1,15 @@
+--[[
+    GD50 
+    Final Project
 
+    Author: Daniel Schwartz
+    daniel.schwartz.music@gmail.com
+
+    -- Target Select State --
+
+    This state is used to select a target using the target
+    definition of an action.
+]]
 
 TargetSelectState = Class{__includes = BaseState}
 
