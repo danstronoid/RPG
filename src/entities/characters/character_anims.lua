@@ -37,27 +37,27 @@ CHARACTER_ANIMS = {
             },
             ['idle-left'] = {
                 texture = 'man',
-                frames = {10}
+                frames = {11}
             },
             ['idle-right'] = {
                 texture = 'man',
-                frames = {4}
+                frames = {5}
             },
             ['idle-down'] = {
                 texture = 'man',
-                frames = {7}
+                frames = {8}
             },
             ['idle-up'] = {
                 texture = 'man',
-                frames = {1}
+                frames = {2}
             },
         },
         battle = {
             texture = 'man',
-            frame = 4
+            frame = 5
         }
     },
-    ['Tipper'] = {
+    ['Moon'] = {
         field = {
             ['walk-left'] = {
                 texture = 'woman',
@@ -81,24 +81,24 @@ CHARACTER_ANIMS = {
             },
             ['idle-left'] = {
                 texture = 'woman',
-                frames = {10}
+                frames = {11}
             },
             ['idle-right'] = {
                 texture = 'woman',
-                frames = {4}
+                frames = {5}
             },
             ['idle-down'] = {
                 texture = 'woman',
-                frames = {7}
+                frames = {8}
             },
             ['idle-up'] = {
                 texture = 'woman',
-                frames = {1}
+                frames = {2}
             },
         },
         battle = {
             texture = 'woman',
-            frame = 4
+            frame = 5
         }
     }
 }

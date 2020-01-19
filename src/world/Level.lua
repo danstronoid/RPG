@@ -65,7 +65,7 @@ function Level:init(camera)
         onInteract = function()
             self.player:changeState('idle')
             
-            gStateStack:push(DialogueState('I am error.', 
+            gStateStack:push(DialogueState('Graaaahh...', 
             function()
                 gMusic['dungeon']:pause()
                 gStateStack:push(BattleTransState(BLACK, 1, 
@@ -101,8 +101,8 @@ function Level:init(camera)
     end
 
     -- set the camera position to the player's position
-    self.camera.offsetX = self.player.x + self.player.width / 2 - VIRTUAL_WIDTH / 2
-    self.camera.offsetY = self.player.y + self.player.height / 2 - VIRTUAL_HEIGHT / 2
+    self.camera:set(self.player.x + self.player.width / 2 - VIRTUAL_WIDTH / 2,
+        self.player.y + self.player.height / 2 - VIRTUAL_HEIGHT / 2)
 end
 
 function Level:update(dt) 

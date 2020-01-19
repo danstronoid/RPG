@@ -7,12 +7,11 @@
 
     -- EntityWalkState --
 
-    This state is used when an entity is walking.  At present
-    this only works for the player entity and would need to be modified
-    to be used with other entities.  This state changes both the player position
-    and the camera position in tandem to give the illusion of the camera following
-    the player.  A flag could be added for whether or the the camera should
-    follow this entity.
+    This state is used when an entity is walking.  There are two flags belonging 
+    to an entity that change how this state functions.  If the cameraFollow flag is 
+    true, then the camera offset is tweened with the entity position.  If the canInput
+    flag is true, then the player's directional input will trigger the walk state.  
+    Otherwise you can chain state changes using a callback.
 ]]
 
 EntityWalkState = Class{__includes = EntityBaseState}
@@ -23,7 +22,8 @@ function EntityWalkState:init(entity, level)
     self.camera = self.level.camera 
 end
 
-function EntityWalkState:enter(params)
+function EntityWalkState:enter(callback)
+    self.callback = callback or function() self.entity:changeState('idle') end
     self:move()
 end
 
@@ -67,26 +67,46 @@ function EntityWalkState:move()
 
     self.entity:changeAnimation('walk-' .. tostring(self.entity.direction))
 
-    Timer.tween(0.5, {
-        [self.entity] = {x = (toX -1) * TILE_SIZE, y = (toY -1) * TILE_SIZE - 4},
-        [self.camera] = {offsetX = toCamX, offsetY = toCamY}
-    }):finish(function ()
-        self.entity.steps = self.entity.steps + 1
-        if love.keyboard.isDown('up') then
-            self.entity.direction = 'up'
-            self.entity:changeState('walk')
-        elseif love.keyboard.isDown('down') then
-            self.entity.direction = 'down'
-            self.entity:changeState('walk')
-        elseif love.keyboard.isDown('left') then
-            self.entity.direction = 'left'
-            self.entity:changeState('walk')
-        elseif love.keyboard.isDown('right') then
-            self.entity.direction = 'right'
-            self.entity:changeState('walk')
-        else 
-            self.entity:changeState('idle')
-        end 
-    end)
+    if self.entity.cameraFollows then
+        Timer.tween(0.5, {
+            [self.entity] = {x = (toX - 1) * TILE_SIZE, y = (toY - 1) * TILE_SIZE - 4},
+            [self.camera] = {offsetX = toCamX, offsetY = toCamY}
+        }):finish(function ()
+            if self.entity.canInput then
+                self:checkInput()
+            else
+                self.callback()
+            end
+        end)
+    else
+        Timer.tween(0.5, {
+            [self.entity] = {x = (toX - 1) * TILE_SIZE, y = (toY - 1) * TILE_SIZE - 4}   
+        }):finish(function ()
+            if self.entity.canInput then
+                self:checkInput()
+            else
+                self.callback()
+            end
+        end)
+    end
+end
+
+function EntityWalkState:checkInput()
+    self.entity.steps = self.entity.steps + 1
+    if love.keyboard.isDown('up') then
+        self.entity.direction = 'up'
+        self.entity:changeState('walk')
+    elseif love.keyboard.isDown('down') then
+        self.entity.direction = 'down'
+        self.entity:changeState('walk')
+    elseif love.keyboard.isDown('left') then
+        self.entity.direction = 'left'
+        self.entity:changeState('walk')
+    elseif love.keyboard.isDown('right') then
+        self.entity.direction = 'right'
+        self.entity:changeState('walk')
+    else 
+        self.entity:changeState('idle')
+    end 
 end
 

@@ -14,8 +14,6 @@
 Camera = Class{}
 
 function Camera:init()
-    self.x = 0
-    self.y = 0
     self.offsetX = 0
     self.offsetY = 0
     self.width = VIRTUAL_WIDTH
@@ -25,8 +23,25 @@ end
 function Camera:update(dt) end
 
 function Camera:reset()
-    self.x = 0
-    self.y = 0
     self.offsetX = 0
     self.offsetY = 0
+end
+
+function Camera:set(x, y)
+    self.offsetX = x
+    self.offsetY = y
+end
+
+function Camera:pan(duration, amount, callback)
+    local callback = callback or function() end
+    Timer.tween(duration, {
+        [self] = {offsetX = self.offsetX + amount}
+    }):finish(function() callback() end)
+end
+
+function Camera:tilt(duration, amount, callback)
+    local callback = callback or function() end
+    Timer.tween(duration, {
+        [self] = {offsetY = self.offsetY + amount}
+    }):finish(function() callback() end)
 end

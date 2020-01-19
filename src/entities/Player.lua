@@ -16,6 +16,11 @@ Player = Class{__includes = Entity}
 function Player:init(def)
     Entity.init(self, def)
 
+    -- by default the camera should follow the player
+    -- by default the player should be controlling this entity
+    self.cameraFollows = true
+    self.canInput = true
+
     -- keep track of steps between encounters
     self.steps = 0
 
@@ -29,10 +34,10 @@ function Player:init(def)
                 anims = CHARACTER_ANIMS['Zappa']
             }),
             Character({
-                name = 'Tipper',
-                stats = CHARACTER_STATS['Tipper'],
-                magic = CHARACTER_MAGIC['Tipper'][1],
-                anims = CHARACTER_ANIMS['Tipper']
+                name = 'Moon',
+                stats = CHARACTER_STATS['Moon'],
+                magic = CHARACTER_MAGIC['Moon'][1],
+                anims = CHARACTER_ANIMS['Moon']
             }),
         }
     }

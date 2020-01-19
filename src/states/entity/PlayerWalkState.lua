@@ -22,7 +22,11 @@ function PlayerWalkState:init(player, level)
     self.encounter = false
 end
 
-function PlayerWalkState:enter()
+function PlayerWalkState:enter(callback)
+    -- this optional callback can be used if you want to control the player's movements
+    -- in a cut scene
+    self.callback = callback or function() self.player:changeState('idle') end
+
     --print(self.entity.steps)
     self:checkEncounter()
 

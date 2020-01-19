@@ -31,11 +31,14 @@ function love.load()
     math.randomseed(os.time())
 
     Push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
-        fullscreen = false,
+        fullscreen = true,
         vsync = true,
         resizable = true
     })
 
+    -- can global canvas which can be used for rendering
+    gCanvas = love.graphics.newCanvas(VIRTUAL_WIDTH, VIRTUAL_HEIGHT)
+    
     -- set volume for SFX and music
     for k, music in pairs(gMusic) do 
         music:setVolume(MASTER_VOL * MUSIC_VOL)

@@ -98,6 +98,8 @@ function BattleMenuState:init(player, enemies, index, turn)
                             -- pop off the turn state, and the battle state
                             gStateStack:pop()
                             gStateStack:pop()
+                            gMusic['battle']:stop()
+                            gMusic['dungeon']:resume()
                             gStateStack:push(FadeOutState(BLACK, 1))
                         end))
                     end)

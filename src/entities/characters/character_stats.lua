@@ -26,7 +26,7 @@ CHARACTER_STATS = {
         spdIV = 3,
         dfnIV = 3
     },
-    ['Tipper'] = {
+    ['Moon'] = {
         baseHP = 22,
         baseMP = 12,
         baseStr = 8,

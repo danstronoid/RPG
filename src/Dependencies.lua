@@ -13,6 +13,7 @@ Class = require 'lib/class'
 Push = require 'lib/push'
 Event = require 'lib/knife.event'
 Timer = require 'lib/knife.timer'
+Chain = require 'lib/knife.chain'
 
 -- create a global turn counter for timing battle callbacks
 require 'src/TurnCounter'
@@ -39,6 +40,7 @@ require 'src/states/game/PopUpState'
 require 'src/states/game/GameOverState'
 require 'src/states/game/BattleTransState'
 require 'src/states/game/VictoryState'
+require 'src/states/game/PartyDialogueState'
 
 -- field states
 require 'src/states/game/field/FieldMenuState'

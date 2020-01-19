@@ -19,7 +19,7 @@ CHARACTER_MAGIC = {
         [1] = {'Heal'},
         [2] = {'Protect'}
     },
-    ['Tipper'] = {
+    ['Moon'] = {
         [1] = {'Fire'},
         [3] = {'Ice'}
     }

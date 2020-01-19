@@ -26,14 +26,19 @@ function Entity:init(def)
     self.animations = self:getAnimations(def.animations)
     self.currentAnimation = self.animations['idle-down']
 
+    -- a flag for whether or not the camera follows the entities movements
+    self.cameraFollows = false
+    -- a flag for whether or not the entity is being controlled by the player
+    self.canInput = false
+
     -- worth noting that after creating an entity, 
     -- you need to call a state change to 'idle'
     self.stateMachine = StateMachine(def.states)
 end
 
 function Entity:update(dt)
-    self.currentAnimation:update(dt)
     self.stateMachine:update(dt)
+    self.currentAnimation:update(dt)
 end
 
 function Entity:render(camera)
@@ -53,8 +58,8 @@ function Entity:getAnimations(animationDefs)
     return animationsReturned
 end
 
-function Entity:changeState(name)
-    self.stateMachine:change(name)
+function Entity:changeState(name, params)
+    self.stateMachine:change(name, params)
 end
 
 function Entity:changeAnimation(name)
