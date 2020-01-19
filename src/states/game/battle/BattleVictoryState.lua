@@ -68,14 +68,14 @@ function BattleVictoryState:enter()
     .. self.newSpells,
     function()
     
-        gStateStack:push(FadeInState(BLACK, 1, 
+        gStateStack:push(FadeInState(BLACK, 1, true,
         function()
             -- pop off the battlestate
             gStateStack:pop()
             gStateStack:pop()
             gMusic['battle_victory']:stop()
             gMusic['dungeon']:resume()
-            gStateStack:push(FadeOutState(BLACK, 1))
+            gStateStack:push(FadeOutState(BLACK, 1, true))
         end))
     end))
 

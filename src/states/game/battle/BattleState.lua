@@ -38,7 +38,7 @@ function BattleState:init(player)
 end
 
 function BattleState:enter()
-    gStateStack:push(FadeOutState(BLACK, 1, 
+    gStateStack:push(FadeOutState(BLACK, 1, false,
     function ()
         gMusic['battle']:setLooping(true)
         gMusic['battle']:play()

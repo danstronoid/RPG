@@ -93,14 +93,14 @@ function BattleMenuState:init(player, enemies, index, turn)
                             self.party.members[i].stats:clearTempMods()
                         end
 
-                        gStateStack:push(FadeInState(BLACK, 1,
+                        gStateStack:push(FadeInState(BLACK, 1, true,
                         function()
                             -- pop off the turn state, and the battle state
                             gStateStack:pop()
                             gStateStack:pop()
                             gMusic['battle']:stop()
                             gMusic['dungeon']:resume()
-                            gStateStack:push(FadeOutState(BLACK, 1))
+                            gStateStack:push(FadeOutState(BLACK, 1, true))
                         end))
                     end)
                 end

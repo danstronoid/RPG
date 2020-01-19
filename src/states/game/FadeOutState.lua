@@ -14,11 +14,14 @@
 
 FadeOutState = Class{__includes = BaseState}
 
-function FadeOutState:init(color, time, callback)
+function FadeOutState:init(color, time, audioFade, callback)
     self.color = color
     self.opacity = self.color.a
     self.time = time
     self.callback = callback or function() end
+
+    -- if we want to fade the audio in this transition
+    self.audioFade = audioFade
     self.volume = 0
 
     -- add a quick fade in to prevent pop
@@ -36,7 +39,11 @@ end
 
 function FadeOutState:update(dt)
     -- fade in the master volume
-    love.audio.setVolume(self.volume)
+    if self.audioFade then
+        love.audio.setVolume(self.volume)
+    else
+        love.audio.setVolume(1)
+    end
 
 end
 

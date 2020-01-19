@@ -117,13 +117,13 @@ function TurnState:checkDeaths()
         self.endOfBattle = true
         gStateStack:push(BattleMessageState('You have been defeated.', 
         function()
-            gStateStack:push(FadeInState(BLACK, 1, function()
+            gStateStack:push(FadeInState(BLACK, 1, true, function()
                 -- pop off the turn, battle, and playstate
                 gStateStack:pop()
                 gStateStack:pop()
                 gStateStack:pop()
                 gStateStack:push(GameOverState())
-                gStateStack:push(FadeOutState(BLACK, 1))
+                gStateStack:push(FadeOutState(BLACK, 1, false))
             end))
         end))
     end

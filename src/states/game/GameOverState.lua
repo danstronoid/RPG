@@ -23,12 +23,12 @@ function GameOverState:update(dt)
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return')
         or love.keyboard.wasPressed('space') then
         gSfx['menu_select']:play()
-        gStateStack:push(FadeInState(BLACK, 1, 
+        gStateStack:push(FadeInState(BLACK, 1, true, 
         function ()
             gMusic['gameover']:stop()
             gStateStack:pop()
             gStateStack:push(StartState())
-            gStateStack:push(FadeOutState(BLACK, 1))
+            gStateStack:push(FadeOutState(BLACK, 1, false))
         end))  
     end
 end

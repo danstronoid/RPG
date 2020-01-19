@@ -75,11 +75,11 @@ function PlayState:update(dt)
             gSfx['death']:play()
             self.level.boss.dead = true
             Timer.after(2, function()
-                gStateStack:push(FadeInState(BLACK, 1, function()
+                gStateStack:push(FadeInState(BLACK, 1, true, function()
                     -- pop off the playstate
                     gStateStack:pop()
                     gStateStack:push(VictoryState())
-                    gStateStack:push(FadeOutState(BLACK, 1))
+                    gStateStack:push(FadeOutState(BLACK, 1, false))
                 end))
             end)
         end))

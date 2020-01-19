@@ -1,18 +1,20 @@
 --[[
-    GD50 
-    Final Project
+    Zappa Quest 2
+    GD50 Final Project
 
     Author: Daniel Schwartz
     daniel.schwartz.music@gmail.com
 
-    This game is a SNES-era style turn based RPG.  The player controls the main character Zappa
+    Zappa Quest 2 is a SNES-era style turn based RPG.  The player controls the main character Zappa
     as they explore a procedurally generated dungeon and fight monsters along the way.  The game
-    ends after the player defeats the final boss or the player meets their demise at the hand of 
+    ends if the player defeats the final boss or the player meets their demise at the hand of 
     a monster.
 
-    Some of the foundation for this game came from GD50 Assignment 7 - 50mon by Colton Ogden.
+    The foundation was built from the concepts in GD50 Assignment 7 by Colton Ogden.
 
     All music by Daniel Schwartz
+
+    Sound design created using Bfxr
 
     Character textures by Anifarea https://opengameart.org/content/antifareas-rpg-sprite-set-1-enlarged-w-transparent-background
 
@@ -36,7 +38,7 @@ function love.load()
         resizable = true
     })
 
-    -- can global canvas which can be used for rendering
+    -- global canvas which can be used for rendering
     gCanvas = love.graphics.newCanvas(VIRTUAL_WIDTH, VIRTUAL_HEIGHT)
     
     -- set volume for SFX and music
