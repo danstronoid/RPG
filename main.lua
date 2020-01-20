@@ -5,10 +5,9 @@
     Author: Daniel Schwartz
     daniel.schwartz.music@gmail.com
 
-    Zappa Quest 2 is a SNES-era style turn based RPG.  The player controls the main character Zappa
-    as they explore a procedurally generated dungeon and fight monsters along the way.  The game
-    ends if the player defeats the final boss or the player meets their demise at the hand of 
-    a monster.
+    Zappa Quest 2 (working title) is a SNES style turn-based RPG, similar to the Final Fantasy or Dragon Quest series.  
+    In this playable demo, the player controls the main character Zappa as they explore a procedurally generated dungeon 
+    and fight monsters along the way.  The game ends if the player defeats the final boss or if the player is defeated.
 
     The foundation was built from the concepts in GD50 Assignment 7 by Colton Ogden.
 
